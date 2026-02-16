@@ -9,22 +9,20 @@ const { title } = Astro.props;
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>{title}</title>
 	</head>
-	<body class="bg-[#FDFCFB] overflow-x-hidden m-0 p-0 selection:bg-[#bf953f] selection:text-white">
-		
-		<div class="bg-fixed-elements">
-			<div id="bg-spotlight"></div>
-			<div class="noise-texture"></div>
+	<body class="bg-[#FDFCFB] m-0 p-0 overflow-x-hidden">
+		<div class="fixed inset-0 z-0 pointer-events-none">
+			<div id="bg-spotlight" class="absolute inset-0"></div>
+			<div class="noise-texture absolute inset-0 opacity-40"></div>
 			<div class="particles-field">
-				{Array.from({ length: 50 }).map((_, i) => (
+				{Array.from({ length: 40 }).map((_, i) => (
 					<div class="gold-dust" style={`--l:${Math.random()*100}%; --d:${Math.random()*15}s; --s:${Math.random()*3+2}px;`}></div>
 				))}
 			</div>
 		</div>
 
-		<main class="relative z-10">
+		<main class="relative z-10 w-full">
 			<slot />
 		</main>
-
 	</body>
 </html>
 
@@ -32,25 +30,11 @@ const { title } = Astro.props;
 	@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300;1,600&display=swap');
 	:root { --gold: #bf953f; }
 	html, body { font-family: 'Cormorant Garamond', serif; background: #FDFCFB; color: #1a1a1a; scroll-behavior: smooth; }
-
-	/* 🔧 Fix: ชั้นหลังบ้านต้องไม่ขวางทางเมาส์ */
-	.bg-fixed-elements { position: fixed; inset: 0; z-index: 1; pointer-events: none; }
-	#bg-spotlight { position: absolute; inset: 0; background: radial-gradient(circle at center, rgba(191,149,63,0.08) 0%, transparent 80%); }
-	.noise-texture { position: absolute; inset: 0; background-image: url('https://www.transparenttextures.com/patterns/natural-paper.png'); opacity: 0.4; }
-
-	/* ✨ Gold Dust (ระเบียบใหม่) */
-	.gold-dust {
-		position: absolute; left: var(--l); bottom: -20px; width: var(--s); height: var(--s);
-		background: #bf953f; border-radius: 50%; opacity: 0;
-		animation: float-up 20s linear infinite var(--d);
-	}
+	#bg-spotlight { background: radial-gradient(circle at center, rgba(191,149,63,0.08) 0%, transparent 80%); }
+	.noise-texture { background-image: url('https://www.transparenttextures.com/patterns/natural-paper.png'); }
+	.gold-dust { position: absolute; left: var(--l); bottom: -20px; width: var(--s); height: var(--s); background: var(--gold); border-radius: 50%; opacity: 0; animation: float-up 20s linear infinite var(--d); }
 	@keyframes float-up { 0% { transform: translateY(0); opacity: 0; } 20% { opacity: 0.4; } 100% { transform: translateY(-110vh); opacity: 0; } }
-
-	/* 🌊 Section Standard (สลายความแข็งแบบไม่มั่ว) */
-	section { 
-		position: relative; padding: 100px 0; 
-		background: #FDFCFB; 
-		margin-top: -2px; /* ลดการ Negative Margin เพื่อไม่ให้เกยกันมากเกินไป */
-		border-top: 1px solid rgba(191,149,63,0.05);
-	}
+	
+	/* 🌊 Section Standard (เลิกใช้ Negative Margin ที่ทำให้มั่ว) */
+	section { position: relative; width: 100%; padding: 80px 0; background: transparent; }
 </style>

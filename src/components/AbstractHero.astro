@@ -1,73 +1,46 @@
 ---
 const heroImages = [
-  { src: "/img/h1.jpg", alt: "Folklore 1" },
-  { src: "/img/h2.jpg", alt: "Folklore 2" },
-  { src: "/img/h3.jpg", alt: "Folklore 3" },
-  { src: "/img/h4.jpg", alt: "Folklore 4" },
-  { src: "/img/h5.jpg", alt: "Folklore 5" },
-  { src: "/img/h6.jpg", alt: "Folklore 6" }
+  { src: "/img/h1.jpg" }, { src: "/img/h2.jpg" }, { src: "/img/h3.jpg" },
+  { src: "/img/h4.jpg" }, { src: "/img/h5.jpg" }, { src: "/img/h6.jpg" }
 ];
 ---
-<section class="hero-sovereign">
-  <div class="hero-container">
-    <div class="hero-header">
-      <p class="hero-tag">THE SOVEREIGN DIGITAL HERITAGE</p>
-      <h1 class="hero-title font-serif italic">Thailand <br/> <span class="gold-text">Folklore</span></h1>
+<section class="hero-section">
+  <div class="container mx-auto px-10">
+    <div class="text-center mb-16">
+      <p class="text-[10px] tracking-[0.8em] text-[#bf953f] font-bold mb-4">SOVEREIGN DIGITAL HERITAGE</p>
+      <h1 class="text-6xl md:text-8xl italic m-0">Thailand <span class="text-[#bf953f]">Folklore</span></h1>
     </div>
 
-    <div class="hero-gallery">
+    <div class="hero-bento-grid">
       {heroImages.map((img, i) => (
-        <div class={`gallery-item item-${i + 1}`}>
-          <div class="frame">
-            <img src={img.src} alt={img.alt} loading="eager" />
-          </div>
+        <div class={`bento-item item-${i + 1}`}>
+          <img src={img.src} alt="Heritage" loading="eager" class="hero-img" />
         </div>
       ))}
     </div>
-
-    <div class="hero-categories">
-      <div class="cat-item">
-        <span class="num">01</span>
-        <div class="cat-info">
-          <h3>Verified Categories</h3>
-          <p>Series / 26</p>
-        </div>
-      </div>
-      </div>
   </div>
 </section>
 
 <style>
-  .hero-sovereign { padding: 120px 40px 80px 40px !important; min-height: 100vh; display: flex; align-items: center; }
-  .hero-container { max-width: 1400px; margin: 0 auto; width: 100%; text-align: center; }
-  .hero-header { margin-bottom: 60px; }
-  .hero-title { font-size: clamp(3rem, 8vw, 6rem); line-height: 1.1; }
-  .gold-text { color: #bf953f; }
-
-  /* ✨ Bento Gallery Layout */
-  .hero-gallery {
+  .hero-bento-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(2, 250px);
     gap: 20px;
-    margin-bottom: 80px;
+    max-width: 1400px;
+    margin: 0 auto;
   }
-  .gallery-item .frame { 
-    width: 100%; height: 100%; border-radius: 40px; overflow: hidden; 
-    border: 1px solid rgba(191,149,63,0.1); transition: 1s;
-  }
-  .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: 1.5s; }
-  
-  /* ปรับแต่งตำแหน่งให้ดูเป็น Organic Bento */
+  .bento-item { border-radius: 30px; overflow: hidden; border: 1px solid rgba(191,149,63,0.1); background: #eee; }
+  .hero-img { width: 100%; height: 100%; object-fit: cover; transition: 1.5s; }
+  .bento-item:hover .hero-img { transform: scale(1.1); }
+
+  /* Grid Positioning */
   .item-1 { grid-column: span 2; }
   .item-2 { grid-row: span 2; }
   .item-5 { grid-column: span 2; }
 
-  .gallery-item:hover .frame { transform: scale(1.02); border-color: #bf953f; box-shadow: 0 30px 60px rgba(191,149,63,0.15); }
-  .gallery-item:hover img { transform: scale(1.1); }
-
   @media (max-width: 1024px) {
-    .hero-gallery { grid-template-columns: repeat(2, 1fr); grid-template-rows: auto; }
+    .hero-bento-grid { grid-template-columns: repeat(2, 1fr); grid-template-rows: auto; }
     .item-1, .item-2, .item-5 { grid-column: span 1; grid-row: span 1; }
   }
 </style>
