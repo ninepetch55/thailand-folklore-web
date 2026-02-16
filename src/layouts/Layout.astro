@@ -1,22 +1,44 @@
-<style is:global>
-  /* 🛡️ ปรับให้แสดงผลพื้นฐานไว้ก่อน ถ้า JS ไม่ทำงานเว็บก็ยังไม่พัง */
-  section { 
-    opacity: 1 !important; /* เปลี่ยนจาก 0 เป็น 1 ชั่วคราวเพื่อเช็คหน้างาน */
-    transform: none !important; 
-    transition: opacity 1s ease-out;
-  }
-  
-  /* ถ้า JS ทำงานค่อยให้มันค่อยๆ Fade In */
-  .js-enabled section { opacity: 0; }
-  .js-enabled section.visible { opacity: 1; }
-</style>
+---
+interface Props { title: string; }
+const { title } = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>{title}</title>
+	</head>
+	<body class="bg-[#FDFCFB] overflow-x-hidden">
+		<div id="bg-spotlight"></div>
+		
+		<div class="particles-field">
+			{Array.from({ length: 80 }).map((_, i) => (
+				<div class={`gold-dust ${i % 4 === 0 ? 'sparkle' : ''}`} 
+					 style={`--size:${Math.random()*4+2}px; --left:${Math.random()*100}%; --delay:${Math.random()*15}s; --duration:${Math.random()*20+10}s;`}>
+				</div>
+			))}
+		</div>
 
-<script>
-  // บอกให้ CSS รู้ว่า Javascript พร้อมทำงาน
-  document.body.classList.add('js-enabled');
-  
-  const obs = new IntersectionObserver((es) => {
-    es.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('section').forEach(s => obs.observe(s));
-</script>
+		<main class="relative z-10">
+			<slot /> 
+		</main>
+
+	</body>
+</html>
+
+<style is:global>
+	@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300;1,600&display=swap');
+	html, body { margin: 0; padding: 0; background: #FDFCFB; color: #1a1a1a; font-family: 'Cormorant Garamond', serif; }
+	
+	/* Spotlight & Particles CSS */
+	#bg-spotlight { position: fixed; inset: 0; background: radial-gradient(circle at center, rgba(191,149,63,0.1) 0%, transparent 80%); pointer-events: none; z-index: 1; }
+	.particles-field { position: fixed; inset: 0; z-index: 2; pointer-events: none; }
+	.gold-dust { position: absolute; width: var(--size); height: var(--size); left: var(--left); bottom: -20px; background: #bf953f; border-radius: 50%; opacity: 0.3; animation: float-up var(--duration) linear infinite var(--delay); }
+	@keyframes float-up { 0% { transform: translateY(0); opacity: 0; } 20% { opacity: 0.4; } 100% { transform: translateY(-110vh); opacity: 0; } }
+	
+	/* 🌊 สลายความแข็ง: ทำให้ Section มีความนุ่มนวล */
+	section { opacity: 1; position: relative; padding: 40px 0; border-radius: 60px 60px 0 0; background: #FDFCFB; margin-top: -40px; }
+	img { border-radius: 30px; transition: 0.8s cubic-bezier(0.2, 0.8, 0.2, 1); }
+	img:hover { transform: scale(1.03) rotate(1deg); box-shadow: 0 30px 60px rgba(191,149,63,0.2); }
+</style>
