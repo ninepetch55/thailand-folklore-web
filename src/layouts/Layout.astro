@@ -1,0 +1,58 @@
+---
+interface Props { title: string; }
+const { title } = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>{title}</title>
+	</head>
+	<body class="bg-[#F9F8F6] cursor-none"> <div id="aura-cursor"></div>
+		<main class="content-fade-in"><slot /></main>
+	</body>
+</html>
+
+<style is:global>
+	@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300;1,600&display=swap');
+	:root { --gold: #bf953f; }
+	
+	html, body { margin: 0; padding: 0; background: #F9F8F6; overflow-x: hidden; }
+	.font-serif { font-family: 'Cormorant Garamond', serif !important; }
+
+	/* 🔮 Custom Aura Cursor */
+	#aura-cursor {
+		position: fixed; width: 20px; height: 20px;
+		background: var(--gold); border-radius: 50%;
+		pointer-events: none; z-index: 10000;
+		mix-blend-mode: difference;
+		transition: transform 0.1s ease-out, width 0.3s, height 0.3s;
+	}
+
+	/* 🎞️ Smooth Reveal Animation */
+	.reveal { opacity: 0; transform: translateY(30px); transition: all 1s ease-out; }
+	.reveal.visible { opacity: 1; transform: translateY(0); }
+
+	* { box-sizing: border-box; }
+</style>
+
+<script>
+	const cursor = document.getElementById('aura-cursor');
+	window.addEventListener('mousemove', (e) => {
+		cursor.style.left = e.clientX + 'px';
+		cursor.style.top = e.clientY + 'px';
+	});
+
+	// ระบบตรวจจับการ Scroll เพื่อโชว์เนื้อหา
+	const observer = new IntersectionObserver((entries) => {
+		entries.forEach(entry => {
+			if (entry.isIntersecting) entry.target.classList.add('visible');
+		});
+	}, { threshold: 0.1 });
+
+	document.querySelectorAll('section').forEach(section => {
+		section.classList.add('reveal');
+		observer.observe(section);
+	});
+</script>

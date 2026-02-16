@@ -1,0 +1,1259 @@
+{
+    "manifest": {
+        "version": "1.2.0",
+        "last_updated": "2026-02-03T20:00:00Z",
+        "checksum": "sha256-generated-hash-placeholder",
+        "total_records": {
+            "partners": 26,
+            "projects": 26,
+            "artists": 28,
+            "certificates": 1
+        }
+    },
+    "partners": [
+        {
+            "p_id": 1,
+            "name_json": {
+                "th": "สมาพันธ์คณะบริหารองค์การนานาชาติ WOFA",
+                "en": "WOFA International Organization Team",
+                "jp": "WOFA 国際組織運営委員会",
+                "cn": "WOFA 国际组织行政团队"
+            },
+            "type": "Host-Out",
+            "country_code": "AE",
+            "next_cycle_date": "2026-04-01",
+            "contact_enc": "festival@thailandfolklore.com"
+        },
+        {
+            "p_id": 2,
+            "name_json": {
+                "th": "สถาบันศิลปะการเต้นแห่งออสเตรีย",
+                "en": "Austria Dance Company Limited",
+                "jp": "オーストリア・ダンスアカデミー",
+                "cn": "奥地利艺术舞蹈学院"
+            },
+            "type": "Host-Out",
+            "country_code": "AT",
+            "next_cycle_date": "2026-09-09",
+            "contact_enc": "festival@thailandfolklore.com"
+        },
+        {
+            "p_id": 3,
+            "name_json": {
+                "th": "ศูนย์ส่งเสริมและพัฒนาเยาวชนมาเลเซีย",
+                "en": "Centre for Student Development Malaysia Inc",
+                "jp": "マレーシア学生開発センター",
+                "cn": "马来西亚学生发展中心"
+            },
+            "type": "Host-Out",
+            "country_code": "MY",
+            "next_cycle_date": "2026-11-20",
+            "contact_enc": "festival@thailandfolklore.com"
+        },
+        {
+            "p_id": 4,
+            "name_json": {
+                "th": "สถาบันวัฒนธรรมนานาชาติ คาเลลลา สเปน",
+                "en": "The International Calella Spain Inc",
+                "jp": "カレラ・スペイン国際文化機構",
+                "cn": "西班牙卡莱利亚国际机构"
+            },
+            "type": "Host-Out",
+            "country_code": "ES",
+            "next_cycle_date": "2026-07-08",
+            "contact_enc": "festival@thailandfolklore.com"
+        },
+        {
+            "p_id": 5,
+            "name_json": {
+                "th": "สมาพันธ์เทศกาลศิลปะแห่งอิตาลี",
+                "en": "Italy festival Inc",
+                "jp": "イタリア・フェスティバル評議会",
+                "cn": "意大利艺术节委员会"
+            },
+            "type": "Host-Out",
+            "country_code": "IT",
+            "next_cycle_date": "2026-06-05",
+            "contact_enc": "festival@thailandfolklore.com"
+        },
+        {
+            "p_id": 6,
+            "name_json": {
+                "th": "องค์กรคติชนวิทยาแห่งสหพันธ์กรีซ",
+                "en": "Greece Federal Folklore company",
+                "jp": "ギリシャ連邦民俗芸術協会",
+                "cn": "希腊联邦民俗学机构"
+            },
+            "type": "Host-Out",
+            "country_code": "GR",
+            "next_cycle_date": "2026-07-20",
+            "contact_enc": "festival@thailandfolklore.com"
+        },
+        {
+            "p_id": 7,
+            "name_json": {
+                "th": "สถาบันศิลปวิทยาการแห่งสาธารณรัฐเกาหลี",
+                "en": "Replublic of Korea Agency School",
+                "jp": "大韓民国芸術振興機関",
+                "cn": "大韩民国艺术专科机构"
+            },
+            "type": "Host-Out",
+            "country_code": "KR",
+            "next_cycle_date": "2026-03-07",
+            "contact_enc": "festival@thailandfolklore.com"
+        },
+        {
+            "p_id": 8,
+            "name_json": {
+                "th": "สมาคมเทศกาลโลกฮ่องกง",
+                "en": "World Festival Assosiation Hongkong Inc",
+                "jp": "世界フェスティバル協会 香港",
+                "cn": "香港世界节日协会"
+            },
+            "type": "Host-Out",
+            "country_code": "HK",
+            "next_cycle_date": "2026-09-28",
+            "contact_enc": "festival@thailandfolklore.com"
+        },
+        {
+            "p_id": 9,
+            "name_json": {
+                "th": "คณะผู้แทนศิลปวัฒนธรรมแห่งสาธารณรัฐประชาชนจีน",
+                "en": "China Team Company",
+                "jp": "中国文化芸術使節団",
+                "cn": "中国文化艺术代表团"
+            },
+            "type": "Host-Out",
+            "country_code": "CN",
+            "next_cycle_date": "2026-08-03",
+            "contact_enc": "festival@thailandfolklore.com"
+        },
+        {
+            "p_id": 10,
+            "name_json": {
+                "th": "คณะนาฏศิลป์และการแสดงชั้นสูงแห่งอิตาลี",
+                "en": "Italy Entertainment Team",
+                "jp": "イタリア・エンターテインメント・アルティザン",
+                "cn": "意大利演艺精英团队"
+            },
+            "type": "Host-Out",
+            "country_code": "IT",
+            "next_cycle_date": "2026-07-19",
+            "contact_enc": "festival@thailandfolklore.com"
+        },
+        {
+            "p_id": 11,
+            "name_json": {
+                "th": "สถาบันวัฒนธรรมแห่งโปแลนด์",
+                "en": "Poland Organization Limited",
+                "jp": "ポーランド文化芸術機構",
+                "cn": "波兰文化事务机构"
+            },
+            "type": "Host-Out",
+            "country_code": "PL",
+            "next_cycle_date": "2026-08-11",
+            "contact_enc": "festival@thailandfolklore.com"
+        },
+        {
+            "p_id": 12,
+            "name_json": {
+                "th": "สถาบันคติชนวิทยาแห่งศรีลังกา",
+                "en": "Srilanka folklore Agency",
+                "jp": "スリランカ民俗学エージェンシー",
+                "cn": "斯里兰卡民俗机构"
+            },
+            "type": "Host-Out",
+            "country_code": "LK",
+            "next_cycle_date": "2026-01-12",
+            "contact_enc": "festival@thailandfolklore.com"
+        },
+        {
+            "p_id": 13,
+            "name_json": {
+                "th": "สมาพันธ์การแสดงแห่งตุรกี",
+                "en": "Turkiye Festal Company",
+                "jp": "トルコ・フェスティバル文化機構",
+                "cn": "土耳其艺术庆典机构"
+            },
+            "type": "Host-Out",
+            "country_code": "TR",
+            "next_cycle_date": "2026-12-01",
+            "contact_enc": "festival@thailandfolklore.com"
+        },
+        {
+            "p_id": 14,
+            "name_json": {
+                "th": "องค์กรศิลปะพื้นบ้านแห่งอินเดีย",
+                "en": "India Team Of Folklore Agency",
+                "jp": "インド民俗芸術代表機構",
+                "cn": "印度民俗艺术机构"
+            },
+            "type": "Host-Out",
+            "country_code": "IN",
+            "next_cycle_date": "2027-04-05",
+            "contact_enc": "festival@thailandfolklore.com"
+        },
+        {
+            "p_id": 15,
+            "name_json": {
+                "th": "สถาบันเทศกาลและศิลปวัฒนธรรมแห่งอินโดนีเซีย",
+                "en": "Indonesia of Festival Inc",
+                "jp": "インドネシア・フェスティバル公社",
+                "cn": "印度尼西亚文化节机构"
+            },
+            "type": "Host-Out",
+            "country_code": "ID",
+            "next_cycle_date": "2026-05-15",
+            "contact_enc": "festival@thailandfolklore.com"
+        },
+        {
+            "p_id": 16,
+            "name_json": {
+                "th": "สถาบันสังคีตศิลป์แห่งประเทศไทย",
+                "en": "Thailand Music Company Agency",
+                "jp": "タイ・ミュージック・アーティスティック",
+                "cn": "泰国音乐艺术机构"
+            },
+            "type": "Host-In",
+            "country_code": "TH",
+            "next_cycle_date": "2026-08-06",
+            "contact_enc": "festival@thailandfolklore.com"
+        },
+        {
+            "p_id": 17,
+            "name_json": {
+                "th": "สมาพันธ์คติชนวิทยาแห่งประเทศจีน",
+                "en": "China Team Folklore Company",
+                "jp": "中国民俗文化芸術団",
+                "cn": "中国民俗文化艺术团"
+            },
+            "type": "Host-Out",
+            "country_code": "CN",
+            "next_cycle_date": "2026-12-17",
+            "contact_enc": "festival@thailandfolklore.com"
+        },
+        {
+            "p_id": 18,
+            "name_json": {
+                "th": "สถาบันเทศกาลนานาชาติแห่งเม็กซิโก",
+                "en": "Mexico International Festival Company",
+                "jp": "メキシコ国際フェスティバル機構",
+                "cn": "墨西哥国际艺术节机构"
+            },
+            "type": "Host-Out",
+            "country_code": "MX",
+            "next_cycle_date": "2026-09-16",
+            "contact_enc": "festival@thailandfolklore.com"
+        },
+        {
+            "p_id": 19,
+            "name_json": {
+                "th": "องค์กรนาฏศิลป์พื้นเมืองแห่งบราซิล",
+                "en": "Brazil Folkdance Organization Inc",
+                "jp": "ブラジル民族舞踊組織",
+                "cn": "巴西民间舞蹈组织"
+            },
+            "type": "Host-Out",
+            "country_code": "BR",
+            "next_cycle_date": "2026-03-19",
+            "contact_enc": "festival@thailandfolklore.com"
+        },
+        {
+            "p_id": 20,
+            "name_json": {
+                "th": "สถาบันคติชนวิทยาแห่งสหราชอาณาจักร",
+                "en": "United Kingdom of Folklore Inc",
+                "jp": "イギリス民俗文化連盟",
+                "cn": "英国民俗文化机构"
+            },
+            "type": "Host-Out",
+            "country_code": "GB",
+            "next_cycle_date": "2026-05-25",
+            "contact_enc": "festival@thailandfolklore.com"
+        },
+        {
+            "p_id": 21,
+            "name_json": {
+                "th": "คณะสังคีตและคติชนวิทยาแห่งฝรั่งเศส",
+                "en": "France Folklore and Music Team",
+                "jp": "フランス民俗音楽使節団",
+                "cn": "法国民俗与音乐艺术团"
+            },
+            "type": "Host-Out",
+            "country_code": "FR",
+            "next_cycle_date": "2026-06-21",
+            "contact_enc": "festival@thailandfolklore.com"
+        },
+        {
+            "p_id": 22,
+            "name_json": {
+                "th": "วิทยาลัยนาฏศิลป์แห่งเนปาล",
+                "en": "Nepal Institute of Dance",
+                "jp": "ネパール国立舞踊研究所",
+                "cn": "尼泊尔舞蹈研究院"
+            },
+            "type": "Sponsor",
+            "country_code": "NP",
+            "next_cycle_date": "2026-04-06",
+            "contact_enc": "festival@thailandfolklore.com"
+        },
+        {
+            "p_id": 23,
+            "name_json": {
+                "th": "คณะนาฏศิลป์พื้นเมืองแห่งประเทศไทย",
+                "en": "Thailand Folkdance Team",
+                "jp": "タイ民族舞踊団",
+                "cn": "泰国民族舞蹈团"
+            },
+            "type": "Host-In",
+            "country_code": "TH",
+            "next_cycle_date": "2026-04-23",
+            "contact_enc": "festival@thailandfolklore.com"
+        },
+        {
+            "p_id": 24,
+            "name_json": {
+                "th": "สมาพันธ์วัฒนธรรมแห่งประเทศไทย",
+                "en": "Thailand Cultural Organization Limited",
+                "jp": "タイ文化振興組織",
+                "cn": "泰国文化组织机构"
+            },
+            "type": "Host-In",
+            "country_code": "TH",
+            "next_cycle_date": "2026-08-24",
+            "contact_enc": "festival@thailandfolklore.com"
+        },
+        {
+            "p_id": 25,
+            "name_json": {
+                "th": "สถาบันความร่วมมือระหว่างประเทศแห่งญี่ปุ่น",
+                "en": "Japan International Corporation",
+                "jp": "日本国際協力機構",
+                "cn": "日本国际合作机构"
+            },
+            "type": "Host-Out",
+            "country_code": "JP",
+            "next_cycle_date": "2026-06-12",
+            "contact_enc": "festival@thailandfolklore.com"
+        },
+        {
+            "p_id": 26,
+            "name_json": {
+                "th": "สหพันธ์ศิลปะการเต้นสากลแห่งรัสเซีย",
+                "en": "Federation of Russian International Dance Limited",
+                "jp": "ロシア国際ダンス連盟",
+                "cn": "俄罗斯国际舞蹈联合会"
+            },
+            "type": "Host-Out",
+            "country_code": "RU",
+            "next_cycle_date": "2026-02-15",
+            "contact_enc": "festival@thailandfolklore.com"
+        }
+    ],
+    "projects": [
+        {
+            "pr_id": 101,
+            "p_id": 1,
+            "title_json": {
+                "th": "เทศกาลดนตรีและการเต้นรำนานาชาติดูไบ",
+                "en": "Dubai International Festival of Music and Dance",
+                "jp": "ドバイ国際音楽・舞踊フェスティバル",
+                "cn": "迪拜国际音乐舞蹈艺术节"
+            },
+            "is_outbound": true,
+            "status": "Planned",
+            "meta_json": {
+                "focus": "Cultural Exchange",
+                "vibe": "Luxury"
+            }
+        },
+        {
+            "pr_id": 102,
+            "p_id": 2,
+            "title_json": {
+                "th": "เทศกาลเต้นรำนานาชาติกรุงเวียนนา",
+                "en": "Vienna International Dance Festival",
+                "jp": "ウィーン国際ダンスフェスティバル",
+                "cn": "维也纳国际舞蹈节"
+            },
+            "is_outbound": true,
+            "status": "Planned",
+            "meta_json": {
+                "focus": "Cultural Exchange",
+                "vibe": "Luxury"
+            }
+        },
+        {
+            "pr_id": 103,
+            "p_id": 3,
+            "title_json": {
+                "th": "เทศกาลเต้นสีสันโลกมาเลเซีย",
+                "en": "World Colors Malaysia International Dance Festival",
+                "jp": "マレーシア・ワールドカラーズ・ダンスフェスティバル",
+                "cn": "马来西亚“世界色彩”国际舞蹈节"
+            },
+            "is_outbound": true,
+            "status": "Planned",
+            "meta_json": {
+                "focus": "Modern Fusion",
+                "vibe": "Deep Roots"
+            }
+        },
+        {
+            "pr_id": 104,
+            "p_id": 4,
+            "title_json": {
+                "th": "เทศกาลดนตรีพื้นบ้านนานาชาติคาเลลลา",
+                "en": "Calella International Folk Music Festival",
+                "jp": "カレラ国際民族音楽祭",
+                "cn": "卡莱利亚国际民间音乐节"
+            },
+            "is_outbound": true,
+            "status": "Planned",
+            "meta_json": {
+                "focus": "Cultural Exchange",
+                "vibe": "Luxury"
+            }
+        },
+        {
+            "pr_id": 105,
+            "p_id": 5,
+            "title_json": {
+                "th": "เทศกาลนานาชาติฤดูร้อนในริมินี",
+                "en": "Rimini International Summer Arts Festival",
+                "jp": "リミニ国際サマー芸術祭",
+                "cn": "里米尼国际夏季艺术节"
+            },
+            "is_outbound": true,
+            "status": "Planned",
+            "meta_json": {
+                "focus": "Cultural Exchange",
+                "vibe": "Luxury"
+            }
+        },
+        {
+            "pr_id": 106,
+            "p_id": 6,
+            "title_json": {
+                "th": "เทศกาลนานาชาติฮานิโอติ",
+                "en": "Hanioti International Folk Festival",
+                "jp": "ハニオティ国際フェスティバル",
+                "cn": "哈尼奥蒂国际艺术节"
+            },
+            "is_outbound": true,
+            "status": "Planned",
+            "meta_json": {
+                "focus": "Cultural Exchange",
+                "vibe": "Minimal"
+            }
+        },
+        {
+            "pr_id": 107,
+            "p_id": 7,
+            "title_json": {
+                "th": "เทศกาลเต้นรำโลกเชอนัน",
+                "en": "Cheonan World Dance Festival",
+                "jp": "天安世界ダンスフェスティバル",
+                "cn": "天安世界舞蹈节"
+            },
+            "is_outbound": true,
+            "status": "Planned",
+            "meta_json": {
+                "focus": "Cultural Exchange",
+                "vibe": "Deep Roots"
+            }
+        },
+        {
+            "pr_id": 108,
+            "p_id": 8,
+            "title_json": {
+                "th": "เทศกาลเต้นรำนานาชาติฮ่องกง",
+                "en": "Hong Kong International Dance Festival",
+                "jp": "香港国際ダンスフェスティバル",
+                "cn": "香港国际舞蹈节"
+            },
+            "is_outbound": true,
+            "status": "Planned",
+            "meta_json": {
+                "focus": "Cultural Exchange",
+                "vibe": "Luxury"
+            }
+        },
+        {
+            "pr_id": 109,
+            "p_id": 9,
+            "title_json": {
+                "th": "เทศกาลการท่องเที่ยวนานาชาติปักกิ่ง",
+                "en": "Beijing International Tourism Festival",
+                "jp": "北京国際観光フェスティバル",
+                "cn": "北京国际旅游节"
+            },
+            "is_outbound": true,
+            "status": "Planned",
+            "meta_json": {
+                "focus": "Cultural Exchange",
+                "vibe": "Luxury"
+            }
+        },
+        {
+            "pr_id": 110,
+            "p_id": 10,
+            "title_json": {
+                "th": "เทศกาลดนตรีและนาฏศิลป์พื้นบ้านนานาชาติฤดูใบไม้ผลิ",
+                "en": "International Spring Festival of Folk Music and Dance",
+                "jp": "スプリング国際民族音楽・舞踊祭",
+                "cn": "春季国际民间音乐与舞蹈盛典"
+            },
+            "is_outbound": true,
+            "status": "Planned",
+            "meta_json": {
+                "focus": "Cultural Exchange",
+                "vibe": "Luxury"
+            }
+        },
+        {
+            "pr_id": 111,
+            "p_id": 11,
+            "title_json": {
+                "th": "เทศกาลนานาชาติศิลปะพื้นบ้านโปแลนด์",
+                "en": "Poland International Folklore Festival",
+                "jp": "ポーランド国際民族芸術祭",
+                "cn": "波兰国际民间艺术节"
+            },
+            "is_outbound": true,
+            "status": "Planned",
+            "meta_json": {
+                "focus": "Cultural Exchange",
+                "vibe": "Deep Roots"
+            }
+        },
+        {
+            "pr_id": 112,
+            "p_id": 12,
+            "title_json": {
+                "th": "เทศกาลวัฒนธรรมพื้นบ้านนานาชาติศรีลังกา",
+                "en": "Sri Lanka International Folk Culture Festival",
+                "jp": "スリランカ国際民族文化祭",
+                "cn": "斯里兰卡国际民间文化节"
+            },
+            "is_outbound": true,
+            "status": "Completed",
+            "meta_json": {
+                "focus": "Cultural Exchange",
+                "vibe": "Minimal"
+            }
+        },
+        {
+            "pr_id": 113,
+            "p_id": 13,
+            "title_json": {
+                "th": "เทศกาลดนตรีและการเต้นรำตุรกี",
+                "en": "Turkey International Music and Dance Festival",
+                "jp": "トルコ国際音楽・舞踊フェスティバル",
+                "cn": "土耳其国际音乐舞蹈节"
+            },
+            "is_outbound": true,
+            "status": "Planned",
+            "meta_json": {
+                "focus": "Cultural Exchange",
+                "vibe": "Luxury"
+            }
+        },
+        {
+            "pr_id": 114,
+            "p_id": 14,
+            "title_json": {
+                "th": "เทศกาลวัฒนธรรมพื้นบ้านนานาชาติอินเดีย",
+                "en": "India International Folk Culture Festival",
+                "jp": "印度国際民族文化祭",
+                "cn": "印度国际民间文化节"
+            },
+            "is_outbound": true,
+            "status": "Planned",
+            "meta_json": {
+                "focus": "Cultural Exchange",
+                "vibe": "Luxury"
+            }
+        },
+        {
+            "pr_id": 115,
+            "p_id": 15,
+            "title_json": {
+                "th": "เทศกาลเยาวชนนานาชาติอินโดนีเซีย",
+                "en": "Indonesia International Youth Festival",
+                "jp": "インドネシア国際ユースフェスティバル",
+                "cn": "印度尼西亚国际青年艺术节"
+            },
+            "is_outbound": true,
+            "status": "Planned",
+            "meta_json": {
+                "focus": "Cultural Exchange",
+                "vibe": "Luxury"
+            }
+        },
+        {
+            "pr_id": 116,
+            "p_id": 16,
+            "title_json": {
+                "th": "เทศกาลดนตรีและการเต้นรำนานาชาติในประเทศไทย",
+                "en": "Thailand International Music and Dance Festival",
+                "jp": "タイ国際音楽・舞踊フェスティバル",
+                "cn": "泰国国际音乐舞蹈艺术节"
+            },
+            "is_outbound": false,
+            "status": "Planned",
+            "meta_json": {
+                "focus": "Cultural Exchange",
+                "vibe": "Deep Roots"
+            }
+        },
+        {
+            "pr_id": 117,
+            "p_id": 17,
+            "title_json": {
+                "th": "เทศกาลการท่องเที่ยวเซี่ยงไฮ้",
+                "en": "Shanghai Tourism Festival",
+                "jp": "上海観光フェスティバル",
+                "cn": "上海旅游节"
+            },
+            "is_outbound": true,
+            "status": "Planned",
+            "meta_json": {
+                "focus": "Cultural Exchange",
+                "vibe": "Luxury"
+            }
+        },
+        {
+            "pr_id": 118,
+            "p_id": 18,
+            "title_json": {
+                "th": "เทศกาลพื้นบ้านนานาชาติเม็กซิโก",
+                "en": "Mexico International Folklore Festival",
+                "jp": "メキシコ国際民族フェスティバル",
+                "cn": "墨西哥国际民间艺术节"
+            },
+            "is_outbound": true,
+            "status": "Planned",
+            "meta_json": {
+                "focus": "Cultural Exchange",
+                "vibe": "Deep Roots"
+            }
+        },
+        {
+            "pr_id": 119,
+            "p_id": 19,
+            "title_json": {
+                "th": "เทศกาลพื้นบ้านนานาชาติบราซิล",
+                "en": "Brazil International Folklore Festival",
+                "jp": "ブラジル国際民族フェスティバル",
+                "cn": "巴西国际民间艺术节"
+            },
+            "is_outbound": true,
+            "status": "Planned",
+            "meta_json": {
+                "focus": "Cultural Exchange",
+                "vibe": "Luxury"
+            }
+        },
+        {
+            "pr_id": 120,
+            "p_id": 20,
+            "title_json": {
+                "th": "เทศกาลนาฏศิลป์พื้นบ้านนานาชาติสหราชอาณาจักร",
+                "en": "United Kingdom International Folk Dance Festival",
+                "jp": "イギリス国際民族舞踊フェスティバル",
+                "cn": "英国国际民间舞蹈节"
+            },
+            "is_outbound": true,
+            "status": "Planned",
+            "meta_json": {
+                "focus": "Cultural Exchange",
+                "vibe": "Luxury"
+            }
+        },
+        {
+            "pr_id": 121,
+            "p_id": 21,
+            "title_json": {
+                "th": "เทศกาลวัฒนธรรมพื้นบ้านนานาชาติฝรั่งเศส",
+                "en": "France International Folklore Festival",
+                "jp": "フランス国際民族文化祭",
+                "cn": "法国国际民间文化节"
+            },
+            "is_outbound": true,
+            "status": "Planned",
+            "meta_json": {
+                "focus": "Cultural Exchange",
+                "vibe": "Luxury"
+            }
+        },
+        {
+            "pr_id": 122,
+            "p_id": 22,
+            "title_json": {
+                "th": "เทศกาลพื้นบ้านชาติพันธุ์นานาชาติเนปาล",
+                "en": "Nepal International Ethnic Folklore Festival",
+                "jp": "ネパール国際民族芸術祭",
+                "cn": "尼泊尔国际民族民间艺术节"
+            },
+            "is_outbound": true,
+            "status": "Planned",
+            "meta_json": {
+                "focus": "Cultural Exchange",
+                "vibe": "Minimal"
+            }
+        },
+        {
+            "pr_id": 123,
+            "p_id": 23,
+            "title_json": {
+                "th": "เทศกาลนาฏศิลป์และเพลงนานาชาติสีสันแห่งประเทศไทย",
+                "en": "Colors of Thailand International Dance and Music Festival",
+                "jp": "カラーズ・オブ・タイランド国際歌舞祭",
+                "cn": "泰国色彩”国际歌舞盛典"
+            },
+            "is_outbound": false,
+            "status": "Planned",
+            "meta_json": {
+                "focus": "Cultural Exchange",
+                "vibe": "Deep Roots"
+            }
+        },
+        {
+            "pr_id": 124,
+            "p_id": 24,
+            "title_json": {
+                "th": "เทศกาลสงกรานต์ไทยมรดกโลก",
+                "en": "Songkran Thailand World Heritage Festival",
+                "jp": "ソンクラーン：タイの世界遺産祭典",
+                "cn": "泰国宋干节：世界文化遗产盛典"
+            },
+            "is_outbound": false,
+            "status": "Planned",
+            "meta_json": {
+                "focus": "Cultural Exchange",
+                "vibe": "Luxury"
+            }
+        },
+        {
+            "pr_id": 125,
+            "p_id": 25,
+            "title_json": {
+                "th": "เทศกาลพื้นบ้านนานาชาติญี่ปุ่น",
+                "en": "Japan International Folklore Festival",
+                "jp": "日本国際民族フェスティバル",
+                "cn": "日本国际民间艺术节"
+            },
+            "is_outbound": true,
+            "status": "Planned",
+            "meta_json": {
+                "focus": "Cultural Exchange",
+                "vibe": "Luxury"
+            }
+        },
+        {
+            "pr_id": 126,
+            "p_id": 26,
+            "title_json": {
+                "th": "เทศกาลศิลปะพื้นบ้านนานาชาติวงแหวนทองคำ",
+                "en": "Golden Ring International Folk Art Festival",
+                "jp": "ゴールデンリング国際民族芸術祭",
+                "cn": "金环国际民间艺术节"
+            },
+            "is_outbound": true,
+            "status": "Active",
+            "meta_json": {
+                "focus": "Cultural Exchange",
+                "vibe": "Luxury"
+            }
+        }
+    ],
+    "artists": [
+        {
+            "artist_id": 501,
+            "dna_type": "Musical_Arts",
+            "name_json": {
+                "th": "ทีมปี่พาทย์นโรดม",
+                "en": "Narodom Piphat Ensemble",
+                "jp": "ノロドム・ピーパート大楽団",
+                "cn": "诺罗敦 · 披帕大乐团"
+            },
+            "soul_stamp": true,
+            "bio_json": {
+                "th": "ผู้สร้างสรรค์เสียงสังคีตที่สะท้อนความยิ่งใหญ่ของแผ่นดิน",
+                "en": "The Maestro of Melodies Resonating the Grandeur of the Land",
+                "jp": "国の偉大さを響かせる聖なる調べの創造者",
+                "cn": "映照国土壮丽之音的音乐家"
+            }
+        },
+        {
+            "artist_id": 502,
+            "dna_type": "Folk_Performance",
+            "name_json": {
+                "th": "คณะการแสดงพื้นบ้านตาคลี",
+                "en": "Takhli Heritage Folk Arts Troupe",
+                "jp": "タクリー伝統民族舞踊団",
+                "cn": "塔克里民间艺术团"
+            },
+            "soul_stamp": true,
+            "bio_json": {
+                "th": "ผู้เชี่ยวชาญและผู้สืบทอดการแสดงพื้นบ้านไทย",
+                "en": "The Distinguished Expert and Successor of Thai Folk Performance",
+                "jp": "タイ民族芸能の専門家および継承者",
+                "cn": "泰国传统民间演艺专家与传承者"
+            }
+        },
+        {
+            "artist_id": 503,
+            "dna_type": "Folk_Performance",
+            "name_json": {
+                "th": "คณะโปงลางสงขลา",
+                "en": "Songkhla Pong Lang Orchestra",
+                "jp": "ソンクラー・ポンラーン管弦楽団",
+                "cn": "宋卡波朗管弦乐团"
+            },
+            "soul_stamp": true,
+            "bio_json": {
+                "th": "ผู้เชี่ยวชาญและผู้สืบทอดโปงลาง",
+                "en": "The Virtuoso and Heir to the Pong Lang Heritage",
+                "jp": "伝統楽器ポンラーンの至芸継承者",
+                "cn": "波朗艺术传承泰斗"
+            }
+        },
+        {
+            "artist_id": 504,
+            "dna_type": "Folk_Performance",
+            "name_json": {
+                "th": "ทีมการแสดงพื้นบ้านลำปาง",
+                "en": "Lampang Folk Performance Collective",
+                "jp": "ランパーン民族演劇集団",
+                "cn": "南邦民间演艺团"
+            },
+            "soul_stamp": true,
+            "bio_json": {
+                "th": "ผู้รังสรรค์ความสนุกสนานที่เปี่ยมด้วยความหมายทางวัฒนธรรม",
+                "en": "The Artisan of Cultural Joy and Profound Significance",
+                "jp": "文化の真意と歓喜を創出する演芸の創作者",
+                "cn": "富含文化深意与喜悦之演艺创作者"
+            }
+        },
+        {
+            "artist_id": 505,
+            "dna_type": "Folk_Performance",
+            "name_json": {
+                "th": "คณะฟ้อนเมืองน่าน",
+                "en": "Nan Provincial Fon Ensemble",
+                "jp": "ナーン伝統舞踊（フォーン）座",
+                "cn": "楠府传统指甲舞团"
+            },
+            "soul_stamp": true,
+            "bio_json": {
+                "th": "ผู้เชี่ยวชาญและผู้สืบทอดฟ้อน",
+                "en": "The Master and Successor of the Graceful Fon Dance",
+                "jp": "伝統舞踊（フォーン）の専門家および継承者",
+                "cn": "优雅指甲舞 Fon之专家与传承者"
+            }
+        },
+        {
+            "artist_id": 506,
+            "dna_type": "Heritage_Dance",
+            "name_json": {
+                "th": "คณะรำไทยเบญจพร",
+                "en": "Benjaporn Thai Dance Academy",
+                "jp": "ベンジャポーン・タイ舞踊アカデミー",
+                "cn": "班加蓬泰国舞蹈学院"
+            },
+            "soul_stamp": true,
+            "bio_json": {
+                "th": "ผู้รักษามาตรฐานนาฏศิลป์ไทยให้ทรงคุณค่าในระดับสากล",
+                "en": "The Guardian of Excellence in Thai Classical Dance for Global Stature",
+                "jp": "タイ古典舞踊の美しさを世界基準へと高める守護者",
+                "cn": "维护泰国古典舞国际标准之守护者"
+            }
+        },
+        {
+            "artist_id": 507,
+            "dna_type": "Heritage_Dance",
+            "name_json": {
+                "th": "คณะโขนไทยมงคล",
+                "en": "Mongkol Royal Khon Troupe",
+                "jp": "モンコン王室コーン（仮面劇）団",
+                "cn": "蒙空皇室孔剧团"
+            },
+            "soul_stamp": true,
+            "bio_json": {
+                "th": "ศิลปินผู้สืบสานศาสตร์และศิลป์แห่งการแสดงโขนมรดกโลก",
+                "en": "The Artist Preserving the Wisdom and Majesty of World Heritage Khon",
+                "jp": "世界遺産「コーン」の叡智と芸術を継承せし芸術家",
+                "cn": "世界文化遗产“孔剧”学术与艺术传承名家"
+            }
+        },
+        {
+            "artist_id": 508,
+            "dna_type": "Musical_Arts",
+            "name_json": {
+                "th": "คณะดนตรีไทยบุญมี",
+                "en": "Boonmee Thai Classical Music Chamber",
+                "jp": "ブンミー・タイ古典音楽院",
+                "cn": "汶米泰国古典音乐社"
+            },
+            "soul_stamp": true,
+            "bio_json": {
+                "th": "ผู้เชี่ยวชาญและผู้สืบทอดดนตรีไทย",
+                "en": "The Eminent Specialist and Successor of Thai Classical Music",
+                "jp": "タイ古典音楽の泰斗、ならびに継าร継承者",
+                "cn": "泰国古典音乐专家与传承者"
+            }
+        },
+        {
+            "artist_id": 509,
+            "dna_type": "Musical_Arts",
+            "name_json": {
+                "th": "คณะเครื่องสายรุ่งโรจน์",
+                "en": "Rungroj String Ensemble",
+                "jp": "ルンロート・タイ弦楽合奏団",
+                "cn": "荣罗泰国丝弦乐团"
+            },
+            "soul_stamp": false,
+            "bio_json": {
+                "th": "ผู้ถ่ายทอดความนุ่มนวลของดนตรีไทยสู่สุนทรียภาพระดับสูง",
+                "en": "The Custodian Translating Thai Musical Elegance into High Aesthetic Mastery",
+                "jp": "タイ音楽の優美さを至高の芸術性へと導く伝承者",
+                "cn": "将泰国乐音之柔美推向高雅审美境界的传承者"
+            }
+        },
+        {
+            "artist_id": 510,
+            "dna_type": "Folk_Performance",
+            "name_json": {
+                "th": "คณะการแสดงพื้นบ้านสุดารัตน์",
+                "en": "Sudarat Folklore Performance Troupe",
+                "jp": "スダラット民族芸能機構",
+                "cn": "苏达拉民间演艺机构"
+            },
+            "soul_stamp": true,
+            "bio_json": {
+                "th": "ทูตแห่งภูมิปัญญาที่เชื่อมโยงท้องถิ่นสู่สายตาชาวโลก",
+                "en": "The Cultural Ambassador Bridging Local Wisdom to Global Eminence",
+                "jp": "郷土の叡智を世界の舞台へと繋ぐ文化大使",
+                "cn": "连接本土智慧与世界舞台之文化使者"
+            }
+        },
+        {
+            "artist_id": 511,
+            "dna_type": "Folk_Performance",
+            "name_json": {
+                "th": "คณะรำโนราห์เมืองคอน",
+                "en": "The Nora Heritage of Nakhon Si Thammarat",
+                "jp": "ナコーンシータンマラート・ノーラー伝承座",
+                "cn": "洛坤府诺拉舞传承中心"
+            },
+            "soul_stamp": true,
+            "bio_json": {
+                "th": "ผู้ถือครองศาสตร์แห่งแรงศรัทธาและการรำโนราห์",
+                "en": "The Bearer of Sacred Faith and the Ancient Art of Nora",
+                "jp": "信仰の法とノーラー舞踊の極致を司る者",
+                "cn": "诺拉舞 Nora 信仰与艺术之持有者"
+            }
+        },
+        {
+            "artist_id": 512,
+            "dna_type": "Stage_Spectacle",
+            "name_json": {
+                "th": "ทีมการแสดงโชว์ชุดใหญ่ฝรั่งเศส",
+                "en": "France Grand Production Team",
+                "jp": "フランス・グランド・パフォーマンス・チーム",
+                "cn": "法国大型演艺制作团队"
+            },
+            "soul_stamp": true,
+            "bio_json": {
+                "th": "ผู้เชี่ยวชาญและผู้สืบทอดการแสดงโชว์ชุดใหญ่ฝรั่งเศส",
+                "en": "The Master and Successor of Grand French Spectacles",
+                "jp": "フランス式グランド・ショーの専門家および継承者",
+                "cn": "法国大型盛典演艺专家与传承者"
+            }
+        },
+        {
+            "artist_id": 513,
+            "dna_type": "Contemporary_Dance",
+            "name_json": {
+                "th": "ทีมการเต้นร่วมสมัยวรงค์",
+                "en": "Warong Contemporary Dance Studio",
+                "jp": "ワロン・コンテンポラリー・ダンス・スタジオ",
+                "cn": "瓦隆现代舞艺术工作室"
+            },
+            "soul_stamp": true,
+            "bio_json": {
+                "th": "ศิลปินผู้รังสรรค์ภาษาเคลื่อนไหวที่ไร้พรมแดนและข้อจำกัด",
+                "en": "The Visionary Artist of Boundless and Infinite Expressive Language",
+                "jp": "境界なき身体言語を創造する躍動の芸術家",
+                "cn": "创造无边界艺术语言之动感艺术家"
+            }
+        },
+        {
+            "artist_id": 514,
+            "dna_type": "Heritage_Dance",
+            "name_json": {
+                "th": "คณะรำไทยบุรีรัมย์",
+                "en": "Buriram Thai Dance Society",
+                "jp": "ブリーラム・タイ舞踊協会",
+                "cn": "武里南泰国舞蹈社"
+            },
+            "soul_stamp": false,
+            "bio_json": {
+                "th": "ผู้ถือครองจิตวิญญาณแห่งการร่ายรำที่สืบทอดจากรุ่นสู่รุ่น",
+                "en": "The Guardian of the Sacred Spirit of Dance Passed Through Generations",
+                "jp": "世代を超えて受け継がれる舞の魂を宿せし守護者",
+                "cn": "代代相传、守护舞之灵力的艺术名家"
+            }
+        },
+        {
+            "artist_id": 515,
+            "dna_type": "Modern_Movement",
+            "name_json": {
+                "th": "ทีมโมเดิร์นแดนซ์เชียงใหม่",
+                "en": "Chiang Mai Modern Dance Collective",
+                "jp": "チェンマイ・モダン・ダンス・アンサンブル",
+                "cn": "清迈现代舞艺术团"
+            },
+            "soul_stamp": true,
+            "bio_json": {
+                "th": "ผู้เชี่ยวชาญและผู้สืบทอดโมเดิร์นแดนซ์",
+                "en": "The Specialist and Successor of Modern Dance",
+                "jp": "モダン・ダンスの専門家および継承者",
+                "cn": "现代舞艺术专家与传承者"
+            }
+        },
+        {
+            "artist_id": 516,
+            "dna_type": "Heritage_Dance",
+            "name_json": {
+                "th": "คณะโขนอยุธยา",
+                "en": "Ayutthaya Historical Khon Troupe",
+                "jp": "アユタヤ歴史コーン（仮面劇）団",
+                "cn": "阿瑜陀耶历史孔剧团"
+            },
+            "soul_stamp": true,
+            "bio_json": {
+                "th": "ปรมาจารย์ผู้สวมหัวโขนเพื่อธำรงไว้ซึ่งนาฏศิลป์ชั้นสูงของชาติ",
+                "en": "The Grandmaster Adorned in the Sacred Mask to Uphold the Nation Sublime Artistry",
+                "jp": "国家至高の舞踊を護るため、仮面を纏いしグランドマスター",
+                "cn": "佩戴神圣面具以维系国家高等艺术之宗师"
+            }
+        },
+        {
+            "artist_id": 517,
+            "dna_type": "Musical_Arts",
+            "name_json": {
+                "th": "คณะดนตรีไทยมั่งมี",
+                "en": "Mangmee Classical Music Society",
+                "jp": "マンミー古典音楽協会",
+                "cn": "芒米古典音乐协会"
+            },
+            "soul_stamp": true,
+            "bio_json": {
+                "th": "ผู้ร่ายเวทมนตร์ผ่านเสียงกังวานแห่งเครื่องดนตรีไทย",
+                "en": "The Weaver of Mystical Harmonies through Thai Classical Instruments",
+                "jp": "タイ楽器の響きを通じて神秘を紡ぐ芸術家",
+                "cn": "编织泰国乐器玄妙之音的艺术名家"
+            }
+        },
+        {
+            "artist_id": 518,
+            "dna_type": "Musical_Arts",
+            "name_json": {
+                "th": "คณะปี่พาทย์สกลนคร",
+                "en": "Sakon Nakhon Piphat Ensemble",
+                "jp": "サコンナコーン・ピーパート楽団",
+                "cn": "色军府披帕大乐团"
+            },
+            "soul_stamp": true,
+            "bio_json": {
+                "th": "ผู้ส่งต่อจิตวิญญาณปี่พาทย์ให้ตราตรึงในหัวใจคนรุ่นหลัง",
+                "en": "The Custodian of Piphat Sacred Spirit for Future Generations",
+                "jp": "ピーパートの霊魂を次世代の心へと繋ぐ伝承者",
+                "cn": "将“披帕”器乐之魂传颂于后世之杰作"
+            }
+        },
+        {
+            "artist_id": 519,
+            "dna_type": "Musical_Arts",
+            "name_json": {
+                "th": "ทีมเครื่องสายกาญจนบุรี",
+                "en": "Kanchanaburi String Collective",
+                "jp": "カンチャナブリー弦楽合奏団",
+                "cn": "北碧府丝弦艺术团"
+            },
+            "soul_stamp": true,
+            "bio_json": {
+                "th": "ผู้เชี่ยวชาญและผู้สืบทอดเครื่องดนตรีสายของไทย",
+                "en": "The Distinguished Expert and Successor of Thai String Instruments",
+                "jp": "タイ伝統弦楽器の専門家および継承者",
+                "cn": "泰国丝弦乐器专业专家与传承者"
+            }
+        },
+        {
+            "artist_id": 520,
+            "dna_type": "Experimental_Perf",
+            "name_json": {
+                "th": "ทีมการออกแบบท่าเต้นนนทบุรี",
+                "en": "Nonthaburi Choreography Design Studio",
+                "jp": "ノンタブリー振付デザインスタジオ",
+                "cn": "暖武里编舞设计工作室"
+            },
+            "soul_stamp": false,
+            "bio_json": {
+                "th": "ผู้เชี่ยวชาญและผู้สืบทอดการออกแบบท่าเต้น",
+                "en": "The Master Specialist and Successor of Choreographic Design",
+                "jp": "振付設計の専門家および継承者",
+                "cn": "编舞设计艺术专家与传承者"
+            }
+        },
+        {
+            "artist_id": 521,
+            "dna_type": "Stage_Spectacle",
+            "name_json": {
+                "th": "คณะการแสดงโชว์ชุดใหญ่สมุทรปราการ",
+                "en": "Samut Prakan Grand Exhibition Troupe",
+                "jp": "サムットプラーカーン・グランド・ショー・アンサンブル",
+                "cn": "北榄府大型演艺盛典团"
+            },
+            "soul_stamp": true,
+            "bio_json": {
+                "th": "ผู้สืบทอดวิสัยทัศน์ที่ยกระดับการแสดงไทยสู่มาตรฐานสากล",
+                "en": "The Visionary Successor Elevating Thai Performance to Global Excellence",
+                "jp": "タイの舞台芸術を国際的な卓越性へと高めし継承者",
+                "cn": "提升泰国演艺至国际卓越水平之传承先锋"
+            }
+        },
+        {
+            "artist_id": 522,
+            "dna_type": "Heritage_Dance",
+            "name_json": {
+                "th": "คณะโขนกรุงเทพ",
+                "en": "Bangkok Metropolitan Khon Troupe",
+                "jp": "バンコク・メトロポリタン・コーン（仮面劇）団",
+                "cn": "曼谷都会孔剧团"
+            },
+            "soul_stamp": true,
+            "bio_json": {
+                "th": "ผู้เชี่ยวชาญและผู้สืบทอดโขน",
+                "en": "The Master Specialist and Successor of the Khon Masked Theatre",
+                "jp": "仮面劇「コーン」の専門家および継承者",
+                "cn": "孔剧艺术专家与传承者"
+            }
+        },
+        {
+            "artist_id": 523,
+            "dna_type": "Heritage_Dance",
+            "name_json": {
+                "th": "คณะรำไทยปทุมธานี",
+                "en": "Pathum Thani Thai Dance Academy",
+                "jp": "パトゥムターニー・タイ舞踊アカデミー",
+                "cn": "巴吞他尼泰国舞蹈学院"
+            },
+            "soul_stamp": true,
+            "bio_json": {
+                "th": "ผู้เชี่ยวชาญและผู้สืบทอดรำไทย",
+                "en": "The Master Specialist and Successor of Traditional Thai Dance",
+                "jp": "タイ古典舞踊の専門家および継承者",
+                "cn": "泰国古典舞专家与传承者"
+            }
+        },
+        {
+            "artist_id": 524,
+            "dna_type": "Folk_Performance",
+            "name_json": {
+                "th": "ทีมการแสดงพื้นบ้านปักกิ่ง",
+                "en": "Beijing Folk Arts Ensemble",
+                "jp": "北京民族芸能団",
+                "cn": "北京民间艺术团"
+            },
+            "soul_stamp": true,
+            "bio_json": {
+                "th": "ผู้รังสรรค์ความสนุกสนานที่เปี่ยมด้วยความหมายทางวัฒนธรรมจีน",
+                "en": "The Artisan of Cultural Joy and Profound Chinese Heritage",
+                "jp": "中国文化の深淵と歓喜を象徴する演芸の創作者",
+                "cn": "富含华夏文化深意与喜悦之演艺创作者"
+            }
+        },
+        {
+            "artist_id": 525,
+            "dna_type": "Folk_Performance",
+            "name_json": {
+                "th": "คณะฟ้อนชัยนาท",
+                "en": "Chainat Heritage Fon Ensemble",
+                "jp": "チャイナート伝統舞踊（フォーン）座",
+                "cn": "猜纳府传统指甲舞团"
+            },
+            "soul_stamp": true,
+            "bio_json": {
+                "th": "ผู้ร่ายรำความอ่อนละมุนตามแบบฉบับล้านนาอันทรงเกียรติ",
+                "en": "The Master of Lanna Graceful Fon Dance in Its Most Prestigious Form",
+                "jp": "誇り高きランナー伝統舞踊（フォーン）の優美なる伝承者",
+                "cn": "传承兰纳指甲舞 Fon 优雅风范之名家"
+            }
+        },
+        {
+            "artist_id": 526,
+            "dna_type": "Choreography",
+            "name_json": {
+                "th": "ทีมการออกแบบท่าเต้นอุทัยธานี",
+                "en": "Uthai Thani Artistic Choreography",
+                "jp": "ウタイターニー芸術振興振付チーム",
+                "cn": "乌泰他尼艺术编舞团队"
+            },
+            "soul_stamp": true,
+            "bio_json": {
+                "th": "ผู้เชี่ยวชาญและผู้สืบทอดการออกแบบท่าเต้น",
+                "en": "The Master Specialist and Successor: Choreographic Design",
+                "jp": "専門家および継承者：振付設計",
+                "cn": "专家与传承者：编舞设计"
+            }
+        },
+        {
+            "artist_id": 527,
+            "dna_type": "Heritage_Dance",
+            "name_json": {
+                "th": "คณะระบำกำแพงเพชร",
+                "en": "Kamphaeng Phet Rabam Ensemble",
+                "jp": "カンペーンペット伝統舞踊（ラバム）座",
+                "cn": "甘烹碧府传统舞团"
+            },
+            "soul_stamp": true,
+            "bio_json": {
+                "th": "ผู้รักษามาตรฐานความพร้อมเพรียงที่เป็นเอกลักษณ์ของระบำ",
+                "en": "The Guardian of Aesthetic Precision and Unity in Rabam",
+                "jp": "伝統舞踊「ラバム」の規律と美の基準を護る者",
+                "cn": "维系传统舞蹈“拉巴姆”严整性与独特美学之守护者"
+            }
+        },
+        {
+            "artist_id": 528,
+            "dna_type": "Stage_Spectacle",
+            "name_json": {
+                "th": "คณะการแสดงโชว์ชุดใหญ่อิตาลี",
+                "en": "Italy Grand Performance Troupe",
+                "jp": "イタリア・グランド・パフォーマンス・アンサンブル",
+                "cn": "意大利大型演艺制作团"
+            },
+            "soul_stamp": true,
+            "bio_json": {
+                "th": "ผู้สืบทอดวิสัยทัศน์ที่ยกระดับการแสดงอิตาลีสู่มาตรฐานสากล",
+                "en": "The Visionary Successor Elevating Italian Performance to Global Standards",
+                "jp": "イタリアの舞台芸術を世界基準へと昇華せし継承者",
+                "cn": "提升意大利演艺至国际标准之传承先锋"
+            }
+        }
+    ],
+    "certificates": [
+        {
+            "cert_id": 5001,
+            "serial_no": "TF-2026-0001",
+            "owner_id": 501,
+            "issue_date": "2026-01-01",
+            "verify_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "seal_type": "gold_liquid"
+        }
+    ]
+}

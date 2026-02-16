@@ -1,0 +1,118 @@
+---
+// src/components/three/KinnareeCanvas.astro
+const { categories = 26, artifacts = 26, metadata = 28 } = Astro.props;
+---
+
+<div id="canvas-container" class="w-full h-[600px] bg-gradient-to-b from-[#0f172a] to-[#020617] rounded-[2.5rem] overflow-hidden relative border border-white/10 shadow-2xl">
+    
+    <div id="loader-status" class="absolute inset-0 flex items-center justify-center bg-[#020617] z-30 transition-opacity duration-700">
+        <div class="text-cyan-500 font-mono animate-pulse tracking-[0.2em] text-xs uppercase">Activating Kinetic Engine...</div>
+    </div>
+
+    <div class="absolute inset-y-0 left-0 z-10 p-8 flex flex-col justify-center items-start pointer-events-none">
+        <div class="flex flex-col gap-4">
+            <div class="glass-card cyan-border"><div class="label">Categories</div><div class="card-value">{categories}</div></div>
+            <div class="glass-card amber-border"><div class="label">Artifacts</div><div class="card-value">{artifacts}</div></div>
+            <div class="glass-card emerald-border"><div class="label">Metadata</div><div class="card-value">{metadata}</div></div>
+        </div>
+    </div>
+
+    <div class="absolute top-8 left-8 z-10 pointer-events-none">
+        <div class="glass-tag"><div class="ping-dot"></div><span class="tag-text">Auto-Rotation: ON</span></div>
+    </div>
+</div>
+
+<style>
+    .glass-card {
+        width: 150px; padding: 15px 20px; background: rgba(15, 23, 42, 0.85);
+        backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+        border-radius: 0 20px 20px 0; border-top: 1px solid rgba(255,255,255,0.1);
+        border-right: 1px solid rgba(255,255,255,0.1); pointer-events: auto;
+    }
+    .cyan-border { border-left: 4px solid #06b6d4; }
+    .amber-border { border-left: 4px solid #f59e0b; }
+    .emerald-border { border-left: 4px solid #10b981; }
+    .label { font-size: 8px; color: #94a3b8; font-weight: bold; text-transform: uppercase; letter-spacing: 0.15em; }
+    .card-value { font-size: 30px; color: white; font-weight: 900; line-height: 1; }
+    
+    .glass-tag {
+        background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px);
+        padding: 8px 16px; border-radius: 10px; border: 1px solid rgba(255, 255, 255, 0.1);
+        display: flex; align-items: center; gap: 8px;
+    }
+    .tag-text { font-size: 9px; color: #22d3ee; font-weight: bold; text-transform: uppercase; }
+    .ping-dot { width: 6px; height: 6px; background: #06b6d4; border-radius: 50%; animation: pulse 2s infinite; }
+    @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+</style>
+
+<script>
+    import * as THREE from 'three';
+    import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+    import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+
+    const scene = new THREE.Scene();
+    const container = document.getElementById('canvas-container');
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    
+    if (container) {
+        renderer.setSize(container.clientWidth, container.clientHeight);
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.outputColorSpace = THREE.SRGBColorSpace;
+        renderer.toneMapping = THREE.ACESFilmicToneMapping;
+        renderer.toneMappingExposure = 1.5; // เพิ่มความสว่างรวม
+        container.appendChild(renderer.domElement);
+    }
+
+    const camera = new THREE.PerspectiveCamera(35, container.clientWidth / container.clientHeight, 0.1, 1000);
+    camera.position.set(0, 0, 10); 
+
+    // ✅ เพิ่มความสว่างของแสง (Ambient & Point Light)
+    scene.add(new THREE.AmbientLight(0xffffff, 1.2)); 
+    const keyLight = new THREE.DirectionalLight(0xffffff, 2.5);
+    keyLight.position.set(5, 5, 5);
+    scene.add(keyLight);
+
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.autoRotate = false; // เราจะหมุนโมเดลโดยตรงแทนเพื่อให้คุมง่ายกว่า
+
+    let duckModel; // ตัวแปรสำหรับเก็บโมเดลเป็ด
+
+    const loader = new GLTFLoader();
+    loader.load('https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/Duck/glTF-Binary/Duck.glb', (gltf) => {
+        duckModel = gltf.scene;
+        duckModel.scale.set(1.8, 1.8, 1.8); 
+        
+        const box = new THREE.Box3().setFromObject(duckModel);
+        const center = box.getCenter(new THREE.Vector3());
+        duckModel.position.x = -center.x;
+        duckModel.position.y = -center.y;
+        duckModel.position.z = -center.z;
+        
+        scene.add(duckModel);
+        
+        const ls = document.getElementById('loader-status');
+        if (ls) { ls.style.opacity = '0'; setTimeout(() => ls.style.display = 'none', 700); }
+    });
+
+    // ✅ ฟังก์ชันการทำงานแบบวนลูป
+    function animate() {
+        requestAnimationFrame(animate);
+        
+        // 🦆 สั่งให้เป็ดหมุนอัตโนมัติ
+        if (duckModel) {
+            duckModel.rotation.y += 0.01; // ปรับความเร็วการหมุนตรงนี้ครับ
+        }
+
+        controls.update();
+        renderer.render(scene, camera);
+    }
+    animate();
+
+    window.addEventListener('resize', () => {
+        if (!container) return;
+        camera.aspect = container.clientWidth / container.clientHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(container.clientWidth, container.clientHeight);
+    });
+</script>

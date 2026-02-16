@@ -1,0 +1,44 @@
+---
+const items = [
+  { city: "PARIS", img: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=80&w=1200" },
+  { city: "TOKYO", img: "https://images.unsplash.com/photo-1540959733332-e9ab65ba61c0?q=80&w=1200" },
+  { city: "NEW YORK", img: "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?q=80&w=1200" },
+  { city: "BANGKOK", img: "https://images.unsplash.com/photo-1508004526072-3be13a5005f6?q=80&w=1200" }
+];
+---
+<section class="museum-gallery">
+  <div class="tagline">GLOBAL OUTBOUND 80%</div>
+  <div class="frame-grid">
+    {items.map((p) => (
+      <div class="m-card group">
+        <div class="corner tl"></div><div class="corner tr"></div>
+        <div class="corner bl"></div><div class="corner br"></div>
+        <div class="img-box">
+          <img src={p.img} alt={p.city} />
+          <div class="overlay"><h3 class="font-serif italic">{p.city}</h3></div>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .museum-gallery { width: 100%; padding: 100px 0 20px 0; background: #F9F8F6; text-align: center; }
+  .tagline { font-size: 11px; letter-spacing: 0.8em; color: #b89b5e; font-weight: bold; margin-bottom: 50px; }
+  .frame-grid { display: flex; width: 100%; height: 60vh; padding: 0 40px; gap: 20px; }
+  .m-card { position: relative; flex: 1; transition: all 0.7s ease; padding: 12px; background: #fff; border: 1px solid rgba(184,155,94,0.1); }
+  .m-card:hover { flex: 2; border-color: #b89b5e; }
+  .img-box { width: 100%; height: 100%; overflow: hidden; position: relative; }
+  .img-box img { width: 100%; height: 100%; object-fit: cover; transition: 1s; }
+  .m-card:hover img { transform: scale(1.1); }
+  .overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; opacity: 0; transition: 0.5s; }
+  .m-card:hover .overlay { opacity: 1; }
+  .overlay h3 { color: white; font-size: 3.5rem; margin: 0; }
+  .corner { position: absolute; width: 15px; height: 15px; border: 2px solid #b89b5e; transition: 0.5s; }
+  .tl { top: -5px; left: -5px; border-right: none; border-bottom: none; }
+  .tr { top: -5px; right: -5px; border-left: none; border-bottom: none; }
+  .bl { bottom: -5px; left: -5px; border-right: none; border-top: none; }
+  .br { bottom: -5px; right: -5px; border-left: none; border-top: none; }
+  .m-card:hover .corner { width: 35px; height: 35px; }
+  @media (max-width: 1024px) { .frame-grid { flex-direction: column; height: auto; } }
+</style>

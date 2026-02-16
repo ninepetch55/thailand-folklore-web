@@ -1,0 +1,59 @@
+---
+const stats = [
+  { label: "EXPERIENCE", val: 10, suf: "Yrs" },
+  { label: "NETWORK", val: 50, suf: "Nodes" },
+  { label: "REACHED", val: 20, suf: "Cities" },
+  { label: "IMPACT", val: 100, suf: "M+" }
+];
+---
+<section class="stats-divider">
+  <svg class="silk-svg" viewBox="0 0 1440 100" preserveAspectRatio="none">
+    <path id="silk-path" d="M0,50 Q360,0 720,50 T1440,50" stroke="#bf953f" stroke-width="5" fill="none" />
+  </svg>
+
+  <div class="stats-flex">
+    {stats.map((s) => (
+      <div class="s-unit group">
+        <p class="s-tag">{s.label}</p>
+        <div class="orb-container">
+            <div class="ring"></div>
+            <div class="num-main font-serif italic">
+                <span class="count" data-target={s.val}>0</span>
+                <span class="suf">{s.suf}</span>
+            </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .stats-divider { position: relative; width: 100%; padding: 40px 0 140px 0; background: #F9F8F6; overflow: hidden; display: flex; justify-content: center; }
+  .silk-svg { position: absolute; top: 58%; left: 0; width: 100%; height: 80px; opacity: 0.4; z-index: 1; }
+  #silk-path { stroke-dasharray: 2000; stroke-dashoffset: 2000; animation: silk-run 10s linear infinite; }
+  @keyframes silk-run { to { stroke-dashoffset: 0; } }
+  
+  .stats-flex { position: relative; z-index: 10; display: flex; justify-content: space-around; width: 100%; max-width: 1400px; }
+  .s-unit { text-align: center; flex: 1; display: flex; flex-direction: column; align-items: center; }
+  .s-tag { font-size: 10px; letter-spacing: 0.6em; color: #bf953f; font-weight: bold; margin-bottom: 30px; }
+  .orb { position: relative; width: 180px; height: 180px; display: flex; align-items: center; justify-content: center; }
+  .num-main { font-size: 5rem; color: #1a1a1a; display: flex; align-items: baseline; }
+  .suf { font-size: 1.5rem; color: #bf953f; margin-left: 5px; }
+
+  @media (max-width: 1024px) { .stats-flex { flex-direction: column; gap: 60px; } }
+</style>
+
+<script>
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const n = e.target.querySelector('.count');
+        if (n && n.innerText === "0") {
+          let st = 0; const t = parseInt(n.dataset.target);
+          const it = setInterval(() => { st += Math.ceil(t / 40); if (st >= t) { n.innerText = t; clearInterval(it); } else n.innerText = st; }, 30);
+        }
+      }
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('.s-unit').forEach(el => obs.observe(el));
+</script>

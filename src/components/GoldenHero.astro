@@ -1,0 +1,73 @@
+---
+const slides = [
+  { img: '/img/1.jpg', title: 'SACRED' },
+  { img: '/img/2.jpg', title: 'HERITAGE' },
+  { img: '/img/3.jpg', title: 'ETERNAL' },
+  { img: '/img/4.jpg', title: 'WISDOM' },
+  { img: '/img/5.jpg', title: 'MYSTIC' },
+  { img: '/img/6.jpg', title: 'SILK' }
+];
+---
+<section class="h-master">
+  <div class="slides-wrap">
+    {slides.map((s, i) => (
+      <div class={`h-slide ${i === 0 ? 'active' : ''}`} data-index={i}>
+        <div class="h-img" style={`background-image: url('${s.img}')`}></div>
+        <div class="h-overlay"></div>
+        <div class="h-content">
+          <h1 class="font-serif italic shimmer">{s.title}</h1>
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <div class="nav-arrows">
+    <button class="arrow-btn prev" id="pBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
+    <button class="arrow-btn next" id="nBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M9 18l6-6-6-6"/></svg>
+    </button>
+  </div>
+
+  <div class="dot-nav">
+    {slides.map((_, i) => (
+      <button class={`dot ${i===0?'active':''}`} data-to={i}></button>
+    ))}
+  </div>
+</section>
+
+<style>
+  .h-master { position: relative; width: 100vw; height: 100vh; background: #000; overflow: hidden; }
+  .h-slide { position: absolute; inset: 0; opacity: 0; transition: opacity 1.5s ease; z-index: 1; display: flex; align-items: center; justify-content: center; }
+  .h-slide.active { opacity: 1; z-index: 10; }
+  .h-img { position: absolute; inset: 0; background-size: cover; background-position: center; transform: scale(1.1); transition: transform 8s linear; }
+  .h-slide.active .h-img { transform: scale(1); }
+  .h-overlay { position: absolute; inset: 0; background: radial-gradient(circle, transparent 20%, rgba(0,0,0,0.7) 100%); z-index: 2; }
+  .shimmer { font-size: clamp(4rem, 15vw, 11rem); color: #fff; text-shadow: 0 0 30px rgba(184,155,94,0.5); z-index: 20; position: relative; }
+
+  /* 🏛️ Arrow Styles */
+  .nav-arrows { position: absolute; inset: 0; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; z-index: 100; pointer-events: none; }
+  .arrow-btn { pointer-events: auto; background: rgba(0,0,0,0.4); border: 2.5px solid #b89b5e; color: #b89b5e; width: 60px; height: 60px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.4s; }
+  .arrow-btn:hover { background: #b89b5e; color: #fff; }
+  .arrow-btn svg { width: 30px; height: 30px; }
+
+  .dot-nav { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); z-index: 100; display: flex; gap: 12px; }
+  .dot { width: 10px; height: 10px; border-radius: 50%; border: 1.5px solid white; background: none; cursor: pointer; transition: 0.4s; padding: 0; }
+  .dot.active { background: #b89b5e; border-color: #b89b5e; transform: scale(1.4); }
+</style>
+
+<script>
+  let cur = 0; const s = document.querySelectorAll('.h-slide'); const d = document.querySelectorAll('.dot');
+  const update = (i) => {
+    s[cur].classList.remove('active'); d[cur].classList.remove('active');
+    cur = i;
+    s[cur].classList.add('active'); d[cur].classList.add('active');
+  };
+  document.getElementById('nBtn').onclick = () => update((cur + 1) % s.length);
+  document.getElementById('pBtn').onclick = () => update((cur - 1 + s.length) % s.length);
+  d.forEach(dot => dot.onclick = () => update(parseInt(dot.dataset.to)));
+
+  // 🔄 Auto Play
+  setInterval(() => update((cur + 1) % s.length), 6000);
+</script>

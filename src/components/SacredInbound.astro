@@ -1,0 +1,67 @@
+---
+const items = [
+  { city: "AYUTTHAYA", img: "/img/g1.jpg", label: "The Sacred Core" },
+  { city: "SUKHOTHAI", img: "/img/g2.jpg", label: "Ancient Wisdom" },
+  { city: "CHIANG MAI", img: "/img/g3.jpg", label: "Eternal Spirit" },
+  { city: "PHUKET", img: "/img/g4.jpg", label: "Island Identity" }
+];
+---
+<section class="sacred-inbound">
+  <div class="header">
+    <p class="tag">SACRED INBOUND 20%</p>
+    <h2 class="font-serif italic">Exclusivity of the Heritage</h2>
+  </div>
+
+  <div class="staggered-grid">
+    {items.map((p, i) => (
+      <div class={`sacred-item group ${i % 2 === 1 ? 'offset' : ''}`}>
+        <div class="artifact-frame">
+          <div class="img-container">
+            <img src={p.img} alt={p.city} loading="lazy" />
+          </div>
+          <div class="info-tag">
+            <span class="label">{p.label}</span>
+            <h3 class="font-serif italic">{p.city}</h3>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .sacred-inbound { width: 100%; padding: 150px 0; background: #fff; }
+  .header { text-align: center; margin-bottom: 100px; }
+  .tag { font-size: 11px; letter-spacing: 0.8em; color: #bf953f; font-weight: bold; margin-bottom: 20px; }
+  
+  .staggered-grid { 
+    display: grid; grid-template-columns: repeat(4, 1fr); 
+    gap: 40px; width: 100%; max-width: 1400px; margin: 0 auto; padding: 0 40px; 
+  }
+  
+  .sacred-item { transition: 1s cubic-bezier(0.23, 1, 0.32, 1); }
+  .sacred-item.offset { margin-top: 80px; } /* สร้างความต่างสลับสูงต่ำ */
+
+  .artifact-frame { 
+    position: relative; background: #fff; padding: 20px; 
+    border: 1px solid rgba(191,149,63,0.1); 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+  }
+  
+  .img-container { width: 100%; aspect-ratio: 4/5; overflow: hidden; }
+  .img-container img { width: 100%; height: 100%; object-fit: cover; transition: 1.5s; }
+  
+  .sacred-item:hover { transform: translateY(-20px) scale(1.05); }
+  .sacred-item:hover img { transform: scale(1.15); }
+  .sacred-item:hover .artifact-frame { border-color: #bf953f; box-shadow: 0 40px 80px rgba(191,149,63,0.15); }
+
+  .info-tag { margin-top: 30px; text-align: left; }
+  .label { font-size: 9px; letter-spacing: 0.4em; color: #bf953f; text-transform: uppercase; font-weight: bold; }
+  .info-tag h3 { font-size: 2.2rem; margin: 5px 0 0 0; color: #1a1a1a; transition: 0.5s; }
+  .sacred-item:hover h3 { color: #bf953f; }
+
+  @media (max-width: 1024px) { 
+    .staggered-grid { grid-template-columns: repeat(2, 1fr); } 
+    .sacred-item.offset { margin-top: 0; }
+  }
+</style>
