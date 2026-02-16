@@ -9,8 +9,11 @@ const { title } = Astro.props;
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>{title}</title>
 	</head>
-	<body class="bg-[#F9F8F6] cursor-none"> <div id="aura-cursor"></div>
-		<main class="content-fade-in"><slot /></main>
+	<body class="bg-[#F9F8F6] overflow-x-hidden cursor-none">
+		<div id="bg-spotlight"></div>
+		<div class="bg-pattern"></div>
+		
+		<main class="relative z-10"><slot /></main>
 	</body>
 </html>
 
@@ -18,41 +21,39 @@ const { title } = Astro.props;
 	@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300;1,600&display=swap');
 	:root { --gold: #bf953f; }
 	
-	html, body { margin: 0; padding: 0; background: #F9F8F6; overflow-x: hidden; }
+	html, body { margin: 0; padding: 0; background: #F9F8F6; }
 	.font-serif { font-family: 'Cormorant Garamond', serif !important; }
 
-	/* 🔮 Custom Aura Cursor */
-	#aura-cursor {
-		position: fixed; width: 20px; height: 20px;
-		background: var(--gold); border-radius: 50%;
-		pointer-events: none; z-index: 10000;
-		mix-blend-mode: difference;
-		transition: transform 0.1s ease-out, width 0.3s, height 0.3s;
+	/* 🏺 พื้นหลังลายไทยแบบจางพิเศษ */
+	.bg-pattern {
+		position: fixed; inset: 0;
+		background-image: url('https://www.transparenttextures.com/patterns/natural-paper.png'); /* เปลี่ยนเป็นลายไทยได้ภายหลัง */
+		opacity: 0.3; pointer-events: none; z-index: 1;
 	}
 
-	/* 🎞️ Smooth Reveal Animation */
-	.reveal { opacity: 0; transform: translateY(30px); transition: all 1s ease-out; }
-	.reveal.visible { opacity: 1; transform: translateY(0); }
+	/* 🔦 แสง Spotlight สีทองจางๆ */
+	#bg-spotlight {
+		position: fixed; width: 600px; height: 600px;
+		background: radial-gradient(circle, rgba(191,149,63,0.08) 0%, transparent 70%);
+		border-radius: 50%; pointer-events: none; z-index: 2;
+		transform: translate(-50%, -50%);
+		transition: transform 0.1s ease-out;
+	}
 
-	* { box-sizing: border-box; }
+	/* 🎞️ Reveal Animation สำหรับทุก Section */
+	section { opacity: 0; transform: translateY(40px); transition: all 1.2s cubic-bezier(0.2, 0.8, 0.2, 1); }
+	section.visible { opacity: 1; transform: translateY(0); }
 </style>
 
 <script>
-	const cursor = document.getElementById('aura-cursor');
+	const spot = document.getElementById('bg-spotlight');
 	window.addEventListener('mousemove', (e) => {
-		cursor.style.left = e.clientX + 'px';
-		cursor.style.top = e.clientY + 'px';
+		spot.style.left = e.clientX + 'px';
+		spot.style.top = e.clientY + 'px';
 	});
 
-	// ระบบตรวจจับการ Scroll เพื่อโชว์เนื้อหา
-	const observer = new IntersectionObserver((entries) => {
-		entries.forEach(entry => {
-			if (entry.isIntersecting) entry.target.classList.add('visible');
-		});
+	const obs = new IntersectionObserver((es) => {
+		es.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
 	}, { threshold: 0.1 });
-
-	document.querySelectorAll('section').forEach(section => {
-		section.classList.add('reveal');
-		observer.observe(section);
-	});
+	document.querySelectorAll('section').forEach(s => obs.observe(s));
 </script>
