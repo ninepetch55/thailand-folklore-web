@@ -6,22 +6,23 @@ const items = [
   { city: "PHUKET", img: "/img/g4.jpg", label: "Island Identity" }
 ];
 ---
-<section class="sacred-inbound">
+<section class="sacred-wrap">
   <div class="header">
-    <p class="tag">SACRED INBOUND 20%</p>
-    <h2 class="font-serif italic">Exclusivity of the Heritage</h2>
+    <p class="tag-gold">SACRED INBOUND 20%</p>
+    <h2 class="font-serif italic title-in">The Essence of Heritage</h2>
   </div>
 
-  <div class="staggered-grid">
+  <div class="museum-staggered">
     {items.map((p, i) => (
-      <div class={`sacred-item group ${i % 2 === 1 ? 'offset' : ''}`}>
-        <div class="artifact-frame">
-          <div class="img-container">
+      <div class={`museum-item group ${i % 2 === 1 ? 'high' : 'low'}`}>
+        <div class="gold-frame">
+          <div class="img-box">
             <img src={p.img} alt={p.city} loading="lazy" />
           </div>
-          <div class="info-tag">
-            <span class="label">{p.label}</span>
+          <div class="museum-label">
+            <span class="id">0{i+1}</span>
             <h3 class="font-serif italic">{p.city}</h3>
+            <p class="sub">{p.label}</p>
           </div>
         </div>
       </div>
@@ -30,38 +31,36 @@ const items = [
 </section>
 
 <style>
-  .sacred-inbound { width: 100%; padding: 150px 0; background: #fff; }
-  .header { text-align: center; margin-bottom: 100px; }
-  .tag { font-size: 11px; letter-spacing: 0.8em; color: #bf953f; font-weight: bold; margin-bottom: 20px; }
-  
-  .staggered-grid { 
-    display: grid; grid-template-columns: repeat(4, 1fr); 
-    gap: 40px; width: 100%; max-width: 1400px; margin: 0 auto; padding: 0 40px; 
+  .sacred-wrap { width: 100%; padding: 150px 0; background: #fff; text-align: center; }
+  .tag-gold { font-size: 11px; letter-spacing: 0.8em; color: #bf953f; font-weight: bold; margin-bottom: 20px; }
+  .title-in { font-size: 3.5rem; color: #1a1a1a; margin-bottom: 100px; }
+
+  .museum-staggered { 
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; 
+    max-width: 1400px; margin: 0 auto; padding: 0 40px; 
   }
-  
-  .sacred-item { transition: 1s cubic-bezier(0.23, 1, 0.32, 1); }
-  .sacred-item.offset { margin-top: 80px; } /* สร้างความต่างสลับสูงต่ำ */
 
-  .artifact-frame { 
-    position: relative; background: #fff; padding: 20px; 
-    border: 1px solid rgba(191,149,63,0.1); 
-    box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+  .museum-item { transition: 1s cubic-bezier(0.23, 1, 0.32, 1); }
+  .museum-item.high { transform: translateY(-40px); }
+  .museum-item.low { transform: translateY(40px); }
+
+  .gold-frame { 
+    position: relative; background: #fff; padding: 15px; border: 1px solid rgba(191,149,63,0.15); 
+    box-shadow: 0 10px 40px rgba(0,0,0,0.02); 
   }
-  
-  .img-container { width: 100%; aspect-ratio: 4/5; overflow: hidden; }
-  .img-container img { width: 100%; height: 100%; object-fit: cover; transition: 1.5s; }
-  
-  .sacred-item:hover { transform: translateY(-20px) scale(1.05); }
-  .sacred-item:hover img { transform: scale(1.15); }
-  .sacred-item:hover .artifact-frame { border-color: #bf953f; box-shadow: 0 40px 80px rgba(191,149,63,0.15); }
+  .museum-item:hover .gold-frame { border-color: #bf953f; transform: scale(1.05); box-shadow: 0 40px 80px rgba(191,149,63,0.1); }
 
-  .info-tag { margin-top: 30px; text-align: left; }
-  .label { font-size: 9px; letter-spacing: 0.4em; color: #bf953f; text-transform: uppercase; font-weight: bold; }
-  .info-tag h3 { font-size: 2.2rem; margin: 5px 0 0 0; color: #1a1a1a; transition: 0.5s; }
-  .sacred-item:hover h3 { color: #bf953f; }
+  .img-box { width: 100%; aspect-ratio: 4/5; overflow: hidden; }
+  .img-box img { width: 100%; height: 100%; object-fit: cover; transition: 1.5s; }
+  .museum-item:hover img { transform: scale(1.1); }
 
-  @media (max-width: 1024px) { 
-    .staggered-grid { grid-template-columns: repeat(2, 1fr); } 
-    .sacred-item.offset { margin-top: 0; }
+  .museum-label { margin-top: 30px; text-align: left; }
+  .id { font-size: 10px; color: #bf953f; font-weight: bold; display: block; margin-bottom: 5px; }
+  .museum-label h3 { font-size: 2.2rem; margin: 0; color: #1a1a1a; }
+  .sub { font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase; color: #bf953f; margin-top: 10px; }
+
+  @media (max-width: 1024px) {
+    .museum-staggered { grid-template-columns: repeat(2, 1fr); }
+    .museum-item { transform: none !important; }
   }
 </style>
