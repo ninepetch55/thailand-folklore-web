@@ -1,24 +1,66 @@
 ---
-// เช็คให้ชัวร์ว่าชื่อไฟล์ในโฟลเดอร์ public/img/ เป็นตัวเล็กหมดตามนี้ครับ
 const heroImages = [
   { src: "/img/h1.jpg" }, { src: "/img/h2.jpg" }, { src: "/img/h3.jpg" },
   { src: "/img/h4.jpg" }, { src: "/img/h5.jpg" }, { src: "/img/h6.jpg" }
 ];
 ---
-<section class="w-full pt-32 pb-20">
-  <div class="max-w-[1400px] mx-auto px-10">
-    <div class="text-center mb-20">
-      <h1 class="text-7xl md:text-9xl font-serif italic m-0">Thailand <span class="text-[#bf953f]">Folklore</span></h1>
+<section class="hero-master">
+  <div class="container-hero">
+    <div class="header-text">
+      <p class="tag">SOVEREIGN DIGITAL HERITAGE</p>
+      <h1 class="title font-serif">Thailand <span class="gold">Folklore</span></h1>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 auto-rows-[250px]">
+    <div class="hero-bento-grid">
       {heroImages.map((img, i) => (
-        <div class={`rounded-[40px] overflow-hidden border border-gold/10 
-          ${i === 0 || i === 4 ? 'md:col-span-2' : ''} 
-          ${i === 1 ? 'md:row-span-2' : ''}`}>
-          <img src={img.src} class="w-full h-full object-cover transition-transform duration-1000 hover:scale-110" alt="Heritage" />
+        <div class={`bento-item item-${i + 1}`}>
+          <img src={img.src} alt="Heritage" class="hero-img" />
         </div>
       ))}
     </div>
   </div>
 </section>
+
+<style>
+  .hero-master {
+    position: relative;
+    z-index: 50; /* บังคับให้ลอยเหนือทุกเลเยอร์พื้นหลัง */
+    padding: 120px 20px 80px 20px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .container-hero { max-width: 1300px; margin: 0 auto; }
+  .header-text { text-align: center; margin-bottom: 60px; }
+  .tag { font-size: 10px; letter-spacing: 0.8em; color: #bf953f; font-weight: bold; margin-bottom: 20px; }
+  .title { font-size: clamp(3rem, 10vw, 7rem); margin: 0; color: #1a1a1a; line-height: 1; }
+  .gold { color: #bf953f; font-style: italic; }
+
+  /* 🏗️ Grid Structure ที่แข็งแรงที่สุด */
+  .hero-bento-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 280px);
+    gap: 20px;
+  }
+  .bento-item { 
+    position: relative;
+    border-radius: 40px; 
+    overflow: hidden; 
+    background: #eee; /* สีสำรองถ้าโหลดรูปไม่ขึ้น */
+    border: 1px solid rgba(191,149,63,0.15);
+  }
+  .hero-img { 
+    width: 100%; height: 100%; object-fit: cover; 
+    display: block; /* ป้องกันช่องว่างใต้ภาพ */
+  }
+
+  .item-1 { grid-column: span 2; }
+  .item-2 { grid-row: span 2; }
+  .item-5 { grid-column: span 2; }
+
+  @media (max-width: 1024px) {
+    .hero-bento-grid { grid-template-columns: repeat(2, 1fr); grid-template-rows: auto; }
+    .item-1, .item-2, .item-5 { grid-column: span 1; grid-row: span 1; }
+    .bento-item { height: 250px; }
+  }
+</style>
