@@ -9,13 +9,14 @@ const { title } = Astro.props;
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>{title}</title>
 	</head>
-	<body class="bg-[#F9F8F6] overflow-x-hidden cursor-none selection:bg-[#bf953f] selection:text-white">
+	<body class="bg-[#FDFCFB] overflow-x-hidden cursor-none">
 		
 		<div id="bg-spotlight"></div>
+		<div class="noise-overlay"></div>
 		
-		<div class="particles-container">
-			{Array.from({ length: 20 }).map((_, i) => (
-				<div class={`particle p${i}`}></div>
+		<div class="particles-field">
+			{Array.from({ length: 45 }).map((_, i) => (
+				<div class={`gold-dust d${i}`}></div>
 			))}
 		</div>
 
@@ -25,39 +26,61 @@ const { title } = Astro.props;
 
 <style is:global>
 	@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300;1,600&display=swap');
-	:root { --gold: #bf953f; }
-	html, body { margin: 0; padding: 0; background: #F9F8F6; scroll-behavior: smooth; }
-	.font-serif { font-family: 'Cormorant Garamond', serif !important; }
+	:root { --gold-primary: #bf953f; --gold-light: #fcf6ba; }
 
-	/* 🔦 Spotlight Effect */
+	html, body { margin: 0; padding: 0; background: #FDFCFB; }
+
+	/* 🏺 Texture กระดาษเก่า (สลายความโล่ง) */
+	.noise-overlay {
+		position: fixed; inset: 0;
+		background-image: url('https://www.transparenttextures.com/patterns/natural-paper.png');
+		opacity: 0.5; pointer-events: none; z-index: 2;
+	}
+
+	/* 🔦 Spotlight สีทองที่กว้างและนุ่มนวลขึ้น */
 	#bg-spotlight {
-		position: fixed; width: 800px; height: 800px;
-		background: radial-gradient(circle, rgba(191,149,63,0.06) 0%, transparent 70%);
-		border-radius: 50%; pointer-events: none; z-index: 1;
-		transform: translate(-50%, -50%); transition: transform 0.15s ease-out;
+		position: fixed; width: 100vw; height: 100vh;
+		background: radial-gradient(circle at center, rgba(191,149,63,0.1) 0%, transparent 80%);
+		pointer-events: none; z-index: 1; transform: translate(-50%, -50%);
 	}
 
-	/* ✨ ละอองทอง (Particles) */
-	.particles-container { position: fixed; inset: 0; pointer-events: none; z-index: 2; }
-	.particle { 
-		position: absolute; width: 4px; height: 4px; background: var(--gold); 
-		border-radius: 50%; opacity: 0.2; filter: blur(1px);
-		animation: float-up 20s linear infinite;
+	/* ✨ ฝุ่นทองระดับ Premium */
+	.particles-field { position: fixed; inset: 0; z-index: 3; pointer-events: none; }
+	.gold-dust {
+		position: absolute; background: linear-gradient(45deg, var(--gold-primary), var(--gold-light));
+		border-radius: 50%; opacity: 0;
+		filter: drop-shadow(0 0 5px var(--gold-light));
+		animation: floating-gold 15s infinite linear;
 	}
-	@keyframes float-up {
-		0% { transform: translateY(100vh) translateX(0); opacity: 0; }
-		50% { opacity: 0.3; }
-		100% { transform: translateY(-10vh) translateX(100px); opacity: 0; }
-	}
-	
-	/* กระจายละอองทองแบบสุ่ม */
-	.p1 { left: 10%; animation-duration: 25s; } .p2 { left: 30%; animation-duration: 18s; animation-delay: 2s; }
-	.p3 { left: 70%; animation-duration: 22s; animation-delay: 5s; } .p4 { left: 90%; animation-duration: 30s; }
-    /* (คุณสามารถเพิ่มตำแหน่งสุ่มอื่นๆ ได้ตามใจชอบครับ) */
 
-	/* 🎞️ Section Reveal (จี๊ดกว่าเดิม) */
-	section { opacity: 0; filter: blur(10px); transform: scale(0.95) translateY(50px); transition: all 1.4s cubic-bezier(0.2, 0.8, 0.2, 1); }
-	section.visible { opacity: 1; filter: blur(0); transform: scale(1) translateY(0); }
+	@keyframes floating-gold {
+		0% { transform: translateY(110vh) translateX(0) rotate(0deg); opacity: 0; }
+		20% { opacity: 0.6; }
+		80% { opacity: 0.4; }
+		100% { transform: translateY(-10vh) translateX(150px) rotate(360deg); opacity: 0; }
+	}
+
+	/* สุ่มขนาดและตำแหน่งฝุ่นทอง 45 จุด */
+	{Array.from({ length: 45 }).map((_, i) => `
+		.d${i} {
+			width: ${Math.random() * 5 + 2}px;
+			height: ${Math.random() * 5 + 2}px;
+			left: ${Math.random() * 100}%;
+			animation-delay: ${Math.random() * 10}s;
+			animation-duration: ${Math.random() * 15 + 10}s;
+		}
+	`).join('')}
+
+	/* 📏 กระชับพื้นที่ Section ให้แน่นขึ้น */
+	section { 
+		padding-top: 40px !important; 
+		padding-bottom: 40px !important; 
+		margin-bottom: 0px !important;
+	}
+
+	/* 📽️ Reveal Effect */
+	section { opacity: 0; transform: translateY(30px); transition: all 1.5s ease-out; }
+	section.visible { opacity: 1; transform: translateY(0); }
 </style>
 
 <script>
@@ -67,8 +90,10 @@ const { title } = Astro.props;
 		spot.style.top = e.clientY + 'px';
 	});
 
-	const obs = new IntersectionObserver((es) => {
-		es.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-	}, { threshold: 0.1 });
-	document.querySelectorAll('section').forEach(s => obs.observe(s));
+	const observer = new IntersectionObserver((entries) => {
+		entries.forEach(entry => {
+			if (entry.isIntersecting) entry.target.classList.add('visible');
+		});
+	}, { threshold: 0.05 });
+	document.querySelectorAll('section').forEach(s => observer.observe(s));
 </script>
