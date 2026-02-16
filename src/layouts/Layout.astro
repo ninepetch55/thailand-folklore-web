@@ -1,10 +1,22 @@
 <style is:global>
-  /* ปรับปรุงให้ Section ที่โหลดมาแล้วแสดงผลทันทีถ้า Observer มีปัญหา */
+  /* 🛡️ ปรับให้แสดงผลพื้นฐานไว้ก่อน ถ้า JS ไม่ทำงานเว็บก็ยังไม่พัง */
   section { 
-    opacity: 0; 
-    transform: translateY(20px); 
-    transition: opacity 1.2s ease-out, transform 1.2s ease-out; 
-    will-change: opacity, transform;
+    opacity: 1 !important; /* เปลี่ยนจาก 0 เป็น 1 ชั่วคราวเพื่อเช็คหน้างาน */
+    transform: none !important; 
+    transition: opacity 1s ease-out;
   }
-  section.visible { opacity: 1 !important; transform: translateY(0) !important; }
+  
+  /* ถ้า JS ทำงานค่อยให้มันค่อยๆ Fade In */
+  .js-enabled section { opacity: 0; }
+  .js-enabled section.visible { opacity: 1; }
 </style>
+
+<script>
+  // บอกให้ CSS รู้ว่า Javascript พร้อมทำงาน
+  document.body.classList.add('js-enabled');
+  
+  const obs = new IntersectionObserver((es) => {
+    es.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('section').forEach(s => obs.observe(s));
+</script>
