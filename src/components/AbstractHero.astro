@@ -1,12 +1,28 @@
 ---
-// WDM Note: ตรวจสอบว่ามีไฟล์รูปใน public/img/ จริงๆ นะครับ
+const heroImages = [
+  { src: "/img/h1.jpg", alt: "Folklore 1" },
+  { src: "/img/h2.jpg", alt: "Folklore 2" },
+  { src: "/img/h3.jpg", alt: "Folklore 3" },
+  { src: "/img/h4.jpg", alt: "Folklore 4" },
+  { src: "/img/h5.jpg", alt: "Folklore 5" },
+  { src: "/img/h6.jpg", alt: "Folklore 6" }
+];
 ---
 <section class="hero-sovereign">
   <div class="hero-container">
-    <div class="hero-visual">
-      <div class="glow-aura"></div>
+    <div class="hero-header">
       <p class="hero-tag">THE SOVEREIGN DIGITAL HERITAGE</p>
       <h1 class="hero-title font-serif italic">Thailand <br/> <span class="gold-text">Folklore</span></h1>
+    </div>
+
+    <div class="hero-gallery">
+      {heroImages.map((img, i) => (
+        <div class={`gallery-item item-${i + 1}`}>
+          <div class="frame">
+            <img src={img.src} alt={img.alt} loading="eager" />
+          </div>
+        </div>
+      ))}
     </div>
 
     <div class="hero-categories">
@@ -17,55 +33,41 @@
           <p>Series / 26</p>
         </div>
       </div>
-      <div class="cat-item">
-        <span class="num">02</span>
-        <div class="cat-info">
-          <h3>Digital Artifacts</h3>
-          <p>Archive / 26</p>
-        </div>
       </div>
-      <div class="cat-item">
-        <span class="num">03</span>
-        <div class="cat-info">
-          <h3>Linked Metadata</h3>
-          <p>Nodes / 28</p>
-        </div>
-      </div>
-    </div>
   </div>
 </section>
 
 <style>
-  .hero-sovereign {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 120px 40px 60px 40px !important; /* จัดลำดับ Padding ใหม่ */
-    background: transparent;
-    position: relative;
-    z-index: 20;
-  }
-  .hero-container { max-width: 1400px; width: 100%; text-align: center; }
-  
-  .hero-tag { font-size: 12px; letter-spacing: 0.8em; color: #bf953f; font-weight: bold; margin-bottom: 30px; opacity: 1; }
-  .hero-title { font-size: clamp(4rem, 10vw, 8rem); line-height: 1; color: #1a1a1a; margin: 0; }
+  .hero-sovereign { padding: 120px 40px 80px 40px !important; min-height: 100vh; display: flex; align-items: center; }
+  .hero-container { max-width: 1400px; margin: 0 auto; width: 100%; text-align: center; }
+  .hero-header { margin-bottom: 60px; }
+  .hero-title { font-size: clamp(3rem, 8vw, 6rem); line-height: 1.1; }
   .gold-text { color: #bf953f; }
 
-  .hero-categories {
-    display: flex;
-    justify-content: center;
-    gap: 80px;
-    margin-top: 100px;
-    border-top: 1px solid rgba(191,149,63,0.1);
-    padding-top: 50px;
+  /* ✨ Bento Gallery Layout */
+  .hero-gallery {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 250px);
+    gap: 20px;
+    margin-bottom: 80px;
   }
-  .cat-item { display: flex; align-items: flex-start; gap: 15px; text-align: left; }
-  .num { font-size: 11px; color: #bf953f; font-weight: bold; margin-top: 5px; }
-  .cat-info h3 { font-size: 1.2rem; margin: 0; color: #1a1a1a; font-family: serif; font-style: italic; }
-  .cat-info p { font-size: 10px; text-transform: uppercase; color: #999; letter-spacing: 1px; margin: 5px 0 0 0; }
+  .gallery-item .frame { 
+    width: 100%; height: 100%; border-radius: 40px; overflow: hidden; 
+    border: 1px solid rgba(191,149,63,0.1); transition: 1s;
+  }
+  .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: 1.5s; }
+  
+  /* ปรับแต่งตำแหน่งให้ดูเป็น Organic Bento */
+  .item-1 { grid-column: span 2; }
+  .item-2 { grid-row: span 2; }
+  .item-5 { grid-column: span 2; }
+
+  .gallery-item:hover .frame { transform: scale(1.02); border-color: #bf953f; box-shadow: 0 30px 60px rgba(191,149,63,0.15); }
+  .gallery-item:hover img { transform: scale(1.1); }
 
   @media (max-width: 1024px) {
-    .hero-categories { flex-direction: column; gap: 40px; align-items: center; text-align: center; }
+    .hero-gallery { grid-template-columns: repeat(2, 1fr); grid-template-rows: auto; }
+    .item-1, .item-2, .item-5 { grid-column: span 1; grid-row: span 1; }
   }
 </style>
