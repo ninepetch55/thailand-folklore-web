@@ -4,39 +4,11 @@ import Hero from '../components/AbstractHero.astro';
 import GlobalOutbound from '../components/GlobalOutbound.astro';
 import IntelligenceStats from '../components/IntelligenceStats.astro';
 import SacredInbound from '../components/SacredInbound.astro';
-
-// WDM Note: ตรวจสอบชื่อ Component ให้ตรงกับในโฟลเดอร์ src/components ของคุณนะครับ
 ---
 
 <Layout title="Thailand Folklore | The Sovereign Digital Heritage">
-  
-  <main class="content-wrapper">
-    <Hero />
-
-    <div class="section-gap">
-      <GlobalOutbound />
-    </div>
-
-    <div class="section-gap">
-      <IntelligenceStats />
-    </div>
-
-    <div class="section-gap">
-      <SacredInbound />
-    </div>
-
-    </main>
-
+  <Hero />
+  <GlobalOutbound />
+  <IntelligenceStats />
+  <SacredInbound />
 </Layout>
-
-<style>
-  /* 📏 ปรับแต่งช่องว่างให้ "นวล" และไม่ห่างเกินไป */
-  .content-wrapper {
-    position: relative;
-    z-index: 10;
-  }
-  .section-gap {
-    margin-top: -20px; /* ให้แต่ละ Section ซ้อนเหลื่อมกันเล็กน้อยเพื่อความ Smooth */
-    position: relative;
-  }
-</style>

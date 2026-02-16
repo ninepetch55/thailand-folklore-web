@@ -9,19 +9,20 @@ const { title } = Astro.props;
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>{title}</title>
 	</head>
-	<body class="bg-[#FDFCFB] overflow-x-hidden">
-		<div id="bg-spotlight"></div>
+	<body class="bg-[#FDFCFB] overflow-x-hidden m-0 p-0 selection:bg-[#bf953f] selection:text-white">
 		
-		<div class="particles-field">
-			{Array.from({ length: 80 }).map((_, i) => (
-				<div class={`gold-dust ${i % 4 === 0 ? 'sparkle' : ''}`} 
-					 style={`--size:${Math.random()*4+2}px; --left:${Math.random()*100}%; --delay:${Math.random()*15}s; --duration:${Math.random()*20+10}s;`}>
-				</div>
-			))}
+		<div class="bg-fixed-elements">
+			<div id="bg-spotlight"></div>
+			<div class="noise-texture"></div>
+			<div class="particles-field">
+				{Array.from({ length: 50 }).map((_, i) => (
+					<div class="gold-dust" style={`--l:${Math.random()*100}%; --d:${Math.random()*15}s; --s:${Math.random()*3+2}px;`}></div>
+				))}
+			</div>
 		</div>
 
 		<main class="relative z-10">
-			<slot /> 
+			<slot />
 		</main>
 
 	</body>
@@ -29,16 +30,27 @@ const { title } = Astro.props;
 
 <style is:global>
 	@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300;1,600&display=swap');
-	html, body { margin: 0; padding: 0; background: #FDFCFB; color: #1a1a1a; font-family: 'Cormorant Garamond', serif; }
-	
-	/* Spotlight & Particles CSS */
-	#bg-spotlight { position: fixed; inset: 0; background: radial-gradient(circle at center, rgba(191,149,63,0.1) 0%, transparent 80%); pointer-events: none; z-index: 1; }
-	.particles-field { position: fixed; inset: 0; z-index: 2; pointer-events: none; }
-	.gold-dust { position: absolute; width: var(--size); height: var(--size); left: var(--left); bottom: -20px; background: #bf953f; border-radius: 50%; opacity: 0.3; animation: float-up var(--duration) linear infinite var(--delay); }
+	:root { --gold: #bf953f; }
+	html, body { font-family: 'Cormorant Garamond', serif; background: #FDFCFB; color: #1a1a1a; scroll-behavior: smooth; }
+
+	/* 🔧 Fix: ชั้นหลังบ้านต้องไม่ขวางทางเมาส์ */
+	.bg-fixed-elements { position: fixed; inset: 0; z-index: 1; pointer-events: none; }
+	#bg-spotlight { position: absolute; inset: 0; background: radial-gradient(circle at center, rgba(191,149,63,0.08) 0%, transparent 80%); }
+	.noise-texture { position: absolute; inset: 0; background-image: url('https://www.transparenttextures.com/patterns/natural-paper.png'); opacity: 0.4; }
+
+	/* ✨ Gold Dust (ระเบียบใหม่) */
+	.gold-dust {
+		position: absolute; left: var(--l); bottom: -20px; width: var(--s); height: var(--s);
+		background: #bf953f; border-radius: 50%; opacity: 0;
+		animation: float-up 20s linear infinite var(--d);
+	}
 	@keyframes float-up { 0% { transform: translateY(0); opacity: 0; } 20% { opacity: 0.4; } 100% { transform: translateY(-110vh); opacity: 0; } }
-	
-	/* 🌊 สลายความแข็ง: ทำให้ Section มีความนุ่มนวล */
-	section { opacity: 1; position: relative; padding: 40px 0; border-radius: 60px 60px 0 0; background: #FDFCFB; margin-top: -40px; }
-	img { border-radius: 30px; transition: 0.8s cubic-bezier(0.2, 0.8, 0.2, 1); }
-	img:hover { transform: scale(1.03) rotate(1deg); box-shadow: 0 30px 60px rgba(191,149,63,0.2); }
+
+	/* 🌊 Section Standard (สลายความแข็งแบบไม่มั่ว) */
+	section { 
+		position: relative; padding: 100px 0; 
+		background: #FDFCFB; 
+		margin-top: -2px; /* ลดการ Negative Margin เพื่อไม่ให้เกยกันมากเกินไป */
+		border-top: 1px solid rgba(191,149,63,0.05);
+	}
 </style>
