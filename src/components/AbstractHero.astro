@@ -1,144 +1,71 @@
 ---
-// src/components/AbstractHero.astro
-interface Props {
-  categories?: number;
-  artifacts?: number;
-  metadata?: number;
-}
-const { categories = 26, artifacts = 26, metadata = 28 } = Astro.props;
-
-const images = {
-  cat: "https://images.unsplash.com/photo-1578926375605-eaf7559b1458?q=80&w=2000&auto=format&fit=crop", 
-  art: "https://images.unsplash.com/photo-1599733594230-6b823276abcc?q=80&w=2000&auto=format&fit=crop",
-  meta: "https://images.unsplash.com/photo-1614850523296-d8c1af93d400?q=80&w=2000&auto=format&fit=crop"
-};
+// WDM Note: ตรวจสอบว่ามีไฟล์รูปใน public/img/ จริงๆ นะครับ
 ---
-
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
-
-<div class="luxury-wrapper">
-    <div class="bg-overlay-container">
-        <div id="img-cat" class="bg-layer" style={`background-image: url(${images.cat})`}></div>
-        <div id="img-art" class="bg-layer" style={`background-image: url(${images.art})`}></div>
-        <div id="img-meta" class="bg-layer" style={`background-image: url(${images.meta})`}></div>
-        <div class="white-wash"></div>
+<section class="hero-sovereign">
+  <div class="hero-container">
+    <div class="hero-visual">
+      <div class="glow-aura"></div>
+      <p class="hero-tag">THE SOVEREIGN DIGITAL HERITAGE</p>
+      <h1 class="hero-title font-serif italic">Thailand <br/> <span class="gold-text">Folklore</span></h1>
     </div>
 
-    <div class="content-grid">
-        <div class="stat-item" data-id="cat">
-            <span class="tag">Series / 01</span>
-            <div class="number-wrap">
-                <h2 class="display-number card-value">{categories}</h2>
-            </div>
-            <p class="description">Verified Categories</p>
+    <div class="hero-categories">
+      <div class="cat-item">
+        <span class="num">01</span>
+        <div class="cat-info">
+          <h3>Verified Categories</h3>
+          <p>Series / 26</p>
         </div>
-
-        <div class="stat-item" data-id="art">
-            <span class="tag">Archive / 02</span>
-            <div class="number-wrap">
-                <h2 class="display-number card-value">{artifacts}</h2>
-            </div>
-            <p class="description">Digital Artifacts</p>
+      </div>
+      <div class="cat-item">
+        <span class="num">02</span>
+        <div class="cat-info">
+          <h3>Digital Artifacts</h3>
+          <p>Archive / 26</p>
         </div>
-
-        <div class="stat-item" data-id="meta">
-            <span class="tag">Nodes / 03</span>
-            <div class="number-wrap">
-                <h2 class="display-number card-value">{metadata}</h2>
-            </div>
-            <p class="description">Linked Metadata</p>
+      </div>
+      <div class="cat-item">
+        <span class="num">03</span>
+        <div class="cat-info">
+          <h3>Linked Metadata</h3>
+          <p>Nodes / 28</p>
         </div>
+      </div>
     </div>
-</div>
+  </div>
+</section>
 
 <style>
-    .luxury-wrapper {
-        position: relative;
-        width: 100vw;
-        height: 100vh; /* ✅ บังคับเต็มจอ */
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: #ffffff;
-        overflow: hidden;
-        margin-left: calc(-50vw + 50%); /* จัดให้กึ่งกลางหน้าจอเสมอแม้จะอยู่ใน Container */
-    }
+  .hero-sovereign {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 120px 40px 60px 40px !important; /* จัดลำดับ Padding ใหม่ */
+    background: transparent;
+    position: relative;
+    z-index: 20;
+  }
+  .hero-container { max-width: 1400px; width: 100%; text-align: center; }
+  
+  .hero-tag { font-size: 12px; letter-spacing: 0.8em; color: #bf953f; font-weight: bold; margin-bottom: 30px; opacity: 1; }
+  .hero-title { font-size: clamp(4rem, 10vw, 8rem); line-height: 1; color: #1a1a1a; margin: 0; }
+  .gold-text { color: #bf953f; }
 
-    .bg-overlay-container {
-        position: absolute;
-        inset: 0;
-        z-index: 0;
-    }
+  .hero-categories {
+    display: flex;
+    justify-content: center;
+    gap: 80px;
+    margin-top: 100px;
+    border-top: 1px solid rgba(191,149,63,0.1);
+    padding-top: 50px;
+  }
+  .cat-item { display: flex; align-items: flex-start; gap: 15px; text-align: left; }
+  .num { font-size: 11px; color: #bf953f; font-weight: bold; margin-top: 5px; }
+  .cat-info h3 { font-size: 1.2rem; margin: 0; color: #1a1a1a; font-family: serif; font-style: italic; }
+  .cat-info p { font-size: 10px; text-transform: uppercase; color: #999; letter-spacing: 1px; margin: 5px 0 0 0; }
 
-    .bg-layer {
-        position: absolute;
-        inset: 0;
-        background-size: cover; /* ✅ ครอบคลุมพื้นที่ทั้งหมด */
-        background-position: center;
-        opacity: 0;
-        transform: scale(1.1);
-        transition: all 1.5s cubic-bezier(0.23, 1, 0.32, 1);
-    }
-
-    .white-wash {
-        position: absolute;
-        inset: 0;
-        background: rgba(255, 255, 255, 0.82); /* ปรับให้ใสขึ้นนิดหน่วยเพื่อให้เห็นภาพชัดขึ้น */
-        backdrop-filter: blur(3px);
-    }
-
-    .content-grid {
-        position: relative;
-        z-index: 10;
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 100px;
-        width: 100%;
-        max-width: 1400px;
-        padding: 0 60px;
-    }
-
-    .stat-item { text-align: center; cursor: pointer; }
-    .tag { display: block; font-size: 10px; letter-spacing: 0.8em; text-transform: uppercase; color: #94a3b8; margin-bottom: 20px; font-weight: bold; }
-
-    .display-number {
-        font-family: 'Cormorant Garamond', serif;
-        font-size: 12rem; /* ✅ ใหญ่ขึ้นอีกนิด */
-        font-weight: 300;
-        color: #1a1a1a;
-        line-height: 1;
-        transition: all 0.8s ease;
-        display: inline-block;
-        animation: floating 8s infinite ease-in-out;
-    }
-
-    .stat-item:hover .display-number {
-        font-style: italic;
-        transform: skewX(-15deg) scale(1.08);
-        color: #b45309;
-    }
-
-    .description { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 16px; color: #64748b; margin-top: 25px; opacity: 0; transform: translateY(10px); transition: all 0.6s ease; }
-    .stat-item:hover .description { opacity: 1; transform: translateY(0); }
-
-    @keyframes floating {
-        0%, 100% { transform: translateY(0); }
-        50% { transform: translateY(-30px); }
-    }
+  @media (max-width: 1024px) {
+    .hero-categories { flex-direction: column; gap: 40px; align-items: center; text-align: center; }
+  }
 </style>
-
-<script>
-    const items = document.querySelectorAll('.stat-item');
-    items.forEach(item => {
-        item.addEventListener('mouseenter', () => {
-            const id = item.getAttribute('data-id');
-            const bg = document.getElementById(`img-${id}`);
-            if (bg) { bg.style.opacity = '0.25'; bg.style.transform = 'scale(1)'; }
-        });
-        item.addEventListener('mouseleave', () => {
-            const id = item.getAttribute('data-id');
-            const bg = document.getElementById(`img-${id}`);
-            if (bg) { bg.style.opacity = '0'; bg.style.transform = 'scale(1.1)'; }
-        });
-    });
-</script>
