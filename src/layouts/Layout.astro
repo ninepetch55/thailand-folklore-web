@@ -1,69 +1,10 @@
----
-interface Props { title: string; }
-const { title } = Astro.props;
----
-<!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>{title}</title>
-	</head>
-	<body class="bg-[#FDFCFB] overflow-x-hidden cursor-none">
-		
-		<div id="bg-spotlight"></div>
-		
-		<div class="particles-field">
-			{Array.from({ length: 80 }).map((_, i) => (
-				<div 
-					class={`gold-dust ${i % 4 === 0 ? 'sparkle' : ''}`} 
-					style={`
-						--size: ${Math.random() * 5 + 2}px;
-						--left: ${Math.random() * 100}%;
-						--delay: ${Math.random() * 15}s;
-						--duration: ${Math.random() * 25 + 10}s;
-						--opacity: ${Math.random() * 0.5 + 0.3};
-					`}
-				></div>
-			))}
-		</div>
-
-		<main class="relative z-10"><slot /></main>
-	</body>
-</html>
-
 <style is:global>
-	@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300;1,600&display=swap');
-	:root { --gold: #bf953f; }
-	html, body { margin: 0; padding: 0; background: #FDFCFB; scroll-behavior: smooth; }
-	.font-serif { font-family: 'Cormorant Garamond', serif !important; }
-
-	/* 🔦 Spotlight */
-	#bg-spotlight {
-		position: fixed; inset: 0;
-		background: radial-gradient(circle at center, rgba(191,149,63,0.05) 0%, transparent 80%);
-		pointer-events: none; z-index: 1; transform: translate(-50%, -50%);
-	}
-
-	/* ✨ Sparkle Animation */
-	.particles-field { position: fixed; inset: 0; z-index: 2; pointer-events: none; }
-	.gold-dust {
-		position: absolute; width: var(--size); height: var(--size); left: var(--left);
-		bottom: -20px; background: linear-gradient(45deg, #bf953f, #fcf6ba);
-		border-radius: 50%; opacity: 0; filter: blur(1px);
-		animation: float-up var(--duration) linear infinite; animation-delay: var(--delay);
-	}
-	.gold-dust.sparkle { animation: float-up var(--duration) linear infinite, flash 3s infinite; }
-	
-	@keyframes float-up {
-		0% { transform: translateY(0) scale(1); opacity: 0; }
-		20% { opacity: var(--opacity); }
-		100% { transform: translateY(-110vh) scale(1.2); opacity: 0; }
-	}
-	@keyframes flash { 0%, 100% { filter: brightness(1) blur(1px); } 50% { filter: brightness(3) blur(0px); box-shadow: 0 0 10px #fff; } }
-
-	/* 🌊 Section Transition (สลายความแข็ง) */
-	section { position: relative; padding: 80px 0; border-radius: 50px 50px 0 0; margin-top: -30px; background: #FDFCFB; }
-	img { border-radius: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.05); transition: 0.8s; }
-	img:hover { transform: scale(1.05) rotate(1deg); box-shadow: 0 40px 80px rgba(191,149,63,0.15); }
+  /* ปรับปรุงให้ Section ที่โหลดมาแล้วแสดงผลทันทีถ้า Observer มีปัญหา */
+  section { 
+    opacity: 0; 
+    transform: translateY(20px); 
+    transition: opacity 1.2s ease-out, transform 1.2s ease-out; 
+    will-change: opacity, transform;
+  }
+  section.visible { opacity: 1 !important; transform: translateY(0) !important; }
 </style>
