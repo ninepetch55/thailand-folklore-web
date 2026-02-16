@@ -1,39 +1,33 @@
 <div class="particles-field">
-  {Array.from({ length: 50 }).map((_, i) => (
+  {Array.from({ length: 80 }).map((_, i) => (
     <div 
-      class="gold-dust" 
+      class={`gold-dust ${i % 3 === 0 ? 'sparkle' : ''}`} 
       style={`
-        --size: ${Math.random() * 4 + 2}px;
+        --size: ${Math.random() * 5 + 2}px;
         --left: ${Math.random() * 100}%;
-        --delay: ${Math.random() * 15}s;
-        --duration: ${Math.random() * 20 + 10}s;
-        --opacity: ${Math.random() * 0.4 + 0.2};
+        --delay: ${Math.random() * 20}s;
+        --duration: ${Math.random() * 25 + 15}s;
+        --opacity: ${Math.random() * 0.5 + 0.3};
       `}
     ></div>
   ))}
 </div>
 
 <style is:global>
-  .particles-field { position: fixed; inset: 0; z-index: 3; pointer-events: none; }
-  
-  .gold-dust {
-    position: absolute;
-    width: var(--size);
-    height: var(--size);
-    left: var(--left);
-    bottom: -10px;
-    background: linear-gradient(45deg, #bf953f, #fcf6ba);
-    border-radius: 50%;
-    opacity: 0;
-    filter: blur(1px) drop-shadow(0 0 5px #fcf6ba);
-    animation: float-up-vivid var(--duration) linear infinite;
-    animation-delay: var(--delay);
+  /* ✨ Sparkle Effect เพิ่มความจี๊ด */
+  .gold-dust.sparkle {
+    animation: float-up-vivid var(--duration) linear infinite, sparkle-glow 2s ease-in-out infinite;
   }
-
-  @keyframes float-up-vivid {
-    0% { transform: translateY(0) translateX(0); opacity: 0; }
-    10% { opacity: var(--opacity); }
-    90% { opacity: var(--opacity); }
-    100% { transform: translateY(-110vh) translateX(100px); opacity: 0; }
+  @keyframes sparkle-glow {
+    0%, 100% { filter: brightness(1) blur(1px); transform: scale(1); }
+    50% { filter: brightness(2.5) blur(0px); transform: scale(1.3); box-shadow: 0 0 15px #fcf6ba; }
+  }
+  
+  /* เพิ่มเส้นโค้งเชื่อมต่อ Section (ประยุกต์ใช้ในทุกหน้า) */
+  .section-divider {
+    width: 100%; overflow: hidden; line-height: 0;
+  }
+  .section-divider svg {
+    display: block; width: calc(100% + 1.3px); height: 80px; fill: #F9F8F6;
   }
 </style>
