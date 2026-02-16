@@ -9,10 +9,16 @@ const { title } = Astro.props;
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>{title}</title>
 	</head>
-	<body class="bg-[#F9F8F6] overflow-x-hidden cursor-none">
-		<div id="bg-spotlight"></div>
-		<div class="bg-pattern"></div>
+	<body class="bg-[#F9F8F6] overflow-x-hidden cursor-none selection:bg-[#bf953f] selection:text-white">
 		
+		<div id="bg-spotlight"></div>
+		
+		<div class="particles-container">
+			{Array.from({ length: 20 }).map((_, i) => (
+				<div class={`particle p${i}`}></div>
+			))}
+		</div>
+
 		<main class="relative z-10"><slot /></main>
 	</body>
 </html>
@@ -20,29 +26,38 @@ const { title } = Astro.props;
 <style is:global>
 	@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300;1,600&display=swap');
 	:root { --gold: #bf953f; }
-	
-	html, body { margin: 0; padding: 0; background: #F9F8F6; }
+	html, body { margin: 0; padding: 0; background: #F9F8F6; scroll-behavior: smooth; }
 	.font-serif { font-family: 'Cormorant Garamond', serif !important; }
 
-	/* 🏺 พื้นหลังลายไทยแบบจางพิเศษ */
-	.bg-pattern {
-		position: fixed; inset: 0;
-		background-image: url('https://www.transparenttextures.com/patterns/natural-paper.png'); /* เปลี่ยนเป็นลายไทยได้ภายหลัง */
-		opacity: 0.3; pointer-events: none; z-index: 1;
-	}
-
-	/* 🔦 แสง Spotlight สีทองจางๆ */
+	/* 🔦 Spotlight Effect */
 	#bg-spotlight {
-		position: fixed; width: 600px; height: 600px;
-		background: radial-gradient(circle, rgba(191,149,63,0.08) 0%, transparent 70%);
-		border-radius: 50%; pointer-events: none; z-index: 2;
-		transform: translate(-50%, -50%);
-		transition: transform 0.1s ease-out;
+		position: fixed; width: 800px; height: 800px;
+		background: radial-gradient(circle, rgba(191,149,63,0.06) 0%, transparent 70%);
+		border-radius: 50%; pointer-events: none; z-index: 1;
+		transform: translate(-50%, -50%); transition: transform 0.15s ease-out;
 	}
 
-	/* 🎞️ Reveal Animation สำหรับทุก Section */
-	section { opacity: 0; transform: translateY(40px); transition: all 1.2s cubic-bezier(0.2, 0.8, 0.2, 1); }
-	section.visible { opacity: 1; transform: translateY(0); }
+	/* ✨ ละอองทอง (Particles) */
+	.particles-container { position: fixed; inset: 0; pointer-events: none; z-index: 2; }
+	.particle { 
+		position: absolute; width: 4px; height: 4px; background: var(--gold); 
+		border-radius: 50%; opacity: 0.2; filter: blur(1px);
+		animation: float-up 20s linear infinite;
+	}
+	@keyframes float-up {
+		0% { transform: translateY(100vh) translateX(0); opacity: 0; }
+		50% { opacity: 0.3; }
+		100% { transform: translateY(-10vh) translateX(100px); opacity: 0; }
+	}
+	
+	/* กระจายละอองทองแบบสุ่ม */
+	.p1 { left: 10%; animation-duration: 25s; } .p2 { left: 30%; animation-duration: 18s; animation-delay: 2s; }
+	.p3 { left: 70%; animation-duration: 22s; animation-delay: 5s; } .p4 { left: 90%; animation-duration: 30s; }
+    /* (คุณสามารถเพิ่มตำแหน่งสุ่มอื่นๆ ได้ตามใจชอบครับ) */
+
+	/* 🎞️ Section Reveal (จี๊ดกว่าเดิม) */
+	section { opacity: 0; filter: blur(10px); transform: scale(0.95) translateY(50px); transition: all 1.4s cubic-bezier(0.2, 0.8, 0.2, 1); }
+	section.visible { opacity: 1; filter: blur(0); transform: scale(1) translateY(0); }
 </style>
 
 <script>
