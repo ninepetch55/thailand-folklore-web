@@ -1,81 +1,62 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import StatsAbstract from '../components/StatsAbstract.astro';
-
-// หมายเหตุ: ในอนาคตเราจะแยก Slider, Outbound, Inbound, Footer เป็น Component ย่อย
-// เพื่อให้คุณ Copy-Paste ได้ง่าย ผมจะใส่โครงสร้างหลักไว้ที่นี่ก่อนครับ
+import AbstractHero from '../components/AbstractHero.astro';
+import IntelligenceStats from '../components/IntelligenceStats.astro';
+// หมายเหตุ: ตรวจสอบชื่อไฟล์คอมโพเนนต์ให้ตรงกับที่คุณมีนะครับ
 ---
 
 <Layout title="Thailandfolklore | Abstract Luxury Heritage">
-  <main>
-    <section class="relative h-screen flex items-center justify-center overflow-hidden bg-black">
-      <div class="absolute inset-0 z-0">
-        <img src="/img/h1.jpg" class="w-full h-full object-cover opacity-40 scale-110 animate-ken-burns" alt="Hero" />
-      </div>
-      <div class="relative z-10 text-center px-6">
-        <h1 class="font-serif italic text-5xl md:text-8xl text-[#D4AF37] mb-6 reveal-up">
-          Thailandfolklore
-        </h1>
-        <p class="text-white/60 uppercase tracking-[0.5em] text-xs md:text-sm reveal-up" style="transition-delay: 0.3s;">
-          The Global Heritage Flagship
-        </p>
-      </div>
-      <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce opacity-20">
-        <div class="w-[1px] h-16 bg-white"></div>
-      </div>
-    </section>
+  <main class="main-container">
+    
+    <AbstractHero />
 
-    <section class="py-32 px-6 bg-[#001F3F]">
-      <div class="max-w-7xl mx-auto">
-        <div class="flex items-center gap-4 mb-16 reveal-up">
-          <h2 class="font-serif italic text-4xl text-[#D4AF37]">Global Stage</h2>
-          <div class="flex-grow h-[1px] bg-[#D4AF37]/20"></div>
-          <span class="text-white/30 text-xs uppercase tracking-widest">80% Outbound</span>
-        </div>
-        
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-          {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
-            <div class={`relative overflow-hidden group reveal-up h-64 ${i === 1 || i === 6 ? 'md:col-span-2' : ''}`}>
-              <img src={`/img/g${i}.jpg`} class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt={`Project ${i}`} />
-              <div class="absolute inset-0 bg-[#001F3F]/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                <span class="text-[#D4AF37] font-serif italic">View Project</span>
-              </div>
+    <section class="global-stage">
+      <div class="section-header">
+        <h2 class="gold-italic">Global Stage</h2>
+        <div class="line"></div>
+        <span class="sub-tag">80% Outbound</span>
+      </div>
+      
+      <div class="project-grid">
+        {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
+          <div class={`grid-item ${i === 1 || i === 6 ? 'wide' : ''}`}>
+            <img src={`/img/g${i}.jpg`} alt={`Project ${i}`} class="grid-img" />
+            <div class="img-overlay">
+              <span>View Project</span>
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
     </section>
 
-    <StatsAbstract />
+    <IntelligenceStats />
 
-    <section class="py-32 px-6 bg-[#001F3F]">
-      <div class="max-w-7xl mx-auto">
-        <div class="flex items-center gap-4 mb-16 reveal-up">
-          <span class="text-white/30 text-xs uppercase tracking-widest">20% Inbound</span>
-          <div class="flex-grow h-[1px] bg-[#D4AF37]/20"></div>
-          <h2 class="font-serif italic text-4xl text-[#D4AF37]">Heritage Roots</h2>
-        </div>
-        
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-          {[1, 2, 3, 4].map((i) => (
-            <div class="relative aspect-square overflow-hidden reveal-up">
-              <img src={`/img/h${i}.jpg`} class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" alt={`Heritage ${i}`} />
-            </div>
-          ))}
-        </div>
+    <section class="heritage-roots">
+      <div class="section-header">
+        <span class="sub-tag">20% Inbound</span>
+        <div class="line"></div>
+        <h2 class="gold-italic">Heritage Roots</h2>
+      </div>
+      
+      <div class="roots-grid">
+        {[1, 2, 3, 4].map((i) => (
+          <div class="root-item">
+            <img src={`/img/h${i}.jpg`} alt={`Heritage ${i}`} class="root-img" />
+          </div>
+        ))}
       </div>
     </section>
 
-    <footer class="py-20 bg-[#00162d] border-t border-[#D4AF37]/10 relative overflow-hidden">
-      <div id="footer-aura" class="absolute w-[500px] h-[500px] bg-[#D4AF37]/5 rounded-full blur-[100px] pointer-events-none transition-transform duration-300"></div>
-      <div class="max-w-7xl mx-auto px-6 text-center relative z-10">
-        <h3 class="font-serif italic text-3xl text-[#D4AF37] mb-8">Thailandfolklore</h3>
-        <div class="flex justify-center gap-12 text-[10px] uppercase tracking-[0.3em] text-white/40 mb-12">
-          <a href="#" class="hover:text-[#D4AF37] transition-colors">History</a>
-          <a href="#" class="hover:text-[#D4AF37] transition-colors">Verify</a>
-          <a href="#" class="hover:text-[#D4AF37] transition-colors">Contact</a>
-        </div>
-        <p class="text-[9px] text-white/20 uppercase tracking-[0.5em]">
+    <footer class="main-footer">
+      <div id="footer-aura"></div>
+      <div class="footer-content">
+        <h3 class="gold-italic">Thailandfolklore</h3>
+        <nav class="footer-nav">
+          <a href="#">History</a>
+          <a href="#">Verify</a>
+          <a href="#">Contact</a>
+        </nav>
+        <p class="copyright">
           &copy; 2026 Thailandfolklore Foundation. Strictly No-Cloud.
         </p>
       </div>
@@ -84,21 +65,84 @@ import StatsAbstract from '../components/StatsAbstract.astro';
 </Layout>
 
 <style>
-  @keyframes ken-burns {
-    0% { transform: scale(1); }
-    100% { transform: scale(1.1); }
+  /* 🏗️ Core Layout Fixes */
+  .main-container {
+    background: #001F3F; /* สีน้ำเงินเข้มตามที่คุณต้องการ */
   }
-  .animate-ken-burns {
-    animation: ken-burns 20s infinite alternate ease-in-out;
+
+  .section-header {
+    max-width: 1200px;
+    margin: 0 auto 60px;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
   }
+
+  .gold-italic {
+    font-family: serif;
+    font-style: italic;
+    font-size: clamp(2rem, 5vw, 3rem);
+    color: #D4AF37;
+    margin: 0;
+  }
+
+  .line { flex-grow: 1; h-1px; background: rgba(212, 175, 55, 0.2); }
+  .sub-tag { color: rgba(255, 255, 255, 0.3); font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; }
+
+  /* 🖼️ Grid Styling */
+  .global-stage, .heritage-roots { padding: 120px 0; }
+  
+  .project-grid, .roots-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+  }
+
+  .grid-item { position: relative; height: 300px; overflow: hidden; background: #000; }
+  .grid-item.wide { grid-column: span 2; }
+  .grid-img, .root-img { width: 100%; height: 100%; object-fit: cover; transition: 0.8s; }
+  .grid-item:hover .grid-img { transform: scale(1.1); }
+  
+  .img-overlay {
+    position: absolute; inset: 0; background: rgba(0, 31, 63, 0.7);
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; transition: 0.4s; color: #D4AF37; font-style: italic;
+  }
+  .grid-item:hover .img-overlay { opacity: 1; }
+
+  /* 🏛️ Footer Styling */
+  .main-footer {
+    padding: 100px 0;
+    background: #00162d;
+    border-top: 1px solid rgba(212, 175, 55, 0.1);
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+  }
+
+  #footer-aura {
+    position: absolute; width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.05) 0%, transparent 70%);
+    border-radius: 50%; blur: 80px; pointer-events: none;
+    z-index: 1;
+  }
+
+  .footer-content { position: relative; z-index: 10; }
+  .footer-nav { display: flex; justify-content: center; gap: 40px; margin: 40px 0; }
+  .footer-nav a { color: rgba(255, 255, 255, 0.4); text-decoration: none; font-size: 10px; letter-spacing: 0.2em; transition: 0.3s; }
+  .footer-nav a:hover { color: #D4AF37; }
+  .copyright { font-size: 9px; color: rgba(255, 255, 255, 0.2); letter-spacing: 0.4em; }
 </style>
 
 <script>
-  // ระบบ Aura ติดตามเมาส์ใน Footer
   const aura = document.getElementById('footer-aura');
   window.addEventListener('mousemove', (e) => {
     if (aura) {
-      const rect = aura.parentElement!.getBoundingClientRect();
+      const rect = aura.parentElement.getBoundingClientRect();
       const x = e.clientX - 250;
       const y = e.clientY - rect.top - 250;
       aura.style.transform = `translate(${x}px, ${y}px)`;
