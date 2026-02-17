@@ -1,57 +1,72 @@
-<section class="stats-final-wrap">
-    <div class="stats-grid">
-        {[ {t:26, l:'SERIES'}, {t:26, l:'ARCHIVE'}, {t:28, l:'NODES'}, {t:124, l:'ARTIFACTS'} ].map(s => (
-            <div class="stat-box">
-                <div class="silk-container">
+<section class="stats-outer-box">
+    <div class="stats-grid-layout">
+        {[ 
+            {t:26, l:'SERIES'}, {t:26, l:'ARCHIVE'}, 
+            {t:28, l:'NODES'}, {t:124, l:'ARTIFACTS'} 
+        ].map(s => (
+            <div class="stat-item-card">
+                <div class="silk-circle-wrap">
                     <svg viewBox="0 0 100 100">
-                        <circle class="c-bg" cx="50" cy="50" r="45"></circle>
-                        <circle class="c-silk" cx="50" cy="50" r="45"></circle>
+                        <circle class="circle-under" cx="50" cy="50" r="45"></circle>
+                        <circle class="silk-path" cx="50" cy="50" r="45"></circle>
                     </svg>
-                    <h3 class="s-num" data-target={s.t}>0</h3>
+                    <h3 class="stat-count-num" data-target={s.t}>0</h3>
                 </div>
-                <p class="s-label">{s.l}</p>
+                <p class="stat-card-label">{s.l}</p>
             </div>
         ))}
     </div>
 </section>
 
 <script is:inline>
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const el = entry.target;
-                const target = parseInt(el.dataset.target);
-                let current = 0;
-                const step = target / 50;
-                
-                const timer = setInterval(() => {
-                    current += step;
-                    if (current >= target) {
-                        el.innerText = target;
-                        clearInterval(timer);
-                    } else {
-                        el.innerText = Math.floor(current);
-                    }
-                }, 40);
-                entry.target.closest('.stat-box').classList.add('silk-active');
-                observer.unobserve(el);
-            }
-        });
-    }, { threshold: 0.5 });
-    document.querySelectorAll('.s-num').forEach(n => observer.observe(n));
+    const startAnimations = () => {
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const el = entry.target;
+                    const target = parseInt(el.dataset.target);
+                    let current = 0;
+                    const duration = 2000; // 2 seconds
+                    const startTime = performance.now();
+
+                    const animate = (currentTime) => {
+                        const elapsed = currentTime - startTime;
+                        const progress = Math.min(elapsed / duration, 1);
+                        el.innerText = Math.floor(progress * target);
+
+                        if (progress < 1) {
+                            requestAnimationFrame(animate);
+                        } else {
+                            el.innerText = target;
+                        }
+                    };
+                    requestAnimationFrame(animate);
+                    entry.target.closest('.stat-item-card').classList.add('start-silk-animation');
+                    obs.unobserve(el);
+                }
+            });
+        }, { threshold: 0.5 });
+        document.querySelectorAll('.stat-count-num').forEach(n => obs.observe(n));
+    };
+    window.addEventListener('load', startAnimations);
 </script>
 
 <style>
-    .stats-final-wrap { padding: 120px 0; background: #FDFCFB; }
-    .stats-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
-    .stat-box { text-align: center; }
-    .silk-container { position: relative; width: 140px; height: 140px; margin: 0 auto 20px; }
+    .stats-outer-box { padding: 120px 0; background: #FDFCFB; }
+    .stats-grid-layout { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; }
+    .stat-item-card { text-align: center; }
+    .silk-circle-wrap { position: relative; width: 140px; height: 140px; margin: 0 auto 20px; }
     svg { transform: rotate(-90deg); width: 100%; height: 100%; }
     circle { fill: none; stroke-width: 2.5; }
-    .c-bg { stroke: rgba(191,149,63,0.1); }
-    .c-silk { stroke: var(--gold); stroke-dasharray: 283; stroke-dashoffset: 283; transition: 3s cubic-bezier(0.4, 0, 0.2, 1); }
-    .silk-active .c-silk { stroke-dashoffset: 70; }
-    .s-num { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 38px; color: var(--gold); margin: 0; }
-    .s-label { font-size: 10px; letter-spacing: 0.6em; color: #999; font-weight: bold; }
-    @media (max-width: 768px) { .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 50px; } }
+    .circle-under { stroke: rgba(191,149,63,0.1); }
+    .silk-path { 
+        stroke: var(--gold); 
+        stroke-dasharray: 283; 
+        stroke-dashoffset: 283; 
+        transition: stroke-dashoffset 2.5s cubic-bezier(0.4, 0, 0.2, 1); 
+    }
+    .start-silk-animation .silk-path { stroke-dashoffset: 80; } /* เส้นสายไหมวิ่งเมื่อมองเห็น */
+    .stat-count-num { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 38px; color: var(--gold); margin: 0; font-family: serif; }
+    .stat-card-label { font-size: 10px; letter-spacing: 0.6em; color: #999; font-weight: bold; }
+    @media (max-width: 768px) { .stats-grid-layout { grid-template-columns: repeat(2, 1fr); gap: 50px; } }
 </style>
