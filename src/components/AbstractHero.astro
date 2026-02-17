@@ -1,31 +1,14 @@
 ---
-const images = ["/img/h1.jpg", "/img/h2.jpg", "/img/h3.jpg", "/img/h4.jpg", "/img/h5.jpg", "/img/h6.jpg"];
+const images = ["/img/h1.jpg", "/img/h2.jpg"]; // ลองแค่ 2 รูปก่อนครับ
 ---
-<section style="width:100%; height:100vh; position:relative; background:#000; overflow:hidden;">
-    <div class="swiper mySwiper" style="width:100%; height:100%;">
-        <div class="swiper-wrapper">
-            {images.map((img) => (
-                <div class="swiper-slide" style="width:100%; height:100%;">
-                    <img src={img} style="width:100%; height:100%; object-fit:cover;" />
-                </div>
-            ))}
-        </div>
-        <div class="swiper-button-next" style="color:#bf953f;"></div>
-        <div class="swiper-button-prev" style="color:#bf953f;"></div>
-        <div class="swiper-pagination"></div>
+<section style="width:100%; height:80vh; background:#000; position:relative; overflow:hidden; display:flex; align-items:center; justify-content:center; color:#fff;">
+    <div style="text-align:center; z-index:10;">
+        <h1 style="font-size:4rem; margin:0;">V30 - REBORN</h1>
+        <p style="letter-spacing:5px;">TESTING SYSTEM DEPLOYMENT</p>
+    </div>
+    
+    {/* แสดงภาพแบบธรรมดา ไม่ใช้ Swiper ก่อน เพื่อเช็คว่าภาพยังเรียกขึ้นไหม */}
+    <div style="position:absolute; inset:0; opacity:0.5;">
+        <img src={images[0]} style="width:100%; height:100%; object-fit:cover;" />
     </div>
 </section>
-
-<script is:inline>
-    // ใช้สคริปต์ที่เรียบง่ายที่สุดเพื่อทดสอบ
-    window.addEventListener('load', () => {
-        if (typeof Swiper !== 'undefined') {
-            new Swiper(".mySwiper", {
-                loop: true,
-                autoplay: { delay: 3000 },
-                navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
-                pagination: { el: ".swiper-pagination", clickable: true },
-            });
-        }
-    });
-</script>
