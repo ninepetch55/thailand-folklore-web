@@ -10,20 +10,23 @@ const { title } = Astro.props;
     <title>{title}</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 </head>
-<body class="luxury-body">
-    <div id="cursor-circle"></div>
-    <div class="gold-particles">
+<body class="m-0 p-0 overflow-x-hidden bg-[#FDFCFB] cursor-none">
+    <div id="cursor-dot"></div>
+    
+    <div class="fixed inset-0 z-[100] pointer-events-none">
         {Array.from({ length: 40 }).map((_, i) => (
             <div class="dust" style={`--l:${Math.random()*100}%; --d:${Math.random()*15}s; --s:${Math.random()*3+2}px;`}></div>
         ))}
     </div>
+
     <main><slot /></main>
+
     <script is:inline src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script is:inline>
-        const cursor = document.getElementById('cursor-circle');
+        const dot = document.getElementById('cursor-dot');
         document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
+            dot.style.left = e.clientX + 'px';
+            dot.style.top = e.clientY + 'px';
         });
     </script>
 </body>
@@ -32,10 +35,8 @@ const { title } = Astro.props;
 <style is:global>
     @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300;1,600&display=swap');
     :root { --gold: #bf953f; }
-    html, body { margin: 0; padding: 0; background: #FDFCFB; cursor: none !important; font-family: 'Cormorant Garamond', serif; }
-    .luxury-body { overflow-x: hidden; }
-    #cursor-circle { width: 30px; height: 30px; border: 1px solid var(--gold); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); transition: transform 0.1s ease-out; }
-    .gold-particles { position: fixed; inset: 0; z-index: 100; pointer-events: none; }
+    html, body { font-family: 'Cormorant Garamond', serif; cursor: none !important; }
+    #cursor-dot { width: 8px; height: 8px; background: var(--gold); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); transition: transform 0.05s ease-out; box-shadow: 0 0 10px rgba(191,149,63,0.5); }
     .dust { position: absolute; left: var(--l); bottom: -20px; width: var(--s); height: var(--s); background: var(--gold); border-radius: 50%; opacity: 0; animation: floatUp 20s linear infinite var(--d); }
     @keyframes floatUp { 0% { opacity: 0; } 20% { opacity: 0.4; } 100% { transform: translateY(-110vh); opacity: 0; } }
 </style>
