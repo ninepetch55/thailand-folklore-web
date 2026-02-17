@@ -1,57 +1,59 @@
 ---
 const images = ["/img/h1.jpg", "/img/h2.jpg", "/img/h3.jpg", "/img/h4.jpg", "/img/h5.jpg", "/img/h6.jpg"];
 ---
-<section class="hero-wrap">
+<section class="hero-master-v13">
     <div class="swiper heroSwiper">
         <div class="swiper-wrapper">
             {images.map((src) => (
-                <div class="swiper-slide"><img src={src} class="ken-burns" alt="Heritage" /></div>
+                <div class="swiper-slide"><img src={src} class="ken-burns" alt="Folklore" /></div>
             ))}
         </div>
-        <div class="swiper-button-next luxury-btn"></div>
-        <div class="swiper-button-prev luxury-btn"></div>
+        <div class="swiper-button-next luxury-nav"></div>
+        <div class="swiper-button-prev luxury-nav"></div>
         <div class="swiper-pagination luxury-pagination"></div>
     </div>
-    <div class="hero-content">
+    <div class="hero-overlay">
         <p class="tag">THE SOVEREIGN DIGITAL HERITAGE</p>
-        <h1 class="font-serif italic">Thailand <span class="gold">Folklore</span></h1>
+        <h1 class="main-title font-serif italic">Thailand <span class="gold">Folklore</span></h1>
     </div>
 </section>
 
 <script is:inline>
-    window.addEventListener('load', () => {
+    const initSwiper = () => {
         new Swiper(".heroSwiper", {
             loop: true, speed: 2500, effect: 'fade',
             autoplay: { delay: 5000, disableOnInteraction: false },
             navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
             pagination: { el: ".swiper-pagination", clickable: true },
+            observer: true, observeParents: true,
         });
-    });
+    };
+    window.addEventListener('load', initSwiper);
 </script>
 
 <style>
-    .hero-wrap { position: relative; width: 100vw; height: 100vh; overflow: hidden; background: #000; left: 0; }
+    .hero-master-v13 { width: 100vw; height: 100vh; position: relative; overflow: hidden; background: #000; margin: 0; padding: 0; }
     .swiper { width: 100%; height: 100%; }
-    .ken-burns { width: 100%; height: 100%; object-fit: cover; animation: zoom 15s infinite alternate; }
-    @keyframes zoom { from { transform: scale(1); } to { transform: scale(1.1); } }
-    .hero-content { position: absolute; inset: 0; z-index: 20; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; background: rgba(0,0,0,0.3); pointer-events: none; text-align: center; }
+    .ken-burns { width: 100%; height: 100%; object-fit: cover; animation: zoomIn 20s infinite alternate; }
+    @keyframes zoomIn { from { transform: scale(1); } to { transform: scale(1.15); } }
+    .hero-overlay { position: absolute; inset: 0; z-index: 20; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; background: rgba(0,0,0,0.35); text-align: center; pointer-events: none; }
     .tag { font-size: 11px; letter-spacing: 0.8em; color: var(--gold); font-weight: bold; margin-bottom: 20px; }
-    h1 { font-size: clamp(3.5rem, 12vw, 8rem); margin: 0; line-height: 1; }
+    .main-title { font-size: clamp(3rem, 12vw, 8rem); margin: 0; line-height: 1; }
     .gold { color: var(--gold); }
 
-    /* ✨ Luxury Arrows with Hover Effect */
-    .luxury-btn { color: var(--gold) !important; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
-    .luxury-btn:hover { transform: scale(1.4); text-shadow: 0 0 20px var(--gold); filter: brightness(1.5); }
-    .luxury-btn::after { font-size: 24px !important; font-weight: bold; }
+    /* ✨ Luxury Interactive Arrows */
+    .luxury-nav { color: var(--gold) !important; transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+    .luxury-nav:hover { transform: scale(1.4); filter: drop-shadow(0 0 10px var(--gold)); }
+    .luxury-nav::after { font-size: 24px !important; font-weight: bold; }
 
-    /* ✨ Circle Pagination Interactive */
+    /* ✨ Luxury Circle Pagination */
     :global(.luxury-pagination .swiper-pagination-bullet) { 
-        width: 10px !important; height: 10px !important; 
-        background: transparent !important; border: 1px solid rgba(255,255,255,0.5) !important;
-        opacity: 1 !important; transition: 0.4s; margin: 0 10px !important;
+        width: 12px !important; height: 12px !important; 
+        background: transparent !important; border: 1px solid rgba(255,255,255,0.6) !important;
+        opacity: 1 !important; transition: 0.5s !important; margin: 0 10px !important;
     }
     :global(.luxury-pagination .swiper-pagination-bullet-active) { 
         background: var(--gold) !important; border-color: var(--gold) !important; 
-        transform: scale(1.5); box-shadow: 0 0 15px var(--gold);
+        transform: scale(1.4); box-shadow: 0 0 15px var(--gold);
     }
 </style>
