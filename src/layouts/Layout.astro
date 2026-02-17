@@ -6,20 +6,20 @@ const { title } = Astro.props;
 <html lang="th">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>{title}</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 </head>
-<body class="m-0 p-0 overflow-x-hidden bg-[#FDFCFB] cursor-none">
+<body class="luxury-root">
     <div id="master-cursor"></div>
     
-    <div class="fixed inset-0 z-[9999] pointer-events-none">
+    <div class="particles-master-field">
         {Array.from({ length: 45 }).map((_, i) => (
             <div class="dust" style={`--l:${Math.random()*100}%; --d:${Math.random()*15}s; --s:${Math.random()*3+2}px;`}></div>
         ))}
     </div>
 
-    <main class="relative z-10"><slot /></main>
+    <main class="main-wrapper"><slot /></main>
 
     <script is:inline src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script is:inline>
@@ -35,8 +35,22 @@ const { title } = Astro.props;
 <style is:global>
     @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300;1,600&display=swap');
     :root { --gold: #bf953f; }
-    html, body { font-family: 'Cormorant Garamond', serif; cursor: none !important; margin: 0; padding: 0; }
-    #master-cursor { width: 10px; height: 10px; background: var(--gold); border-radius: 50%; position: fixed; pointer-events: none; z-index: 10000; transform: translate(-50%, -50%); transition: transform 0.05s ease-out; box-shadow: 0 0 10px var(--gold); }
+    
+    * { box-sizing: border-box; } /* 🛡️ ล็อคขนาดทุกอย่างห้ามเกินขอบ */
+    
+    html, body { 
+        margin: 0 !important; padding: 0 !important; 
+        background: #FDFCFB; cursor: none !important; 
+        font-family: 'Cormorant Garamond', serif;
+        width: 100%; height: 100%; overflow-x: hidden;
+    }
+    
+    .luxury-root { isolation: isolate; position: relative; width: 100vw; }
+    #master-cursor { width: 10px; height: 10px; background: var(--gold); border-radius: 50%; position: fixed; pointer-events: none; z-index: 10000; transform: translate(-50%, -50%); transition: transform 0.05s linear; box-shadow: 0 0 10px var(--gold); }
+    
+    .particles-master-field { position: fixed; inset: 0; z-index: 9999; pointer-events: none; }
     .dust { position: absolute; left: var(--l); bottom: -20px; width: var(--s); height: var(--s); background: var(--gold); border-radius: 50%; opacity: 0; animation: floatUp 20s linear infinite var(--d); }
     @keyframes floatUp { 0% { opacity: 0; } 20% { opacity: 0.5; } 100% { transform: translateY(-110vh); opacity: 0; } }
+    
+    .main-wrapper { position: relative; z-index: 10; width: 100%; }
 </style>
