@@ -1,56 +1,82 @@
 ---
-interface Props { title: string; }
+import { ViewTransitions } from 'astro:transitions';
+
+interface Props {
+	title: string;
+}
+
 const { title } = Astro.props;
 ---
+
 <!doctype html>
 <html lang="th">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>{title}</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-</head>
-<body class="luxury-root">
-    <div id="master-cursor"></div>
-    
-    <div class="particles-master-field">
-        {Array.from({ length: 45 }).map((_, i) => (
-            <div class="dust" style={`--l:${Math.random()*100}%; --d:${Math.random()*15}s; --s:${Math.random()*3+2}px;`}></div>
-        ))}
-    </div>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="Thailandfolklore - The Global Heritage Flagship" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+		<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+		<ViewTransitions />
+	</head>
+	<body class="bg-[#001F3F] selection:bg-[#D4AF37] selection:text-[#001F3F]">
+		<slot />
+		<style is:global>
+			:root {
+				--color-midnight: #001F3F;
+				--color-gold: #D4AF37;
+				--color-gold-soft: rgba(212, 175, 55, 0.6);
+			}
+			
+			html {
+				font-family: 'Inter', sans-serif;
+				background: var(--color-midnight);
+				scroll-behavior: smooth;
+			}
 
-    <main class="main-wrapper"><slot /></main>
+			.font-serif {
+				font-family: 'Playfair Display', serif;
+			}
 
-    <script is:inline src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script is:inline>
-        const dot = document.getElementById('master-cursor');
-        document.addEventListener('mousemove', (e) => {
-            dot.style.left = e.clientX + 'px';
-            dot.style.top = e.clientY + 'px';
-        });
-    </script>
-</body>
+			/* จริตการเคลื่อนไหวแบบ Abstract Luxury */
+			.reveal-up {
+				opacity: 0;
+				transform: translateY(30px);
+				transition: all 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+			}
+
+			.reveal-up.active {
+				opacity: 1;
+				transform: translateY(0);
+			}
+
+			/* สไตล์สำหรับการ Scroll นุ่มนวล */
+			::-webkit-scrollbar {
+				width: 6px;
+			}
+			::-webkit-scrollbar-track {
+				background: var(--color-midnight);
+			}
+			::-webkit-scrollbar-thumb {
+				background: var(--color-gold);
+				border-radius: 10px;
+			}
+		</style>
+		<script>
+			// ระบบตรวจจับการ Scroll เพื่อแสดงผลแอนิเมชัน
+			const observerOptions = {
+				threshold: 0.1
+			};
+			const observer = new IntersectionObserver((entries) => {
+				entries.forEach(entry => {
+					if (entry.isIntersecting) {
+						entry.target.classList.add('active');
+					}
+				});
+			}, observerOptions);
+
+			document.querySelectorAll('.reveal-up').forEach(el => observer.observe(el));
+		</script>
+	</body>
 </html>
-
-<style is:global>
-    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300;1,600&display=swap');
-    :root { --gold: #bf953f; }
-    
-    * { box-sizing: border-box; } /* 🛡️ ล็อคขนาดทุกอย่างห้ามเกินขอบ */
-    
-    html, body { 
-        margin: 0 !important; padding: 0 !important; 
-        background: #FDFCFB; cursor: none !important; 
-        font-family: 'Cormorant Garamond', serif;
-        width: 100%; height: 100%; overflow-x: hidden;
-    }
-    
-    .luxury-root { isolation: isolate; position: relative; width: 100vw; }
-    #master-cursor { width: 10px; height: 10px; background: var(--gold); border-radius: 50%; position: fixed; pointer-events: none; z-index: 10000; transform: translate(-50%, -50%); transition: transform 0.05s linear; box-shadow: 0 0 10px var(--gold); }
-    
-    .particles-master-field { position: fixed; inset: 0; z-index: 9999; pointer-events: none; }
-    .dust { position: absolute; left: var(--l); bottom: -20px; width: var(--s); height: var(--s); background: var(--gold); border-radius: 50%; opacity: 0; animation: floatUp 20s linear infinite var(--d); }
-    @keyframes floatUp { 0% { opacity: 0; } 20% { opacity: 0.5; } 100% { transform: translateY(-110vh); opacity: 0; } }
-    
-    .main-wrapper { position: relative; z-index: 10; width: 100%; }
-</style>

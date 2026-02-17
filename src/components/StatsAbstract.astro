@@ -1,0 +1,53 @@
+---
+// ข้อมูลสถิติมหาจักร (สมมติเพื่อความสวยงามตามโจทย์ของคุณ)
+const stats = [
+  { label: "จำนวนนักแสดงทั้งหมด", value: 1538, suffix: "+" },
+  { label: "จำนวนกิจกรรม", value: 112, suffix: "" },
+  { label: "จำนวนผู้ประสานงาน", value: 45, suffix: " ท่าน" },
+  { label: "เทศกาลนานาชาติ", value: 26, suffix: "" }
+];
+---
+
+<div class="py-32 bg-[#00162d] relative overflow-hidden">
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[#D4AF37]/5 blur-[120px] rounded-full"></div>
+
+  <div class="max-w-7xl mx-auto px-6 relative z-10">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-16 md:gap-8">
+      {stats.map((stat) => (
+        <div class="text-center reveal-up">
+          <div class="relative inline-block mb-6">
+            <span class="font-serif text-6xl md:text-8xl text-[#D4AF37] block leading-none tracking-tighter counter" data-target={stat.value}>
+              0
+            </span>
+            <span class="text-[#D4AF37]/60 text-lg font-light mt-2 block">{stat.suffix}</span>
+          </div>
+          <div class="w-12 h-[1px] bg-[#D4AF37]/30 mx-auto mb-4"></div>
+          <p class="text-white/40 uppercase tracking-[0.3em] text-[10px] md:text-xs font-light">
+            {stat.label}
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+</div>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  gsap.registerPlugin(ScrollTrigger);
+
+  // แอนิเมชันตัวเลขวิ่งแบบนุ่มนวล
+  document.querySelectorAll('.counter').forEach((el) => {
+    const target = parseInt(el.getAttribute('data-target') || "0");
+    gsap.to(el, {
+      innerText: target,
+      duration: 2.5,
+      snap: { innerText: 1 },
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: el,
+        start: "top 90%",
+      }
+    });
+  });
+</script>
