@@ -1,20 +1,18 @@
 ---
-const heroImages = [
-  { src: "/img/h1.jpg" }, { src: "/img/h2.jpg" }, { src: "/img/h3.jpg" },
-  { src: "/img/h4.jpg" }, { src: "/img/h5.jpg" }, { src: "/img/h6.jpg" }
-];
+// ดึงรูป 1.jpg ถึง 6.jpg ตามที่คุณตรวจสอบเจอในโฟลเดอร์
+const images = ["/1.jpg", "/2.jpg", "/3.jpg", "/4.jpg", "/5.jpg", "/6.jpg"];
 ---
-<section class="hero-master">
-  <div class="container-hero">
+<section class="hero-stable">
+  <div class="container">
     <div class="header-text">
       <p class="tag">SOVEREIGN DIGITAL HERITAGE</p>
-      <h1 class="title font-serif">Thailand <span class="gold">Folklore</span></h1>
+      <h1 class="font-serif">Thailand <span class="gold">Folklore</span></h1>
     </div>
 
-    <div class="hero-bento-grid">
-      {heroImages.map((img, i) => (
-        <div class={`bento-item item-${i + 1}`}>
-          <img src={img.src} alt="Heritage" class="hero-img" />
+    <div class="bento-grid">
+      {images.map((src, i) => (
+        <div class={`bento-item item-${i}`}>
+          <img src={src} alt="Heritage Artifact" class="hero-img" />
         </div>
       ))}
     </div>
@@ -22,45 +20,30 @@ const heroImages = [
 </section>
 
 <style>
-  .hero-master {
-    position: relative;
-    z-index: 50; /* บังคับให้ลอยเหนือทุกเลเยอร์พื้นหลัง */
-    padding: 120px 20px 80px 20px;
-    width: 100%;
-    box-sizing: border-box;
-  }
-  .container-hero { max-width: 1300px; margin: 0 auto; }
-  .header-text { text-align: center; margin-bottom: 60px; }
-  .tag { font-size: 10px; letter-spacing: 0.8em; color: #bf953f; font-weight: bold; margin-bottom: 20px; }
-  .title { font-size: clamp(3rem, 10vw, 7rem); margin: 0; color: #1a1a1a; line-height: 1; }
+  .hero-stable { position: relative; z-index: 10; padding: 100px 20px; width: 100%; }
+  .container { max-width: 1200px; margin: 0 auto; }
+  .header-text { text-align: center; margin-bottom: 50px; }
+  .tag { font-size: 10px; letter-spacing: 0.6em; color: #bf953f; font-weight: bold; }
+  h1 { font-size: clamp(3rem, 8vw, 6rem); margin: 15px 0; color: #1a1a1a; }
   .gold { color: #bf953f; font-style: italic; }
 
-  /* 🏗️ Grid Structure ที่แข็งแรงที่สุด */
-  .hero-bento-grid {
+  /* 🏗️ Grid Structure ที่นิ่งและชัวร์ */
+  .bento-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(2, 280px);
-    gap: 20px;
+    grid-template-rows: repeat(2, 250px);
+    gap: 15px;
   }
-  .bento-item { 
-    position: relative;
-    border-radius: 40px; 
-    overflow: hidden; 
-    background: #eee; /* สีสำรองถ้าโหลดรูปไม่ขึ้น */
-    border: 1px solid rgba(191,149,63,0.15);
-  }
-  .hero-img { 
-    width: 100%; height: 100%; object-fit: cover; 
-    display: block; /* ป้องกันช่องว่างใต้ภาพ */
-  }
+  .bento-item { border-radius: 30px; overflow: hidden; background: #f5f5f5; border: 1px solid rgba(0,0,0,0.05); }
+  .hero-img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-  .item-1 { grid-column: span 2; }
-  .item-2 { grid-row: span 2; }
-  .item-5 { grid-column: span 2; }
+  .item-0 { grid-column: span 2; }
+  .item-1 { grid-row: span 2; }
+  .item-4 { grid-column: span 2; }
 
-  @media (max-width: 1024px) {
-    .hero-bento-grid { grid-template-columns: repeat(2, 1fr); grid-template-rows: auto; }
-    .item-1, .item-2, .item-5 { grid-column: span 1; grid-row: span 1; }
-    .bento-item { height: 250px; }
+  @media (max-width: 768px) {
+    .bento-grid { grid-template-columns: repeat(2, 1fr); grid-template-rows: auto; }
+    .item-0, .item-1, .item-4 { grid-column: span 1; grid-row: span 1; }
+    .bento-item { height: 200px; }
   }
 </style>
