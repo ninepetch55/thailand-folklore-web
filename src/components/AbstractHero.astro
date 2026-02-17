@@ -1,52 +1,46 @@
 ---
 const images = ["/img/h1.jpg", "/img/h2.jpg", "/img/h3.jpg", "/img/h4.jpg", "/img/h5.jpg", "/img/h6.jpg"];
 ---
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-
-<section class="hero-locked-v36">
-    <div class="swiper swiperHero">
+<section class="hero-box-v37">
+    <div class="swiper heroSwiperV37">
         <div class="swiper-wrapper">
             {images.map((src) => (
-                <div class="swiper-slide"><img src={src} class="hero-img" alt="Heritage" /></div>
+                <div class="swiper-slide"><img src={src} class="hero-img" alt="Folklore" /></div>
             ))}
         </div>
-        <div class="swiper-button-next luxury-nav"></div>
-        <div class="swiper-button-prev luxury-nav"></div>
-        <div class="swiper-pagination luxury-dots"></div>
+        <div class="swiper-button-next arrow-gold"></div>
+        <div class="swiper-button-prev arrow-gold"></div>
+        <div class="swiper-pagination dots-gold"></div>
     </div>
-    <div class="hero-text">
+    <div class="hero-content">
         <p class="tag">THE SOVEREIGN DIGITAL HERITAGE</p>
         <h1 class="italic">Thailand <span class="gold">Folklore</span></h1>
     </div>
 </section>
 
-<script is:inline src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script is:inline>
-    // ล็อคการทำงานของสคริปต์ให้รันทันทีที่ Library พร้อม
-    const initHeroV36 = () => {
-        if (typeof Swiper !== 'undefined') {
-            new Swiper(".swiperHero", {
+    const startHeroV37 = () => {
+        if (window.Swiper) {
+            new Swiper(".heroSwiperV37", {
                 loop: true, speed: 2000, effect: 'fade',
                 autoplay: { delay: 5000, disableOnInteraction: false },
                 navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
                 pagination: { el: ".swiper-pagination", clickable: true },
-                observer: true, observeParents: true
             });
         }
     };
-    window.addEventListener('load', initHeroV36);
+    window.addEventListener('load', startHeroV37);
 </script>
 
 <style>
-    .hero-locked-v36 { position: relative; width: 100vw; height: 100vh; overflow: hidden !important; background: #000; }
+    .hero-box-v37 { position: relative; width: 100vw; height: 100vh; overflow: hidden; background: #000; }
     .swiper { width: 100%; height: 100%; }
-    .hero-img { width: 100%; height: 100%; object-fit: cover; animation: kenBurnsV36 20s infinite alternate; }
-    @keyframes kenBurnsV36 { from { transform: scale(1); } to { transform: scale(1.1); } }
-    .hero-text { position: absolute; inset: 0; z-index: 20; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; background: rgba(0,0,0,0.35); pointer-events: none; text-align: center; }
-    .tag { font-size: 11px; letter-spacing: 0.8em; color: #bf953f; font-weight: bold; margin-bottom: 20px; }
-    h1 { font-size: clamp(3rem, 10vw, 8rem); margin: 0; line-height: 1; }
-    .gold { color: #bf953f; }
-    .luxury-nav { color: #bf953f !important; border: 1.5px solid #bf953f; width: 60px !important; height: 60px !important; border-radius: 50%; background: rgba(0,0,0,0.1); transition: 0.4s; z-index: 50; }
-    .luxury-nav:hover { background: #bf953f; color: white !important; }
-    :global(.luxury-dots .swiper-pagination-bullet) { width: 12px !important; height: 12px !important; background: transparent !important; border: 1.5px solid white !important; opacity: 1 !important; transition: 0.4s; }
+    .hero-img { width: 100%; height: 100%; object-fit: cover; animation: slowZoom 20s infinite alternate; }
+    @keyframes slowZoom { from { transform: scale(1); } to { transform: scale(1.1); } }
+    .hero-content { position: absolute; inset: 0; z-index: 10; display: flex; flex-direction: column; align-items: center; justify-content: center; background: rgba(0,0,0,0.3); pointer-events: none; text-align: center; }
+    .tag { font-size: 11px; letter-spacing: 0.8em; color: #D4AF37; margin-bottom: 20px; }
+    h1 { font-size: clamp(3rem, 10vw, 7rem); margin: 0; line-height: 1; }
+    .gold { color: #D4AF37; }
+    .arrow-gold { color: #D4AF37 !important; transform: scale(0.8); }
+    :global(.dots-gold .swiper-pagination-bullet-active) { background: #D4AF37 !important; }
 </style>

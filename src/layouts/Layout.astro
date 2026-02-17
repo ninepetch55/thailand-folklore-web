@@ -9,36 +9,15 @@ const { title } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-    <script is:inline src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 </head>
-<body class="luxury-body">
-    <div id="master-cursor"></div>
+<body style="margin:0; padding:0; background:#001F3F; overflow-x:hidden;">
     <main><slot /></main>
-    <script is:inline>
-        // ระบบเมาส์ทอง
-        const dot = document.getElementById('master-cursor');
-        document.addEventListener('mousemove', (e) => {
-            if(dot) {
-                dot.style.left = e.clientX + 'px';
-                dot.style.top = e.clientY + 'px';
-            }
-        });
-    </script>
+    <script is:inline src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 </body>
 </html>
 
 <style is:global>
     @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300;1,600&display=swap');
-    :root { --gold: #bf953f; --deep-blue: #001F3F; }
-    html, body { 
-        margin: 0; padding: 0; width: 100%; overflow-x: hidden;
-        background: var(--deep-blue); font-family: 'Cormorant Garamond', serif;
-        cursor: none !important;
-    }
-    #master-cursor { 
-        width: 10px; height: 10px; background: var(--gold); border-radius: 50%; 
-        position: fixed; pointer-events: none; z-index: 10000; 
-        transform: translate(-50%, -50%); transition: transform 0.05s linear;
-        box-shadow: 0 0 10px var(--gold); 
-    }
+    :root { --gold: #D4AF37; }
+    html, body { font-family: 'Cormorant Garamond', serif; color: white; }
 </style>
