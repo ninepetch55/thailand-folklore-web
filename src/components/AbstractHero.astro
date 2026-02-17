@@ -1,59 +1,31 @@
 ---
 const images = ["/img/h1.jpg", "/img/h2.jpg", "/img/h3.jpg", "/img/h4.jpg", "/img/h5.jpg", "/img/h6.jpg"];
 ---
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-
-<section class="hero-v29-wrap">
-    <div class="swiper swiperV29">
+<section style="width:100%; height:100vh; position:relative; background:#000; overflow:hidden;">
+    <div class="swiper mySwiper" style="width:100%; height:100%;">
         <div class="swiper-wrapper">
-            {images.map((src) => (
-                <div class="swiper-slide"><img src={src} class="img-v29" alt="Heritage" /></div>
+            {images.map((img) => (
+                <div class="swiper-slide" style="width:100%; height:100%;">
+                    <img src={img} style="width:100%; height:100%; object-fit:cover;" />
+                </div>
             ))}
         </div>
-        <div class="swiper-button-next nav-v29"></div>
-        <div class="swiper-button-prev nav-v29"></div>
-        <div class="swiper-pagination dots-v29"></div>
-    </div>
-    <div class="overlay-v29">
-        <p class="tag-v29">THE SOVEREIGN DIGITAL HERITAGE</p>
-        <h1 class="title-v29 italic">Thailand <span class="gold-v29">Folklore</span></h1>
+        <div class="swiper-button-next" style="color:#bf953f;"></div>
+        <div class="swiper-button-prev" style="color:#bf953f;"></div>
+        <div class="swiper-pagination"></div>
     </div>
 </section>
 
-<script is:inline src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script is:inline>
-    function startV29() {
+    // ใช้สคริปต์ที่เรียบง่ายที่สุดเพื่อทดสอบ
+    window.addEventListener('load', () => {
         if (typeof Swiper !== 'undefined') {
-            new Swiper(".swiperV29", {
-                loop: true, speed: 2000, effect: 'fade',
-                autoplay: { delay: 4000 },
+            new Swiper(".mySwiper", {
+                loop: true,
+                autoplay: { delay: 3000 },
                 navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
                 pagination: { el: ".swiper-pagination", clickable: true },
-                observer: true, observeParents: true
             });
         }
-    }
-    window.addEventListener('load', startV29);
+    });
 </script>
-
-<style>
-    .hero-v29-wrap { 
-        position: relative; width: 100vw; height: 100vh; 
-        overflow: hidden !important; /* 🛡️ ล็อคตายตัวห้ามภาพแหลม */
-        background: #000; left: 0;
-    }
-    .swiper { width: 100%; height: 100%; }
-    .img-v29 { width: 100%; height: 100%; object-fit: cover; animation: zoomV29 20s infinite alternate; }
-    @keyframes zoomV29 { from { transform: scale(1); } to { transform: scale(1.1); } }
-    
-    .overlay-v29 { position: absolute; inset: 0; z-index: 20; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; background: rgba(0,0,0,0.35); pointer-events: none; text-align: center; }
-    .tag-v29 { font-size: 11px; letter-spacing: 0.8em; color: #bf953f; font-weight: bold; margin-bottom: 20px; }
-    .title-v29 { font-size: clamp(3rem, 10vw, 7.5rem); margin: 0; line-height: 1; }
-    .gold-v29 { color: #bf953f; }
-
-    .nav-v29 { color: #bf953f !important; border: 1px solid #bf953f; width: 60px !important; height: 60px !important; border-radius: 50%; background: rgba(0,0,0,0.1); transition: 0.4s; z-index: 50; }
-    .nav-v29:hover { background: #bf953f; color: white !important; }
-    
-    :global(.dots-v29 .swiper-pagination-bullet) { width: 12px !important; height: 12px !important; background: transparent !important; border: 1.5px solid white !important; opacity: 1 !important; transition: 0.4s; }
-    :global(.dots-v29 .swiper-pagination-bullet-active) { background: #bf953f !important; border-color: #bf953f !important; }
-</style>
