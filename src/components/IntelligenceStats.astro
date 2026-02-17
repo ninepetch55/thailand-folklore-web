@@ -1,60 +1,62 @@
-<section class="stats-master-v34">
+<section class="stats-master">
     <div class="stats-grid">
         {[ {t:26, l:'SERIES'}, {t:26, l:'ARCHIVE'}, {t:28, l:'NODES'}, {t:124, l:'ARTIFACTS'} ].map(s => (
-            <div class="stat-box">
-                <div class="silk-wrap">
+            <div class="stat-card">
+                <div class="silk-circle">
                     <svg viewBox="0 0 100 100">
-                        <circle class="c-bg" cx="50" cy="50" r="45"></circle>
-                        <circle class="c-silk" cx="50" cy="50" r="45"></circle>
+                        <circle class="track" cx="50" cy="50" r="45"></circle>
+                        <circle class="silk-line" cx="50" cy="50" r="45"></circle>
                     </svg>
-                    <h3 class="stat-val" data-target={s.t}>0</h3>
+                    <h3 class="n-val" data-target={s.t}>0</h3>
                 </div>
-                <p class="stat-lab">{s.l}</p>
+                <p class="l-val">{s.l}</p>
             </div>
         ))}
     </div>
 </section>
 
 <script is:inline>
-    const initStatsV34 = () => {
+    const runStats = () => {
         const obs = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    const h3 = entry.target.querySelector('.stat-val');
-                    const silk = entry.target.querySelector('.c-silk');
-                    const targetNum = parseInt(h3.dataset.target);
-                    const len = silk.getTotalLength();
+                    const h3 = entry.target.querySelector('.n-val');
+                    const silk = entry.target.querySelector('.silk-line');
+                    const target = parseInt(h3.dataset.target);
+                    const len = 283; // Circumference
+
                     silk.style.strokeDasharray = len;
                     silk.style.strokeDashoffset = len;
+
                     let start = null;
                     const duration = 2500;
                     const animate = (time) => {
                         if (!start) start = time;
                         const progress = Math.min((time - start) / duration, 1);
-                        h3.innerText = Math.floor(progress * targetNum);
+                        h3.innerText = Math.floor(progress * target);
                         silk.style.strokeDashoffset = len - (progress * (len * 0.8));
                         if (progress < 1) requestAnimationFrame(animate);
-                        else h3.innerText = targetNum;
+                        else h3.innerText = target;
                     };
                     requestAnimationFrame(animate);
                     obs.unobserve(entry.target);
                 }
             });
-        }, { threshold: 0.6 });
-        document.querySelectorAll('.stat-box').forEach(b => obs.observe(b));
+        }, { threshold: 0.5 });
+        document.querySelectorAll('.stat-card').forEach(b => obs.observe(b));
     };
-    window.addEventListener('load', initStatsV34);
+    window.addEventListener('load', runStats);
 </script>
 
 <style>
-    .stats-master-v34 { padding: 120px 0; background: #FDFCFB; }
+    .stats-master { padding: 100px 0; background: #001F3F; }
     .stats-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
-    .stat-box { text-align: center; }
-    .silk-wrap { position: relative; width: 140px; height: 140px; margin: 0 auto 20px; }
+    .stat-card { text-align: center; }
+    .silk-circle { position: relative; width: 140px; height: 140px; margin: 0 auto 20px; }
     svg { transform: rotate(-90deg); width: 100%; height: 100%; }
-    circle { fill: none; stroke-width: 2.5; stroke-linecap: round; }
-    .c-bg { stroke: rgba(191,149,63,0.1); }
-    .c-silk { stroke: #bf953f; transition: none; }
-    .stat-val { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 38px; color: #bf953f; margin: 0; font-family: serif; }
-    .stat-lab { font-size: 10px; letter-spacing: 0.6em; color: #999; font-weight: bold; }
+    circle { fill: none; stroke-width: 3; stroke-linecap: round; }
+    .track { stroke: rgba(212, 175, 55, 0.1); }
+    .silk-line { stroke: #D4AF37; transition: none; }
+    .n-val { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 38px; color: #D4AF37; margin: 0; }
+    .l-val { font-size: 10px; letter-spacing: 0.4em; color: rgba(255,255,255,0.4); }
 </style>
