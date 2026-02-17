@@ -1,41 +1,23 @@
 <section class="py-24 bg-[#FDFCFB]">
-  <div class="max-w-6xl mx-auto grid grid-cols-3 gap-12">
-    {[
-      {target: 26, label: 'SERIES'},
-      {target: 26, label: 'ARCHIVE'},
-      {target: 28, label: 'NODES'}
-    ].map(item => (
+  <div class="max-w-6xl mx-auto grid grid-cols-3 gap-10">
+    {[ {t:26, l:'SERIES'}, {t:26, l:'ARCHIVE'}, {t:28, l:'NODES'} ].map(s => (
       <div class="text-center">
-        <h3 class="text-5xl md:text-6xl text-[#bf953f] font-serif mb-3" data-count={item.target}>0</h3>
-        <p class="text-[10px] tracking-[0.6em] text-gray-400 font-bold">{item.label}</p>
+        <h3 class="text-6xl text-[#bf953f] font-serif mb-2" data-target={s.t}>0</h3>
+        <p class="text-[10px] tracking-[0.5em] text-gray-400 font-bold">{s.l}</p>
       </div>
     ))}
   </div>
 </section>
-
 <script is:inline>
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        const el = entry.target;
-        const target = parseInt(el.dataset.count);
-        let current = 0;
-        const duration = 2000;
-        const step = target / (duration / 50);
-        
-        const timer = setInterval(() => {
-          current += step;
-          if (current >= target) {
-            el.innerText = target;
-            clearInterval(timer);
-          } else {
-            el.innerText = Math.floor(current);
-          }
-        }, 50);
-        observer.unobserve(el);
+        const el = entry.target; const target = parseInt(el.dataset.target);
+        let count = 0; const timer = setInterval(() => {
+          if (count < target) { el.innerText = ++count; } else { clearInterval(timer); }
+        }, 50); observer.unobserve(el);
       }
     });
-  }, { threshold: 0.8 });
-
-  document.querySelectorAll('[data-count]').forEach(h3 => observer.observe(h3));
+  }, { threshold: 1 });
+  document.querySelectorAll('[data-target]').forEach(h3 => observer.observe(h3));
 </script>

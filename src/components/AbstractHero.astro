@@ -1,45 +1,28 @@
 ---
 const images = ["/img/h1.jpg", "/img/h2.jpg", "/img/h3.jpg", "/img/h4.jpg", "/img/h5.jpg", "/img/h6.jpg"];
 ---
-<section class="relative h-screen w-full bg-black overflow-hidden">
+<section class="h-screen w-full relative overflow-hidden bg-black">
   <div class="swiper heroSwiper h-full w-full">
     <div class="swiper-wrapper">
       {images.map((src) => (
-        <div class="swiper-slide">
-          <img src={src} class="w-full h-full object-cover ken-burns" alt="Heritage" />
-        </div>
+        <div class="swiper-slide"><img src={src} class="w-full h-full object-cover ken-burns" /></div>
       ))}
     </div>
-    
     <div class="swiper-button-next !text-[#bf953f]"></div>
     <div class="swiper-button-prev !text-[#bf953f]"></div>
-    <div class="swiper-pagination"></div>
+    <div class="swiper-pagination !bottom-10"></div>
   </div>
-
-  <div class="absolute inset-0 z-20 flex flex-col items-center justify-center pointer-events-none text-white">
-    <p class="text-[12px] tracking-[1em] text-[#bf953f] font-bold mb-4">SOVEREIGN DIGITAL HERITAGE</p>
+  <div class="absolute inset-0 z-20 flex flex-col items-center justify-center pointer-events-none text-white text-center">
+    <p class="text-[10px] tracking-[1em] text-[#bf953f] font-bold mb-4">SOVEREIGN DIGITAL HERITAGE</p>
     <h1 class="text-6xl md:text-9xl italic m-0">Thailand <span class="text-[#bf953f]">Folklore</span></h1>
   </div>
 </section>
-
-
-
 <script is:inline>
-  new Swiper(".heroSwiper", {
-    loop: true,
-    effect: 'fade',
-    speed: 3000,
-    autoplay: { delay: 5000 },
-    navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
-    pagination: { el: ".swiper-pagination", clickable: true },
-  });
+  new Swiper(".heroSwiper", { loop: true, effect: 'fade', speed: 3000, autoplay: { delay: 5000 }, navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" }, pagination: { el: ".swiper-pagination", clickable: true } });
 </script>
-
 <style>
-  .ken-burns { animation: zoomInOut 15s ease-out infinite alternate; }
-  @keyframes zoomInOut { from { transform: scale(1); } to { transform: scale(1.15); } }
-  
+  .ken-burns { animation: zoomEffect 15s ease-out infinite alternate; }
+  @keyframes zoomEffect { from { transform: scale(1); } to { transform: scale(1.15); } }
   :global(.swiper-pagination-bullet) { background: #fff !important; width: 40px; height: 2px; border-radius: 0; transition: 0.4s; }
   :global(.swiper-pagination-bullet-active) { background: #bf953f !important; width: 80px; }
-  :global(.swiper-button-next::after, .swiper-button-prev::after) { font-size: 24px !important; font-weight: bold; }
 </style>

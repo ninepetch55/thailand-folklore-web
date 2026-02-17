@@ -12,20 +12,14 @@ const { title } = Astro.props;
 	</head>
 	<body class="bg-[#FDFCFB] m-0 p-0 overflow-x-hidden cursor-none">
 		<div id="custom-cursor"></div>
-		
-		<div class="fixed inset-0 z-[100] pointer-events-none">
-			{Array.from({ length: 45 }).map((_, i) => (
+		<div class="particles-layer">
+			{Array.from({ length: 40 }).map((_, i) => (
 				<div class="dust" style={`--l:${Math.random()*100}%; --d:${Math.random()*15}s; --s:${Math.random()*3+2}px;`}></div>
 			))}
 		</div>
-
-		<main class="relative z-10">
-			<slot />
-		</main>
-
+		<main class="relative z-10"><slot /></main>
 		<script is:inline src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 		<script is:inline>
-			// 🖱️ Cursor Movement Logic
 			const cursor = document.getElementById('custom-cursor');
 			document.addEventListener('mousemove', (e) => {
 				cursor.style.left = e.clientX + 'px';
@@ -34,16 +28,11 @@ const { title } = Astro.props;
 		</script>
 	</body>
 </html>
-
 <style is:global>
 	@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300;1,600&display=swap');
-	:root { --gold: #bf953f; }
 	html, body { font-family: 'Cormorant Garamond', serif; background: #FDFCFB; cursor: none !important; }
-	
-	/* 🖱️ Custom Cursor Style */
-	#custom-cursor { width: 25px; height: 25px; border: 1px solid var(--gold); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); transition: transform 0.15s ease-out; }
-	
-	/* ✨ Golden Dust Animation */
-	.dust { position: absolute; left: var(--l); bottom: -20px; width: var(--s); height: var(--s); background: var(--gold); border-radius: 50%; opacity: 0; animation: floatUp 20s linear infinite var(--d); }
-	@keyframes floatUp { 0% { transform: translateY(0); opacity: 0; } 20% { opacity: 0.5; } 100% { transform: translateY(-110vh); opacity: 0; } }
+	#custom-cursor { width: 25px; height: 25px; border: 1px solid #bf953f; border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); transition: transform 0.1s; }
+	.particles-layer { position: fixed; inset: 0; z-index: 100; pointer-events: none; }
+	.dust { position: absolute; left: var(--l); bottom: -20px; width: var(--size); height: var(--size); background: #bf953f; border-radius: 50%; opacity: 0; animation: floatUp 20s linear infinite var(--d); }
+	@keyframes floatUp { 0% { opacity: 0; } 20% { opacity: 0.4; } 100% { transform: translateY(-110vh); opacity: 0; } }
 </style>
