@@ -1,13 +1,16 @@
-<section class="stats-v16">
-    <div class="stats-grid">
-        {[ {t:26, l:'SERIES'}, {t:26, l:'ARCHIVE'}, {t:28, l:'NODES'}, {t:124, l:'ARTIFACTS'} ].map(s => (
-            <div class="stat-box">
-                <div class="silk-circle">
+<section class="stats-master-section">
+    <div class="stats-grid-container">
+        {[ 
+            {t:26, l:'SERIES'}, {t:26, l:'ARCHIVE'}, 
+            {t:28, l:'NODES'}, {t:124, l:'ARTIFACTS'} 
+        ].map(s => (
+            <div class="stat-luxury-card">
+                <div class="circle-box">
                     <svg viewBox="0 0 100 100">
-                        <circle class="bg-ring" cx="50" cy="50" r="45"></circle>
-                        <circle class="silk-line" cx="50" cy="50" r="45" id={`silk-${s.l}`}></circle>
+                        <circle class="track" cx="50" cy="50" r="45"></circle>
+                        <circle class="silk-line-anim" cx="50" cy="50" r="45"></circle>
                     </svg>
-                    <h3 class="stat-num" data-target={s.t}>0</h3>
+                    <h3 class="stat-val" data-target={s.t}>0</h3>
                 </div>
                 <p class="stat-label">{s.l}</p>
             </div>
@@ -16,50 +19,59 @@
 </section>
 
 <script is:inline>
-    const startSilkAnimation = (entries, obs) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const h3 = entry.target.querySelector('.stat-num');
-                const line = entry.target.querySelector('.silk-line');
-                const target = parseInt(h3.dataset.target);
-                
-                // Animation Logic
-                let current = 0;
-                const duration = 2000;
-                const startTime = performance.now();
-
-                const animate = (time) => {
-                    const elapsed = time - startTime;
-                    const progress = Math.min(elapsed / duration, 1);
-                    h3.innerText = Math.floor(progress * target);
+    const initStatsAnim = () => {
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const h3 = entry.target.querySelector('.stat-val');
+                    const line = entry.target.querySelector('.silk-line-anim');
+                    const target = parseInt(h3.dataset.target);
+                    const circumference = 2 * Math.PI * 45; // 282.7
                     
-                    // Silk line logic: 283 is circumference
-                    const offset = 283 - (progress * 220); // 220 is about 80% of circle
-                    line.style.strokeDashoffset = offset;
+                    line.style.strokeDasharray = circumference;
+                    line.style.strokeDashoffset = circumference;
 
-                    if (progress < 1) requestAnimationFrame(animate);
-                    else h3.innerText = target;
-                };
+                    let start = null;
+                    const duration = 2500;
 
-                requestAnimationFrame(animate);
-                obs.unobserve(entry.target);
-            }
-        });
+                    const step = (timestamp) => {
+                        if (!start) start = timestamp;
+                        const progress = Math.min((timestamp - start) / duration, 1);
+                        
+                        // เลขวิ่ง
+                        h3.innerText = Math.floor(progress * target);
+                        
+                        // เส้นสายไหมวิ่ง (80% ของวงกลม)
+                        const offset = circumference - (progress * (circumference * 0.8));
+                        line.style.strokeDashoffset = offset;
+
+                        if (progress < 1) {
+                            window.requestAnimationFrame(step);
+                        } else {
+                            h3.innerText = target;
+                        }
+                    };
+                    window.requestAnimationFrame(step);
+                    obs.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.6 });
+
+        document.querySelectorAll('.stat-luxury-card').forEach(card => obs.observe(card));
     };
-
-    const obs = new IntersectionObserver(startSilkAnimation, { threshold: 0.6 });
-    document.querySelectorAll('.stat-box').forEach(box => obs.observe(box));
+    window.addEventListener('load', initStatsAnim);
 </script>
 
 <style>
-    .stats-v16 { padding: 120px 0; background: #FDFCFB; }
-    .stats-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
-    .stat-box { text-align: center; }
-    .silk-circle { position: relative; width: 140px; height: 140px; margin: 0 auto 20px; }
+    .stats-master-section { padding: 120px 0; background: transparent; }
+    .stats-grid-container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+    .stat-luxury-card { text-align: center; }
+    .circle-box { position: relative; width: 140px; height: 140px; margin: 0 auto 20px; }
     svg { transform: rotate(-90deg); width: 100%; height: 100%; }
-    circle { fill: none; stroke-width: 2.5; }
-    .bg-ring { stroke: rgba(191,149,63,0.1); }
-    .silk-line { stroke: var(--gold); stroke-dasharray: 283; stroke-dashoffset: 283; }
-    .stat-num { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 38px; color: var(--gold); margin: 0; font-family: serif; }
-    .stat-label { font-size: 10px; letter-spacing: 0.6em; color: #999; font-weight: bold; }
+    circle { fill: none; stroke-width: 2; }
+    .track { stroke: rgba(191,149,63,0.1); }
+    .silk-line-anim { stroke: #bf953f; transition: none; } /* คุมผ่าน JS */
+    .stat-val { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 38px; color: #bf953f; margin: 0; }
+    .stat-label { font-size: 10px; letter-spacing: 0.6em; color: #999; font-weight: bold; margin: 0; }
+    @media (max-width: 768px) { .stats-grid-container { grid-template-columns: repeat(2, 1fr); gap: 40px; } }
 </style>
