@@ -1,49 +1,25 @@
 ---
-// ดึงรูป 1.jpg ถึง 6.jpg ตามที่คุณตรวจสอบเจอในโฟลเดอร์
-const images = ["/1.jpg", "/2.jpg", "/3.jpg", "/4.jpg", "/5.jpg", "/6.jpg"];
+// เรียกจาก public/img/h1.jpg ถึง h6.jpg
+const heroImages = [
+  "/img/h1.jpg", "/img/h2.jpg", "/img/h3.jpg", 
+  "/img/h4.jpg", "/img/h5.jpg", "/img/h6.jpg"
+];
 ---
 <section class="hero-stable">
-  <div class="container">
-    <div class="header-text">
-      <p class="tag">SOVEREIGN DIGITAL HERITAGE</p>
-      <h1 class="font-serif">Thailand <span class="gold">Folklore</span></h1>
+  <div class="container mx-auto px-6">
+    <div class="text-center mb-12">
+      <p class="text-gold tracking-[0.5em] text-xs font-bold mb-4">SOVEREIGN DIGITAL HERITAGE</p>
+      <h1 class="text-6xl md:text-8xl font-serif italic m-0">Thailand <span class="text-[#bf953f]">Folklore</span></h1>
     </div>
 
-    <div class="bento-grid">
-      {images.map((src, i) => (
-        <div class={`bento-item item-${i}`}>
-          <img src={src} alt="Heritage Artifact" class="hero-img" />
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 auto-rows-[250px]">
+      {heroImages.map((src, i) => (
+        <div class={`rounded-[30px] overflow-hidden border border-black/5 
+          ${i === 0 || i === 4 ? 'md:col-span-2' : ''} 
+          ${i === 1 ? 'md:row-span-2' : ''}`}>
+          <img src={src} alt="Heritage" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110" />
         </div>
       ))}
     </div>
   </div>
 </section>
-
-<style>
-  .hero-stable { position: relative; z-index: 10; padding: 100px 20px; width: 100%; }
-  .container { max-width: 1200px; margin: 0 auto; }
-  .header-text { text-align: center; margin-bottom: 50px; }
-  .tag { font-size: 10px; letter-spacing: 0.6em; color: #bf953f; font-weight: bold; }
-  h1 { font-size: clamp(3rem, 8vw, 6rem); margin: 15px 0; color: #1a1a1a; }
-  .gold { color: #bf953f; font-style: italic; }
-
-  /* 🏗️ Grid Structure ที่นิ่งและชัวร์ */
-  .bento-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(2, 250px);
-    gap: 15px;
-  }
-  .bento-item { border-radius: 30px; overflow: hidden; background: #f5f5f5; border: 1px solid rgba(0,0,0,0.05); }
-  .hero-img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-  .item-0 { grid-column: span 2; }
-  .item-1 { grid-row: span 2; }
-  .item-4 { grid-column: span 2; }
-
-  @media (max-width: 768px) {
-    .bento-grid { grid-template-columns: repeat(2, 1fr); grid-template-rows: auto; }
-    .item-0, .item-1, .item-4 { grid-column: span 1; grid-row: span 1; }
-    .bento-item { height: 200px; }
-  }
-</style>
