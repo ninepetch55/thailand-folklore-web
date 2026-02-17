@@ -1,18 +1,18 @@
-<section class="stats-section">
+<section class="stats-outer">
     <div class="stats-grid">
         {[ 
             {t:26, l:'SERIES'}, {t:26, l:'ARCHIVE'}, 
             {t:28, l:'NODES'}, {t:124, l:'ARTIFACTS'} 
         ].map(s => (
-            <div class="stat-card">
-                <div class="circle-container">
+            <div class="stat-box">
+                <div class="circle-wrap">
                     <svg viewBox="0 0 100 100">
-                        <circle class="circle-bg" cx="50" cy="50" r="45"></circle>
-                        <circle class="silk-line" cx="50" cy="50" r="45"></circle>
+                        <circle class="c-bg" cx="50" cy="50" r="45"></circle>
+                        <circle class="c-silk" cx="50" cy="50" r="45"></circle>
                     </svg>
-                    <h3 class="stat-number" data-target={s.t}>0</h3>
+                    <h3 class="s-num" data-target={s.t}>0</h3>
                 </div>
-                <p class="stat-label">{s.l}</p>
+                <p class="s-label">{s.l}</p>
             </div>
         ))}
     </div>
@@ -25,8 +25,8 @@
                 const el = entry.target;
                 const target = parseInt(el.dataset.target);
                 let current = 0;
-                const duration = 2500;
-                const step = target / (duration / 30);
+                const duration = 2000;
+                const step = target / (duration / 50);
                 
                 const timer = setInterval(() => {
                     current += step;
@@ -36,30 +36,30 @@
                     } else {
                         el.innerText = Math.floor(current);
                     }
-                }, 30);
-                
-                entry.target.closest('.stat-card').classList.add('animate-silk');
+                }, 50);
+                entry.target.closest('.stat-box').classList.add('silk-run');
                 observer.unobserve(el);
             }
         });
-    }, { threshold: 0.7 });
-    document.querySelectorAll('.stat-number').forEach(n => observer.observe(n));
+    }, { threshold: 0.5 });
+    document.querySelectorAll('.s-num').forEach(n => observer.observe(n));
 </script>
 
 <style>
-    .stats-section { padding: 140px 0; background: #FDFCFB; }
+    .stats-outer { padding: 120px 0; background: #FDFCFB; }
     .stats-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
-    .stat-card { text-align: center; }
-    .circle-container { position: relative; width: 140px; height: 140px; margin: 0 auto 20px; }
-    svg { transform: rotate(-90deg); width: 100%; height: 100%; }
-    circle { fill: none; stroke-width: 2.5; }
-    .circle-bg { stroke: rgba(191,149,63,0.1); }
-    .silk-line { 
+    .stat-box { text-align: center; opacity: 0.3; transition: 1s; }
+    .stat-box.silk-run { opacity: 1; }
+    .circle-wrap { position: relative; width: 140px; height: 140px; margin: 0 auto 20px; }
+    svg { transform: rotate(-90deg); }
+    circle { fill: none; stroke-width: 2; }
+    .c-bg { stroke: rgba(191,149,63,0.1); }
+    .c-silk { 
         stroke: var(--gold); stroke-dasharray: 283; stroke-dashoffset: 283; 
         transition: 3s cubic-bezier(0.4, 0, 0.2, 1); 
     }
-    .animate-silk .silk-line { stroke-dashoffset: 70; } /* เส้นสายไหมวิ่ง */
-    .stat-number { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 38px; color: var(--gold); margin: 0; }
-    .stat-label { font-size: 10px; letter-spacing: 0.6em; color: #999; font-weight: bold; }
-    @media (max-width: 768px) { .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 50px; } }
+    .silk-run .c-silk { stroke-dashoffset: 80; } /* เส้นสายไหมวิ่งเมื่อมองเห็น */
+    .s-num { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 38px; color: var(--gold); margin: 0; }
+    .s-label { font-size: 10px; letter-spacing: 0.6em; color: #999; font-weight: bold; }
+    @media (max-width: 768px) { .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 60px; } }
 </style>
