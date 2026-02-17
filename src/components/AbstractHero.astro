@@ -1,46 +1,52 @@
 ---
 const images = ["/img/h1.jpg", "/img/h2.jpg", "/img/h3.jpg", "/img/h4.jpg", "/img/h5.jpg", "/img/h6.jpg"];
 ---
-<section class="hero-wrap">
-    <div class="swiper heroSwiper">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+<section class="hero-locked-v36">
+    <div class="swiper swiperHero">
         <div class="swiper-wrapper">
             {images.map((src) => (
-                <div class="swiper-slide"><img src={src} class="ken-burns" alt="Heritage" /></div>
+                <div class="swiper-slide"><img src={src} class="hero-img" alt="Heritage" /></div>
             ))}
         </div>
         <div class="swiper-button-next luxury-nav"></div>
         <div class="swiper-button-prev luxury-nav"></div>
         <div class="swiper-pagination luxury-dots"></div>
     </div>
-    <div class="hero-content">
+    <div class="hero-text">
         <p class="tag">THE SOVEREIGN DIGITAL HERITAGE</p>
         <h1 class="italic">Thailand <span class="gold">Folklore</span></h1>
     </div>
 </section>
 
+<script is:inline src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script is:inline>
-    const startHero = () => {
-        new Swiper(".heroSwiper", {
-            loop: true, speed: 2500, effect: 'fade',
-            autoplay: { delay: 5000, disableOnInteraction: false },
-            navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
-            pagination: { el: ".swiper-pagination", clickable: true },
-            watchSlidesProgress: true,
-        });
+    // ล็อคการทำงานของสคริปต์ให้รันทันทีที่ Library พร้อม
+    const initHeroV36 = () => {
+        if (typeof Swiper !== 'undefined') {
+            new Swiper(".swiperHero", {
+                loop: true, speed: 2000, effect: 'fade',
+                autoplay: { delay: 5000, disableOnInteraction: false },
+                navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
+                pagination: { el: ".swiper-pagination", clickable: true },
+                observer: true, observeParents: true
+            });
+        }
     };
-    window.addEventListener('load', startHero);
+    window.addEventListener('load', initHeroV36);
 </script>
 
 <style>
-    .hero-wrap { position: relative; width: 100vw; height: 100vh; overflow: hidden; background: #000; }
+    .hero-locked-v36 { position: relative; width: 100vw; height: 100vh; overflow: hidden !important; background: #000; }
     .swiper { width: 100%; height: 100%; }
-    .ken-burns { width: 100%; height: 100%; object-fit: cover; animation: zoom 20s infinite alternate; }
-    @keyframes zoom { from { transform: scale(1); } to { transform: scale(1.15); } }
-    .hero-content { position: absolute; inset: 0; z-index: 20; display: flex; flex-direction: column; align-items: center; justify-content: center; pointer-events: none; text-align: center; background: rgba(0,0,0,0.3); }
-    .tag { font-size: 11px; letter-spacing: 0.8em; color: var(--gold); font-weight: bold; margin-bottom: 20px; color: white; }
-    h1 { font-size: clamp(3rem, 10vw, 8rem); margin: 0; color: white; }
-    .gold { color: var(--gold); }
-    .luxury-nav { color: var(--gold) !important; border: 1px solid var(--gold); width: 60px !important; height: 60px !important; border-radius: 50%; background: rgba(0,0,0,0.2); }
-    :global(.luxury-dots .swiper-pagination-bullet) { width: 12px !important; height: 12px !important; background: transparent !important; border: 1px solid white !important; opacity: 1 !important; margin: 0 10px !important; }
-    :global(.luxury-dots .swiper-pagination-bullet-active) { background: var(--gold) !important; border-color: var(--gold) !important; }
+    .hero-img { width: 100%; height: 100%; object-fit: cover; animation: kenBurnsV36 20s infinite alternate; }
+    @keyframes kenBurnsV36 { from { transform: scale(1); } to { transform: scale(1.1); } }
+    .hero-text { position: absolute; inset: 0; z-index: 20; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; background: rgba(0,0,0,0.35); pointer-events: none; text-align: center; }
+    .tag { font-size: 11px; letter-spacing: 0.8em; color: #bf953f; font-weight: bold; margin-bottom: 20px; }
+    h1 { font-size: clamp(3rem, 10vw, 8rem); margin: 0; line-height: 1; }
+    .gold { color: #bf953f; }
+    .luxury-nav { color: #bf953f !important; border: 1.5px solid #bf953f; width: 60px !important; height: 60px !important; border-radius: 50%; background: rgba(0,0,0,0.1); transition: 0.4s; z-index: 50; }
+    .luxury-nav:hover { background: #bf953f; color: white !important; }
+    :global(.luxury-dots .swiper-pagination-bullet) { width: 12px !important; height: 12px !important; background: transparent !important; border: 1.5px solid white !important; opacity: 1 !important; transition: 0.4s; }
 </style>
