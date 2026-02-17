@@ -1,92 +1,59 @@
 ---
 const images = ["/img/h1.jpg", "/img/h2.jpg", "/img/h3.jpg", "/img/h4.jpg", "/img/h5.jpg", "/img/h6.jpg"];
 ---
-<section class="hero-container-v27">
-  <div class="swiper heroSwiper">
-    <div class="swiper-wrapper">
-      {images.map((src) => (
-        <div class="swiper-slide">
-          <img src={src} class="slide-img" alt="Heritage" />
-        </div>
-      ))}
-    </div>
-    <div class="swiper-button-next luxury-btn"></div>
-    <div class="swiper-button-prev luxury-btn"></div>
-    <div class="swiper-pagination luxury-dots"></div>
-  </div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
-  <div class="overlay-content">
-    <p class="tag">THE SOVEREIGN DIGITAL HERITAGE</p>
-    <h1 class="italic">Thailand <span class="gold">Folklore</span></h1>
-  </div>
+<section class="hero-master-v28">
+    <div class="swiper heroSwiper">
+        <div class="swiper-wrapper">
+            {images.map((src) => (
+                <div class="swiper-slide"><img src={src} class="hero-img" alt="Heritage" /></div>
+            ))}
+        </div>
+        <div class="swiper-button-next luxury-nav"></div>
+        <div class="swiper-button-prev luxury-nav"></div>
+        <div class="swiper-pagination luxury-pagination"></div>
+    </div>
+    <div class="hero-overlay">
+        <p class="tag">THE SOVEREIGN DIGITAL HERITAGE</p>
+        <h1 class="italic">Thailand <span class="gold">Folklore</span></h1>
+    </div>
 </section>
 
+<script is:inline src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script is:inline>
-  // ฟังก์ชันนี้จะรันเมื่อ Swiper Library โหลดเสร็จเท่านั้น
-  function startSwiper() {
-    if (typeof Swiper !== 'undefined') {
-      new Swiper(".heroSwiper", {
-        loop: true,
-        speed: 2500,
-        effect: 'fade',
-        autoplay: { delay: 5000, disableOnInteraction: false },
-        navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
-        pagination: { el: ".swiper-pagination", clickable: true },
-        observer: true,
-        observeParents: true,
-      });
+    function initHero() {
+        if (typeof Swiper !== 'undefined') {
+            new Swiper(".heroSwiper", {
+                loop: true, speed: 2000, effect: 'fade',
+                autoplay: { delay: 5000 },
+                navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
+                pagination: { el: ".swiper-pagination", clickable: true },
+                observer: true, observeParents: true,
+                watchSlidesProgress: true // 🛡️ บังคับเช็คขอบภาพ
+            });
+        }
     }
-  }
-  // รันทันที
-  window.addEventListener('load', startSwiper);
+    window.addEventListener('load', initHero);
 </script>
 
 <style>
-  .hero-container-v27 { 
-    position: relative; 
-    width: 100vw; 
-    height: 100vh; 
-    overflow: hidden !important; 
-    background: #000;
-  }
-  .swiper { width: 100%; height: 100%; }
-  
-  /* 🖼️ ล็อคขนาดภาพไม่ให้ "ใหญ่เกิน" */
-  .slide-img { 
-    width: 100% !important; 
-    height: 100% !important; 
-    object-fit: cover; 
-    animation: slowZoom 20s infinite alternate; 
-  }
-  @keyframes slowZoom { from { transform: scale(1); } to { transform: scale(1.1); } }
+    .hero-master-v28 { 
+        position: relative; width: 100vw; height: 100vh; 
+        overflow: hidden !important; /* 🛡️ ตัดส่วนที่แหลมทิ้ง */
+        background: #000; left: 0;
+    }
+    .swiper { width: 100%; height: 100%; }
+    .hero-img { width: 100%; height: 100%; object-fit: cover; animation: slowZoom 20s infinite alternate; }
+    @keyframes slowZoom { from { transform: scale(1); } to { transform: scale(1.1); } }
+    
+    .hero-overlay { position: absolute; inset: 0; z-index: 20; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; background: rgba(0,0,0,0.3); pointer-events: none; text-align: center; }
+    .tag { font-size: 11px; letter-spacing: 0.8em; color: var(--gold); font-weight: bold; margin-bottom: 20px; }
+    h1 { font-size: clamp(3rem, 10vw, 7.5rem); margin: 0; line-height: 1; }
+    .gold { color: var(--gold); }
 
-  .overlay-content { 
-    position: absolute; inset: 0; z-index: 20; 
-    display: flex; flex-direction: column; align-items: center; justify-content: center; 
-    color: white; pointer-events: none; text-align: center;
-    background: rgba(0,0,0,0.3);
-  }
-  .tag { font-size: 11px; letter-spacing: 0.8em; color: var(--gold); font-weight: bold; margin-bottom: 20px; }
-  h1 { font-size: clamp(3rem, 10vw, 7.5rem); margin: 0; line-height: 1; }
-  .gold { color: var(--gold); }
-
-  /* 🧭 Buttons */
-  .luxury-btn { 
-    color: var(--gold) !important; 
-    border: 1px solid var(--gold); 
-    width: 60px !important; height: 60px !important; 
-    border-radius: 50%; background: rgba(0,0,0,0.2); 
-    z-index: 50 !important; transition: 0.4s; 
-  }
-  .luxury-btn:hover { background: var(--gold); color: #fff !important; }
-  .luxury-btn::after { font-size: 18px !important; font-weight: bold; }
-
-  :global(.luxury-dots .swiper-pagination-bullet) { 
-    width: 12px !important; height: 12px !important; 
-    background: transparent !important; border: 1.5px solid white !important; 
-    opacity: 1 !important; transition: 0.4s; margin: 0 10px !important;
-  }
-  :global(.luxury-dots .swiper-pagination-bullet-active) { 
-    background: var(--gold) !important; border-color: var(--gold) !important; 
-  }
+    .luxury-nav { color: var(--gold) !important; border: 1px solid var(--gold); width: 60px !important; height: 60px !important; border-radius: 50%; background: rgba(0,0,0,0.1); transition: 0.4s; z-index: 50; }
+    .luxury-nav:hover { background: var(--gold); color: white !important; box-shadow: 0 0 20px var(--gold); }
+    :global(.luxury-pagination .swiper-pagination-bullet) { width: 12px !important; height: 12px !important; background: transparent !important; border: 1.5px solid white !important; opacity: 1 !important; margin: 0 10px !important; transition: 0.4s; }
+    :global(.luxury-pagination .swiper-pagination-bullet-active) { background: var(--gold) !important; border-color: var(--gold) !important; transform: scale(1.3); }
 </style>
