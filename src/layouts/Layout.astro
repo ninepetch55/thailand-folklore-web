@@ -3,36 +3,39 @@ interface Props { title: string; }
 const { title } = Astro.props;
 ---
 <!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>{title}</title>
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-	</head>
-	<body class="bg-[#FDFCFB] m-0 p-0 overflow-x-hidden cursor-none">
-		<div id="custom-cursor"></div>
-		<div class="particles-layer">
-			{Array.from({ length: 40 }).map((_, i) => (
-				<div class="dust" style={`--l:${Math.random()*100}%; --d:${Math.random()*15}s; --s:${Math.random()*3+2}px;`}></div>
-			))}
-		</div>
-		<main class="relative z-10"><slot /></main>
-		<script is:inline src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-		<script is:inline>
-			const cursor = document.getElementById('custom-cursor');
-			document.addEventListener('mousemove', (e) => {
-				cursor.style.left = e.clientX + 'px';
-				cursor.style.top = e.clientY + 'px';
-			});
-		</script>
-	</body>
+<html lang="th">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+</head>
+<body class="luxury-body">
+    <div id="cursor-circle"></div>
+    <div class="gold-particles">
+        {Array.from({ length: 40 }).map((_, i) => (
+            <div class="dust" style={`--l:${Math.random()*100}%; --d:${Math.random()*15}s; --s:${Math.random()*3+2}px;`}></div>
+        ))}
+    </div>
+    <main><slot /></main>
+    <script is:inline src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script is:inline>
+        const cursor = document.getElementById('cursor-circle');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+    </script>
+</body>
 </html>
+
 <style is:global>
-	@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300;1,600&display=swap');
-	html, body { font-family: 'Cormorant Garamond', serif; background: #FDFCFB; cursor: none !important; }
-	#custom-cursor { width: 25px; height: 25px; border: 1px solid #bf953f; border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); transition: transform 0.1s; }
-	.particles-layer { position: fixed; inset: 0; z-index: 100; pointer-events: none; }
-	.dust { position: absolute; left: var(--l); bottom: -20px; width: var(--size); height: var(--size); background: #bf953f; border-radius: 50%; opacity: 0; animation: floatUp 20s linear infinite var(--d); }
-	@keyframes floatUp { 0% { opacity: 0; } 20% { opacity: 0.4; } 100% { transform: translateY(-110vh); opacity: 0; } }
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300;1,600&display=swap');
+    :root { --gold: #bf953f; }
+    html, body { margin: 0; padding: 0; background: #FDFCFB; cursor: none !important; font-family: 'Cormorant Garamond', serif; }
+    .luxury-body { overflow-x: hidden; }
+    #cursor-circle { width: 30px; height: 30px; border: 1px solid var(--gold); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); transition: transform 0.1s ease-out; }
+    .gold-particles { position: fixed; inset: 0; z-index: 100; pointer-events: none; }
+    .dust { position: absolute; left: var(--l); bottom: -20px; width: var(--s); height: var(--s); background: var(--gold); border-radius: 50%; opacity: 0; animation: floatUp 20s linear infinite var(--d); }
+    @keyframes floatUp { 0% { opacity: 0; } 20% { opacity: 0.4; } 100% { transform: translateY(-110vh); opacity: 0; } }
 </style>

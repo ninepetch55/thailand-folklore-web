@@ -1,23 +1,36 @@
-<section class="py-24 bg-[#FDFCFB]">
-  <div class="max-w-6xl mx-auto grid grid-cols-3 gap-10">
-    {[ {t:26, l:'SERIES'}, {t:26, l:'ARCHIVE'}, {t:28, l:'NODES'} ].map(s => (
-      <div class="text-center">
-        <h3 class="text-6xl text-[#bf953f] font-serif mb-2" data-target={s.t}>0</h3>
-        <p class="text-[10px] tracking-[0.5em] text-gray-400 font-bold">{s.l}</p>
-      </div>
-    ))}
-  </div>
+<section class="stats-outer">
+    <div class="stats-grid">
+        {[ {t:26, l:'SERIES'}, {t:26, l:'ARCHIVE'}, {t:28, l:'NODES'} ].map(s => (
+            <div class="stat-card">
+                <h3 class="stat-num" data-target={s.t}>0</h3>
+                <p class="stat-label">{s.l}</p>
+            </div>
+        ))}
+    </div>
 </section>
+
 <script is:inline>
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const el = entry.target; const target = parseInt(el.dataset.target);
-        let count = 0; const timer = setInterval(() => {
-          if (count < target) { el.innerText = ++count; } else { clearInterval(timer); }
-        }, 50); observer.unobserve(el);
-      }
-    });
-  }, { threshold: 1 });
-  document.querySelectorAll('[data-target]').forEach(h3 => observer.observe(h3));
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const el = entry.target;
+                const target = parseInt(el.dataset.target);
+                let count = 0;
+                const timer = setInterval(() => {
+                    if (count < target) { el.innerText = ++count; }
+                    else { clearInterval(timer); }
+                }, 50);
+                observer.unobserve(el);
+            }
+        });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('.stat-num').forEach(h => observer.observe(h));
 </script>
+
+<style>
+    .stats-outer { padding: 100px 0; background: #FDFCFB; }
+    .stats-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+    .stat-card { text-align: center; }
+    .stat-num { font-size: 60px; color: var(--gold); margin: 0; font-family: serif; }
+    .stat-label { font-size: 10px; letter-spacing: 0.5em; color: #999; margin-top: 10px; font-weight: bold; }
+</style>
