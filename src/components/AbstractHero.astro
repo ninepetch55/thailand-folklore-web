@@ -1,14 +1,46 @@
 ---
-const images = ["/img/h1.jpg", "/img/h2.jpg"]; // ลองแค่ 2 รูปก่อนครับ
+const images = ["/img/h1.jpg", "/img/h2.jpg"];
 ---
-<section style="width:100%; height:80vh; background:#000; position:relative; overflow:hidden; display:flex; align-items:center; justify-content:center; color:#fff;">
-    <div style="text-align:center; z-index:10;">
-        <h1 style="font-size:4rem; margin:0;">V30 - REBORN</h1>
-        <p style="letter-spacing:5px;">TESTING SYSTEM DEPLOYMENT</p>
+<section class="reborn-v32">
+    <div class="test-panel">
+        <h1 class="blink">V32 - FULL RESET</h1>
+        <p>IF YOU SEE THIS, THE SYSTEM IS LIVE</p>
     </div>
-    
-    {/* แสดงภาพแบบธรรมดา ไม่ใช้ Swiper ก่อน เพื่อเช็คว่าภาพยังเรียกขึ้นไหม */}
-    <div style="position:absolute; inset:0; opacity:0.5;">
-        <img src={images[0]} style="width:100%; height:100%; object-fit:cover;" />
+    <div class="debug-images">
+        <img src={images[0]} alt="Test" />
     </div>
 </section>
+
+<style>
+    /* 🛡️ บังคับล้าง Cache ด้วย Class Name ใหม่ */
+    .reborn-v32 {
+        width: 100vw;
+        height: 100vh;
+        background: #bf953f; /* เปลี่ยนเป็นสีทองทั้งหน้าจอเพื่อให้เห็นความต่างชัดเจน */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        z-index: 1000;
+    }
+    .test-panel {
+        text-align: center;
+        color: white;
+        z-index: 1001;
+    }
+    .blink {
+        font-size: 5rem;
+        animation: blink-anim 1s infinite;
+    }
+    @keyframes blink-anim {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.3; }
+    }
+    .debug-images {
+        position: absolute;
+        bottom: 20px;
+        width: 200px;
+        border: 5px solid white;
+    }
+    img { width: 100%; height: auto; }
+</style>
