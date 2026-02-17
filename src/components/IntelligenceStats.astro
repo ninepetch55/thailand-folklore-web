@@ -1,69 +1,73 @@
-<section class="stats-section-v19">
+<section class="stats-v20">
     <div class="stats-grid">
-        {[ {t:26, l:'SERIES'}, {t:26, l:'ARCHIVE'}, {t:28, l:'NODES'}, {t:124, l:'ARTIFACTS'} ].map(s => (
-            <div class="stat-luxury-box">
-                <div class="silk-circle-container">
+        {[ 
+            {t:26, l:'SERIES'}, {t:26, l:'ARCHIVE'}, 
+            {t:28, l:'NODES'}, {t:124, l:'ARTIFACTS'} 
+        ].map(s => (
+            <div class="stat-card">
+                <div class="circle-box">
                     <svg viewBox="0 0 100 100">
-                        <circle class="circle-track" cx="50" cy="50" r="45"></circle>
-                        <circle class="silk-line-anim" cx="50" cy="50" r="45"></circle>
+                        <circle class="track" cx="50" cy="50" r="45"></circle>
+                        <circle class="silk-path" cx="50" cy="50" r="45"></circle>
                     </svg>
                     <h3 class="stat-number" data-target={s.t}>0</h3>
                 </div>
-                <p class="stat-label-text">{s.l}</p>
+                <p class="stat-label">{s.l}</p>
             </div>
         ))}
     </div>
 </section>
 
 <script is:inline>
-    const initStatsSovereign = () => {
+    const initStats = () => {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const h3 = entry.target.querySelector('.stat-number');
-                    const line = entry.target.querySelector('.silk-line-anim');
-                    const target = parseInt(h3.dataset.target);
-                    const circumference = 283; // 2 * PI * 45
+                    const silk = entry.target.querySelector('.silk-path');
+                    const targetNum = parseInt(h3.dataset.target);
+                    const circumference = 2 * Math.PI * 45; // 282.7
                     
-                    line.style.strokeDasharray = circumference;
-                    line.style.strokeDashoffset = circumference;
+                    // บังคับตั้งค่าเริ่มต้นของเส้น
+                    silk.style.strokeDasharray = circumference;
+                    silk.style.strokeDashoffset = circumference;
 
                     let start = null;
                     const duration = 2500;
 
-                    const step = (now) => {
-                        if (!start) start = now;
-                        const progress = Math.min((now - start) / duration, 1);
-                        h3.innerText = Math.floor(progress * target);
+                    const animate = (timestamp) => {
+                        if (!start) start = timestamp;
+                        const progress = Math.min((timestamp - start) / duration, 1);
                         
-                        // เส้นสายไหมวิ่ง (รันที่ 80% ของวงกลม)
+                        // อัปเดตตัวเลข
+                        h3.innerText = Math.floor(progress * targetNum);
+                        
+                        // อัปเดตเส้นสายไหม (วิ่งไปที่ 80% ของวงกลม)
                         const offset = circumference - (progress * (circumference * 0.8));
-                        line.style.strokeDashoffset = offset;
+                        silk.style.strokeDashoffset = offset;
 
-                        if (progress < 1) window.requestAnimationFrame(step);
-                        else h3.innerText = target;
+                        if (progress < 1) requestAnimationFrame(animate);
+                        else h3.innerText = targetNum;
                     };
-                    window.requestAnimationFrame(step);
+                    requestAnimationFrame(animate);
                     observer.unobserve(entry.target);
                 }
             });
-        }, { threshold: 0.6 });
-
-        document.querySelectorAll('.stat-luxury-box').forEach(el => observer.observe(el));
+        }, { threshold: 0.5 });
+        document.querySelectorAll('.stat-card').forEach(el => observer.observe(el));
     };
-    window.addEventListener('load', initStatsSovereign);
+    window.addEventListener('load', initStats);
 </script>
 
 <style>
-    .stats-section-v19 { padding: 120px 0; background: #FDFCFB; position: relative; z-index: 10; }
+    .stats-v20 { padding: 120px 0; background: #FDFCFB; }
     .stats-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
-    .stat-luxury-box { text-align: center; }
-    .silk-circle-container { position: relative; width: 140px; height: 140px; margin: 0 auto 20px; }
+    .stat-card { text-align: center; }
+    .circle-box { position: relative; width: 140px; height: 140px; margin: 0 auto 20px; }
     svg { transform: rotate(-90deg); width: 100%; height: 100%; }
-    circle { fill: none; stroke-width: 2.5; }
-    .circle-track { stroke: rgba(191,149,63,0.1); }
-    .silk-line-anim { stroke: var(--gold-primary); transition: none; }
-    .stat-number { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 38px; color: var(--gold-primary); margin: 0; }
-    .stat-label-text { font-size: 10px; letter-spacing: 0.6em; color: #999; font-weight: bold; }
-    @media (max-width: 768px) { .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 50px; } }
+    circle { fill: none; stroke-width: 2.5; stroke-linecap: round; }
+    .track { stroke: rgba(191,149,63,0.1); }
+    .silk-path { stroke: #bf953f; transition: none; }
+    .stat-number { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 38px; color: #bf953f; margin: 0; }
+    .stat-label { font-size: 10px; letter-spacing: 0.6em; color: #999; font-weight: bold; }
 </style>
