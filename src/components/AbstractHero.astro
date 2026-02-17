@@ -1,20 +1,20 @@
 ---
 const images = ["/img/h1.jpg", "/img/h2.jpg", "/img/h3.jpg", "/img/h4.jpg", "/img/h5.jpg", "/img/h6.jpg"];
 ---
-<section class="hero-container">
+<section class="hero-master">
     <div class="swiper heroSwiper">
         <div class="swiper-wrapper">
             {images.map((src) => (
-                <div class="swiper-slide"><img src={src} class="ken-burns" /></div>
+                <div class="swiper-slide"><img src={src} class="zoom-effect" alt="Heritage" /></div>
             ))}
         </div>
-        <div class="swiper-button-next custom-arrow"></div>
-        <div class="swiper-button-prev custom-arrow"></div>
-        <div class="swiper-pagination custom-pagination"></div>
+        <div class="swiper-button-next luxury-arrow"></div>
+        <div class="swiper-button-prev luxury-arrow"></div>
+        <div class="swiper-pagination luxury-dots"></div>
     </div>
-    <div class="overlay">
+    <div class="hero-overlay">
         <p class="tag">THE SOVEREIGN DIGITAL HERITAGE</p>
-        <h1 class="title">Thailand <span class="gold">Folklore</span></h1>
+        <h1 class="main-title">Thailand <span class="gold">Folklore</span></h1>
     </div>
 </section>
 
@@ -23,29 +23,21 @@ const images = ["/img/h1.jpg", "/img/h2.jpg", "/img/h3.jpg", "/img/h4.jpg", "/im
         loop: true, speed: 2500, effect: 'fade',
         autoplay: { delay: 5000, disableOnInteraction: false },
         navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
-        pagination: { el: ".swiper-pagination", clickable: true, renderBullet: function(index, className) {
-            return '<span class="' + className + '"></span>';
-        }},
+        pagination: { el: ".swiper-pagination", clickable: true },
     });
 </script>
 
 <style>
-    .hero-container { width: 100vw; height: 100vh; position: relative; background: #000; }
+    .hero-master { width: 100%; height: 100vh; position: relative; overflow: hidden; background: #000; }
     .swiper { width: 100%; height: 100%; }
-    .ken-burns { width: 100%; height: 100%; object-fit: cover; animation: zoom 15s infinite alternate; }
-    @keyframes zoom { from { transform: scale(1); } to { transform: scale(1.1); } }
-    .overlay { position: absolute; inset: 0; z-index: 10; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; background: rgba(0,0,0,0.3); pointer-events: none; }
-    .tag { font-size: 11px; letter-spacing: 0.8em; color: var(--gold); font-weight: bold; margin-bottom: 15px; }
-    .title { font-size: clamp(3rem, 10vw, 7rem); margin: 0; font-style: italic; }
+    .zoom-effect { width: 100%; height: 100%; object-fit: cover; animation: kenburns 15s infinite alternate; }
+    @keyframes kenburns { from { transform: scale(1); } to { transform: scale(1.15); } }
+    .hero-overlay { position: absolute; inset: 0; z-index: 20; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; background: rgba(0,0,0,0.3); pointer-events: none; text-align: center; }
+    .tag { font-size: 11px; letter-spacing: 0.8em; color: var(--gold); font-weight: bold; margin-bottom: 20px; }
+    .main-title { font-size: clamp(3rem, 10vw, 7.5rem); margin: 0; font-style: italic; }
     .gold { color: var(--gold); }
-
-    /* Luxury Arrow Styling */
-    .custom-arrow { color: var(--gold) !important; transition: 0.3s; }
-    .custom-arrow:hover { transform: scale(1.2); text-shadow: 0 0 15px var(--gold); }
-    .custom-arrow::after { font-size: 20px !important; font-weight: bold; }
-
-    /* Pagination เส้นวิ่ง */
-    :global(.custom-pagination) { bottom: 40px !important; }
-    :global(.swiper-pagination-bullet) { width: 40px !important; height: 2px !important; border-radius: 0 !important; background: rgba(255,255,255,0.3) !important; opacity: 1 !important; transition: 0.5s !important; }
-    :global(.swiper-pagination-bullet-active) { width: 80px !important; background: var(--gold) !important; }
+    .luxury-arrow { color: var(--gold) !important; transition: 0.3s; }
+    .luxury-arrow:hover { transform: scale(1.2); }
+    :global(.luxury-dots .swiper-pagination-bullet) { background: #fff !important; width: 30px; height: 2px; border-radius: 0; transition: 0.5s; }
+    :global(.luxury-dots .swiper-pagination-bullet-active) { background: var(--gold) !important; width: 60px; }
 </style>
