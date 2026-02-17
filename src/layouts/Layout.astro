@@ -10,7 +10,8 @@ const { title } = Astro.props;
 		<title>{title}</title>
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 	</head>
-	<body class="bg-[#FDFCFB] m-0 p-0 overflow-x-hidden selection:bg-[#bf953f] selection:text-white">
+	<body class="bg-[#FDFCFB] m-0 p-0 overflow-x-hidden cursor-none">
+		<div id="custom-cursor"></div>
 		
 		<div class="fixed inset-0 z-[100] pointer-events-none">
 			{Array.from({ length: 40 }).map((_, i) => (
@@ -18,20 +19,29 @@ const { title } = Astro.props;
 			))}
 		</div>
 
-		<main class="relative z-10">
-			<slot />
-		</main>
+		<main class="relative z-10"><slot /></main>
 
 		<script is:inline src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+		<script is:inline>
+			// 🖱️ Cursor Logic
+			const cursor = document.getElementById('custom-cursor');
+			document.addEventListener('mousemove', (e) => {
+				cursor.style.left = e.clientX + 'px';
+				cursor.style.top = e.clientY + 'px';
+			});
+		</script>
 	</body>
 </html>
 
 <style is:global>
 	@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300;1,600&display=swap');
 	:root { --gold: #bf953f; }
-	html, body { font-family: 'Cormorant Garamond', serif; background: #FDFCFB; color: #1a1a1a; scroll-behavior: smooth; }
+	html, body { font-family: 'Cormorant Garamond', serif; background: #FDFCFB; cursor: none; }
 	
-	/* ✨ Dust Animation */
+	/* 🖱️ Cursor Style */
+	#custom-cursor { width: 20px; height: 20px; border: 1px solid var(--gold); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); transition: transform 0.1s; }
+	
+	/* ✨ Dust Style */
 	.dust { position: absolute; left: var(--l); bottom: -20px; width: var(--s); height: var(--s); background: var(--gold); border-radius: 50%; opacity: 0; animation: floatUp 20s linear infinite var(--d); }
 	@keyframes floatUp { 0% { transform: translateY(0); opacity: 0; } 20% { opacity: 0.4; } 100% { transform: translateY(-110vh); opacity: 0; } }
 </style>

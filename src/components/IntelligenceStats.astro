@@ -1,45 +1,28 @@
-<section class="stats-section bg-[#FDFCFB]">
-  <div class="grid grid-cols-3 text-center max-w-5xl mx-auto">
-    <div class="stat-box">
-      <h3 class="text-4xl font-serif text-[#bf953f]" data-target="26">0</h3>
-      <p class="text-xs tracking-widest">SERIES</p>
-    </div>
-    <div class="stat-box">
-      <h3 class="text-4xl font-serif text-[#bf953f]" data-target="26">0</h3>
-      <p class="text-xs tracking-widest">ARCHIVE</p>
-    </div>
-    <div class="stat-box">
-      <h3 class="text-4xl font-serif text-[#bf953f]" data-target="28">0</h3>
-      <p class="text-xs tracking-widest">NODES</p>
-    </div>
+<section class="py-20 bg-[#FDFCFB]">
+  <div class="max-w-6xl mx-auto grid grid-cols-3 gap-10">
+    {[ {t:26, l:'SERIES'}, {t:26, l:'ARCHIVE'}, {t:28, l:'NODES'} ].map(s => (
+      <div class="text-center">
+        <h3 class="text-5xl text-[#bf953f] font-serif mb-2" data-target={s.t}>0</h3>
+        <p class="text-[10px] tracking-[0.5em] text-gray-400">{s.l}</p>
+      </div>
+    ))}
   </div>
 </section>
 
 <script is:inline>
-  const startCount = (el) => {
-    const target = parseInt(el.getAttribute('data-target'));
-    let current = 0;
-    const increment = target / 50;
-    const update = () => {
-      current += increment;
-      if (current < target) {
-        el.innerText = Math.ceil(current);
-        setTimeout(update, 30);
-      } else {
-        el.innerText = target;
-      }
-    };
-    update();
-  };
-
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        startCount(entry.target);
-        observer.unobserve(entry.target);
+        const el = entry.target;
+        const target = parseInt(el.dataset.target);
+        let count = 0;
+        const interval = setInterval(() => {
+          if (count < target) { el.innerText = ++count; }
+          else { clearInterval(interval); }
+        }, 50);
+        observer.unobserve(el);
       }
     });
-  }, { threshold: 0.5 });
-
-  document.querySelectorAll('[data-target]').forEach(el => observer.observe(el));
+  }, { threshold: 1 });
+  document.querySelectorAll('[data-target]').forEach(h => observer.observe(h));
 </script>
