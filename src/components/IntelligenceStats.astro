@@ -1,33 +1,31 @@
-<section class="stats-master-v25">
+<section class="stats-master-v34">
     <div class="stats-grid">
         {[ {t:26, l:'SERIES'}, {t:26, l:'ARCHIVE'}, {t:28, l:'NODES'}, {t:124, l:'ARTIFACTS'} ].map(s => (
             <div class="stat-box">
                 <div class="silk-wrap">
                     <svg viewBox="0 0 100 100">
                         <circle class="c-bg" cx="50" cy="50" r="45"></circle>
-                        <circle class="silk-line" cx="50" cy="50" r="45"></circle>
+                        <circle class="c-silk" cx="50" cy="50" r="45"></circle>
                     </svg>
-                    <h3 class="n-val" data-target={s.t}>0</h3>
+                    <h3 class="stat-val" data-target={s.t}>0</h3>
                 </div>
-                <p class="l-val">{s.l}</p>
+                <p class="stat-lab">{s.l}</p>
             </div>
         ))}
     </div>
 </section>
 
 <script is:inline>
-    const runStatsSovereign = () => {
+    const initStatsV34 = () => {
         const obs = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    const h3 = entry.target.querySelector('.n-val');
-                    const silk = entry.target.querySelector('.silk-line');
+                    const h3 = entry.target.querySelector('.stat-val');
+                    const silk = entry.target.querySelector('.c-silk');
                     const targetNum = parseInt(h3.dataset.target);
-                    
                     const len = silk.getTotalLength();
                     silk.style.strokeDasharray = len;
                     silk.style.strokeDashoffset = len;
-
                     let start = null;
                     const duration = 2500;
                     const animate = (time) => {
@@ -45,18 +43,18 @@
         }, { threshold: 0.6 });
         document.querySelectorAll('.stat-box').forEach(b => obs.observe(b));
     };
-    window.addEventListener('load', runStatsSovereign);
+    window.addEventListener('load', initStatsV34);
 </script>
 
 <style>
-    .stats-master-v25 { padding: 120px 0; background: #FDFCFB; }
+    .stats-master-v34 { padding: 120px 0; background: #FDFCFB; }
     .stats-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
     .stat-box { text-align: center; }
     .silk-wrap { position: relative; width: 140px; height: 140px; margin: 0 auto 20px; }
     svg { transform: rotate(-90deg); width: 100%; height: 100%; }
     circle { fill: none; stroke-width: 2.5; stroke-linecap: round; }
     .c-bg { stroke: rgba(191,149,63,0.1); }
-    .silk-line { stroke: #bf953f; transition: none; }
-    .n-val { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 38px; color: #bf953f; margin: 0; }
-    .l-val { font-size: 10px; letter-spacing: 0.6em; color: #999; font-weight: bold; }
+    .c-silk { stroke: #bf953f; transition: none; }
+    .stat-val { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 38px; color: #bf953f; margin: 0; font-family: serif; }
+    .stat-lab { font-size: 10px; letter-spacing: 0.6em; color: #999; font-weight: bold; }
 </style>
