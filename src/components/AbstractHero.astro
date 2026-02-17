@@ -1,97 +1,66 @@
 ---
-// เรียกไฟล์ h1.jpg - h6.jpg จากโฟลเดอร์ public/img/ ตามที่คุณยืนยัน
-const images = [
-  "/img/h1.jpg", "/img/h2.jpg", "/img/h3.jpg", 
-  "/img/h4.jpg", "/img/h5.jpg", "/img/h6.jpg"
-];
+const images = ["/img/h1.jpg", "/img/h2.jpg", "/img/h3.jpg", "/img/h4.jpg", "/img/h5.jpg", "/img/h6.jpg"];
 ---
-
-<section class="hero-zoom-container">
-  <div class="zoom-slider">
-    {images.map((src, i) => (
-      <div class="slide" style={`animation-delay: ${i * 6}s;`}>
-        <div class="image-wrapper">
-          <img src={src} alt="Heritage Artifact" />
+<section class="hero-full">
+  <div class="swiper mainHeroSwiper">
+    <div class="swiper-wrapper">
+      {images.map((src) => (
+        <div class="swiper-slide">
+          <div class="zoom-image-box">
+            <img src={src} alt="Heritage" />
+          </div>
         </div>
-      </div>
-    ))}
+      ))}
+    </div>
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-pagination"></div>
   </div>
 
-  <div class="hero-overlay">
-    <div class="content-box">
-      <p class="hero-tag">THE SOVEREIGN DIGITAL HERITAGE</p>
-      <h1 class="hero-title font-serif">Thailand <span class="gold-text">Folklore</span></h1>
-      <div class="hero-divider"></div>
-      <p class="hero-desc">Preserving the spirit of Lanna and the soul of Thailand</p>
-    </div>
+  <div class="hero-overlay-content">
+    <p class="tag">THE SOVEREIGN DIGITAL HERITAGE</p>
+    <h1 class="font-serif">Thailand <span class="gold">Folklore</span></h1>
   </div>
 </section>
 
+<script is:inline>
+  new Swiper(".mainHeroSwiper", {
+    loop: true,
+    speed: 2000,
+    autoplay: { delay: 5000, disableOnInteraction: false },
+    effect: 'fade',
+    fadeEffect: { crossFade: true },
+    navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
+    pagination: { el: ".swiper-pagination", clickable: true },
+  });
+</script>
+
 <style>
-  .hero-zoom-container {
-    position: relative;
-    width: 100%;
-    height: 100vh; /* เต็มหน้าจอแบบเดิม */
+  .hero-full { 
+    height: 100vh; /* บังคับ 100% ของความสูงหน้าจอ */
+    width: 100vw;
+    position: relative; 
     overflow: hidden;
-    background: #000;
+    margin: 0; padding: 0;
   }
-
-  .zoom-slider {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
+  .mainHeroSwiper { width: 100%; height: 100%; }
+  .zoom-image-box { width: 100%; height: 100%; overflow: hidden; }
+  .swiper-slide img { 
+    width: 100%; height: 100%; object-fit: cover; 
+    animation: kenburns 10s ease infinite alternate;
   }
+  @keyframes kenburns { 0% { transform: scale(1); } 100% { transform: scale(1.15); } }
 
-  .slide {
-    position: absolute;
-    inset: 0;
-    opacity: 0;
-    animation: zoomAndFade 36s linear infinite; /* วนลูปภาพละ 6 วินาที */
+  .hero-overlay-content {
+    position: absolute; inset: 0; z-index: 20;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    background: rgba(0,0,0,0.3); color: #fff; pointer-events: none;
   }
+  .tag { font-size: 12px; letter-spacing: 0.8em; color: #bf953f; font-weight: bold; }
+  h1 { font-size: clamp(3rem, 10vw, 7rem); margin: 0; text-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+  .gold { color: #bf953f; font-style: italic; }
 
-  .image-wrapper {
-    width: 100%;
-    height: 100%;
-    transform: scale(1.1); /* เริ่มต้นที่ซูมเล็กน้อย */
-  }
-
-  .slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  /* ✨ Ken Burns Effect (การซูมที่นุ่มนวล) */
-  @keyframes zoomAndFade {
-    0% { opacity: 0; transform: scale(1); }
-    5% { opacity: 1; }
-    16.66% { opacity: 1; }
-    22% { opacity: 0; transform: scale(1.15); }
-    100% { opacity: 0; }
-  }
-
-  /* 🏛️ Styling ส่วนข้อความ */
-  .hero-overlay {
-    position: absolute;
-    inset: 0;
-    z-index: 10;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: radial-gradient(circle at center, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.6) 100%);
-    text-align: center;
-    color: #fff;
-    padding: 0 20px;
-  }
-
-  .hero-tag { font-size: 12px; letter-spacing: 0.8em; color: #bf953f; font-weight: bold; margin-bottom: 20px; }
-  .hero-title { font-size: clamp(4rem, 12vw, 8rem); line-height: 1; margin: 0; text-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-  .gold-text { color: #bf953f; font-style: italic; }
-  
-  .hero-divider { width: 80px; height: 2px; background: #bf953f; margin: 30px auto; }
-  .hero-desc { font-size: 18px; letter-spacing: 0.2em; opacity: 0.8; font-style: italic; }
-
-  @media (max-width: 768px) {
-    .hero-title { font-size: 3.5rem; }
-  }
+  /* ปรับแต่งปุ่ม Swiper ให้ดูหรูหรา */
+  :global(.swiper-button-next), :global(.swiper-button-prev) { color: #bf953f !important; }
+  :global(.swiper-pagination-bullet-active) { background: #bf953f !important; }
 </style>

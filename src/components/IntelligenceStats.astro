@@ -1,44 +1,45 @@
----
-const stats = [
-  { label: "EXPERIENCE", val: 10, suf: "Yrs" },
-  { label: "NETWORK", val: 50, suf: "Nodes" },
-  { label: "REACHED", val: 20, suf: "Cities" },
-  { label: "IMPACT", val: 100, suf: "M+" }
-];
----
-<section class="stats-bridge">
-  <svg class="silk-connector" viewBox="0 0 1440 300" preserveAspectRatio="none">
-    <path id="silk-flow" d="M0,0 Q360,150 720,150 T1440,300" stroke="#bf953f" stroke-width="2" fill="none" opacity="0.4" />
-  </svg>
-
-  <div class="stats-content">
-    {stats.map((s) => (
-      <div class="stat-orb group">
-        <p class="orb-tag">{s.label}</p>
-        <div class="visual-orb">
-          <div class="orb-ring"></div>
-          <div class="orb-glow"></div>
-          <h2 class="font-serif italic"><span class="count" data-target={s.val}>0</span>{s.suf}</h2>
-        </div>
-      </div>
-    ))}
+<section class="stats-section bg-[#FDFCFB]">
+  <div class="grid grid-cols-3 text-center max-w-5xl mx-auto">
+    <div class="stat-box">
+      <h3 class="text-4xl font-serif text-[#bf953f]" data-target="26">0</h3>
+      <p class="text-xs tracking-widest">SERIES</p>
+    </div>
+    <div class="stat-box">
+      <h3 class="text-4xl font-serif text-[#bf953f]" data-target="26">0</h3>
+      <p class="text-xs tracking-widest">ARCHIVE</p>
+    </div>
+    <div class="stat-box">
+      <h3 class="text-4xl font-serif text-[#bf953f]" data-target="28">0</h3>
+      <p class="text-xs tracking-widest">NODES</p>
+    </div>
   </div>
 </section>
 
-<style>
-  /* 📏 ลดช่องว่างด้วยการบีบ Padding */
-  .stats-bridge { position: relative; width: 100%; padding: 60px 0; background: transparent; overflow: hidden; }
-  .silk-connector { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; }
-  #silk-flow { stroke-dasharray: 2000; stroke-dashoffset: 2000; animation: silkdraw 8s linear infinite; }
-  @keyframes silkdraw { to { stroke-dashoffset: 0; } }
+<script is:inline>
+  const startCount = (el) => {
+    const target = parseInt(el.getAttribute('data-target'));
+    let current = 0;
+    const increment = target / 50;
+    const update = () => {
+      current += increment;
+      if (current < target) {
+        el.innerText = Math.ceil(current);
+        setTimeout(update, 30);
+      } else {
+        el.innerText = target;
+      }
+    };
+    update();
+  };
 
-  .stats-content { position: relative; z-index: 10; display: flex; justify-content: space-around; max-width: 1400px; margin: 0 auto; }
-  .stat-orb { text-align: center; flex: 1; }
-  .orb-tag { font-size: 10px; letter-spacing: 0.5em; color: #bf953f; font-weight: bold; margin-bottom: 20px; }
-  .visual-orb { position: relative; width: 180px; height: 180px; display: flex; align-items: center; justify-content: center; margin: 0 auto; }
-  .orb-ring { position: absolute; inset: 0; border: 1px solid rgba(191,149,63,0.2); border-radius: 50%; transition: 0.6s; animation: rot 20s linear infinite; }
-  .stat-orb:hover .orb-ring { border-color: #bf953f; transform: scale(1.1); box-shadow: 0 0 30px rgba(191,149,63,0.2); }
-  @keyframes rot { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-  h2 { font-size: 5rem; color: #1a1a1a; margin: 0; position: relative; z-index: 5; transition: 0.5s; }
-  .stat-orb:hover h2 { color: #bf953f; transform: translateY(-5px); }
-</style>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        startCount(entry.target);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  document.querySelectorAll('[data-target]').forEach(el => observer.observe(el));
+</script>

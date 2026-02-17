@@ -1,11 +1,35 @@
-<body class="bg-[#FDFCFB] m-0 p-0 overflow-x-hidden">
-    <div class="fixed inset-0 z-0 pointer-events-none">
-        <div id="bg-spotlight" class="absolute inset-0 opacity-10"></div>
-        <div class="particles-field absolute inset-0">
-             </div>
-    </div>
+---
+interface Props { title: string; }
+const { title } = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>{title}</title>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+	</head>
+	<body class="bg-[#FDFCFB] m-0 p-0 overflow-x-hidden">
+		<div class="particles-container">
+			{Array.from({ length: 50 }).map((_, i) => (
+				<div class="dust" style={`--l:${Math.random()*100}%; --d:${Math.random()*15}s; --s:${Math.random()*3+2}px;`}></div>
+			))}
+		</div>
 
-    <main class="relative z-10 w-full min-h-screen">
-        <slot />
-    </main>
-</body>
+		<main class="relative z-10">
+			<slot />
+		</main>
+
+		<script is:inline src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+	</body>
+</html>
+
+<style is:global>
+	@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300;1,600&display=swap');
+	html, body { font-family: 'Cormorant Garamond', serif; background: #FDFCFB; }
+	
+	.particles-container { position: fixed; inset: 0; z-index: 100; pointer-events: none; }
+	.dust { position: absolute; left: var(--l); bottom: -20px; width: var(--s); height: var(--s); background: #bf953f; border-radius: 50%; opacity: 0; animation: floatUp 20s linear infinite var(--d); }
+	@keyframes floatUp { 0% { transform: translateY(0); opacity: 0; } 20% { opacity: 0.4; } 100% { transform: translateY(-110vh); opacity: 0; } }
+</style>
