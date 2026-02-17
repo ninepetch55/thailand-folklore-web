@@ -1,66 +1,66 @@
 ---
 const images = ["/img/h1.jpg", "/img/h2.jpg", "/img/h3.jpg", "/img/h4.jpg", "/img/h5.jpg", "/img/h6.jpg"];
 ---
-<section class="hero-full">
-  <div class="swiper mainHeroSwiper">
+<section class="hero-master-wrapper">
+  <div class="swiper luxurySwiper">
     <div class="swiper-wrapper">
       {images.map((src) => (
         <div class="swiper-slide">
-          <div class="zoom-image-box">
+          <div class="ken-burns-box">
             <img src={src} alt="Heritage" />
           </div>
         </div>
       ))}
     </div>
-    <div class="swiper-button-next"></div>
-    <div class="swiper-button-prev"></div>
-    <div class="swiper-pagination"></div>
+    
+    <div class="swiper-button-next custom-nav"></div>
+    <div class="swiper-button-prev custom-nav"></div>
+    <div class="swiper-pagination custom-dots"></div>
   </div>
 
-  <div class="hero-overlay-content">
+  <div class="hero-content-overlay">
     <p class="tag">THE SOVEREIGN DIGITAL HERITAGE</p>
-    <h1 class="font-serif">Thailand <span class="gold">Folklore</span></h1>
+    <h1 class="font-serif italic">Thailand <span class="gold-text">Folklore</span></h1>
+    <div class="gold-line"></div>
   </div>
 </section>
 
+
+
 <script is:inline>
-  new Swiper(".mainHeroSwiper", {
+  new Swiper(".luxurySwiper", {
     loop: true,
-    speed: 2000,
-    autoplay: { delay: 5000, disableOnInteraction: false },
+    speed: 2500,
     effect: 'fade',
     fadeEffect: { crossFade: true },
+    autoplay: { delay: 5000, disableOnInteraction: false },
     navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
     pagination: { el: ".swiper-pagination", clickable: true },
   });
 </script>
 
 <style>
-  .hero-full { 
-    height: 100vh; /* บังคับ 100% ของความสูงหน้าจอ */
-    width: 100vw;
-    position: relative; 
-    overflow: hidden;
-    margin: 0; padding: 0;
-  }
-  .mainHeroSwiper { width: 100%; height: 100%; }
-  .zoom-image-box { width: 100%; height: 100%; overflow: hidden; }
-  .swiper-slide img { 
-    width: 100%; height: 100%; object-fit: cover; 
-    animation: kenburns 10s ease infinite alternate;
-  }
+  .hero-master-wrapper { height: 100vh; width: 100vw; position: relative; overflow: hidden; background: #000; }
+  .luxurySwiper { width: 100%; height: 100%; }
+  .ken-burns-box { width: 100%; height: 100%; overflow: hidden; }
+  .swiper-slide img { width: 100%; height: 100%; object-fit: cover; animation: kenburns 12s ease-out infinite alternate; }
+  
   @keyframes kenburns { 0% { transform: scale(1); } 100% { transform: scale(1.15); } }
 
-  .hero-overlay-content {
+  .hero-content-overlay {
     position: absolute; inset: 0; z-index: 20;
     display: flex; flex-direction: column; align-items: center; justify-content: center;
-    background: rgba(0,0,0,0.3); color: #fff; pointer-events: none;
+    background: radial-gradient(circle, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.5) 100%);
+    color: #fff; pointer-events: none;
   }
-  .tag { font-size: 12px; letter-spacing: 0.8em; color: #bf953f; font-weight: bold; }
-  h1 { font-size: clamp(3rem, 10vw, 7rem); margin: 0; text-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-  .gold { color: #bf953f; font-style: italic; }
+  .tag { font-size: 11px; letter-spacing: 0.8em; color: var(--gold); font-weight: bold; margin-bottom: 20px; }
+  h1 { font-size: clamp(3.5rem, 12vw, 8rem); margin: 0; text-shadow: 0 15px 40px rgba(0,0,0,0.6); line-height: 0.9; }
+  .gold-text { color: var(--gold); }
+  .gold-line { width: 60px; height: 1px; background: var(--gold); margin-top: 40px; box-shadow: 0 0 15px var(--gold); }
 
-  /* ปรับแต่งปุ่ม Swiper ให้ดูหรูหรา */
-  :global(.swiper-button-next), :global(.swiper-button-prev) { color: #bf953f !important; }
-  :global(.swiper-pagination-bullet-active) { background: #bf953f !important; }
+  /* 🧭 Custom Luxury UI Elements */
+  :global(.custom-nav) { color: var(--gold) !important; width: 50px !important; height: 50px !important; }
+  :global(.custom-nav::after) { font-size: 24px !important; font-weight: 300; }
+  :global(.custom-dots .swiper-pagination-bullet) { background: #fff !important; opacity: 0.5; width: 6px; height: 6px; margin: 0 8px !important; }
+  :global(.custom-dots .swiper-pagination-bullet-active) { background: var(--gold) !important; opacity: 1; transform: scale(1.5); }
 </style>
