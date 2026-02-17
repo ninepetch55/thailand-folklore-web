@@ -3,57 +3,57 @@ const images = ["/img/h1.jpg", "/img/h2.jpg", "/img/h3.jpg", "/img/h4.jpg", "/im
 ---
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
-<section class="hero-master-v28">
-    <div class="swiper heroSwiper">
+<section class="hero-v29-wrap">
+    <div class="swiper swiperV29">
         <div class="swiper-wrapper">
             {images.map((src) => (
-                <div class="swiper-slide"><img src={src} class="hero-img" alt="Heritage" /></div>
+                <div class="swiper-slide"><img src={src} class="img-v29" alt="Heritage" /></div>
             ))}
         </div>
-        <div class="swiper-button-next luxury-nav"></div>
-        <div class="swiper-button-prev luxury-nav"></div>
-        <div class="swiper-pagination luxury-pagination"></div>
+        <div class="swiper-button-next nav-v29"></div>
+        <div class="swiper-button-prev nav-v29"></div>
+        <div class="swiper-pagination dots-v29"></div>
     </div>
-    <div class="hero-overlay">
-        <p class="tag">THE SOVEREIGN DIGITAL HERITAGE</p>
-        <h1 class="italic">Thailand <span class="gold">Folklore</span></h1>
+    <div class="overlay-v29">
+        <p class="tag-v29">THE SOVEREIGN DIGITAL HERITAGE</p>
+        <h1 class="title-v29 italic">Thailand <span class="gold-v29">Folklore</span></h1>
     </div>
 </section>
 
 <script is:inline src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script is:inline>
-    function initHero() {
+    function startV29() {
         if (typeof Swiper !== 'undefined') {
-            new Swiper(".heroSwiper", {
+            new Swiper(".swiperV29", {
                 loop: true, speed: 2000, effect: 'fade',
-                autoplay: { delay: 5000 },
+                autoplay: { delay: 4000 },
                 navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
                 pagination: { el: ".swiper-pagination", clickable: true },
-                observer: true, observeParents: true,
-                watchSlidesProgress: true // 🛡️ บังคับเช็คขอบภาพ
+                observer: true, observeParents: true
             });
         }
     }
-    window.addEventListener('load', initHero);
+    window.addEventListener('load', startV29);
 </script>
 
 <style>
-    .hero-master-v28 { 
+    .hero-v29-wrap { 
         position: relative; width: 100vw; height: 100vh; 
-        overflow: hidden !important; /* 🛡️ ตัดส่วนที่แหลมทิ้ง */
+        overflow: hidden !important; /* 🛡️ ล็อคตายตัวห้ามภาพแหลม */
         background: #000; left: 0;
     }
     .swiper { width: 100%; height: 100%; }
-    .hero-img { width: 100%; height: 100%; object-fit: cover; animation: slowZoom 20s infinite alternate; }
-    @keyframes slowZoom { from { transform: scale(1); } to { transform: scale(1.1); } }
+    .img-v29 { width: 100%; height: 100%; object-fit: cover; animation: zoomV29 20s infinite alternate; }
+    @keyframes zoomV29 { from { transform: scale(1); } to { transform: scale(1.1); } }
     
-    .hero-overlay { position: absolute; inset: 0; z-index: 20; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; background: rgba(0,0,0,0.3); pointer-events: none; text-align: center; }
-    .tag { font-size: 11px; letter-spacing: 0.8em; color: var(--gold); font-weight: bold; margin-bottom: 20px; }
-    h1 { font-size: clamp(3rem, 10vw, 7.5rem); margin: 0; line-height: 1; }
-    .gold { color: var(--gold); }
+    .overlay-v29 { position: absolute; inset: 0; z-index: 20; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; background: rgba(0,0,0,0.35); pointer-events: none; text-align: center; }
+    .tag-v29 { font-size: 11px; letter-spacing: 0.8em; color: #bf953f; font-weight: bold; margin-bottom: 20px; }
+    .title-v29 { font-size: clamp(3rem, 10vw, 7.5rem); margin: 0; line-height: 1; }
+    .gold-v29 { color: #bf953f; }
 
-    .luxury-nav { color: var(--gold) !important; border: 1px solid var(--gold); width: 60px !important; height: 60px !important; border-radius: 50%; background: rgba(0,0,0,0.1); transition: 0.4s; z-index: 50; }
-    .luxury-nav:hover { background: var(--gold); color: white !important; box-shadow: 0 0 20px var(--gold); }
-    :global(.luxury-pagination .swiper-pagination-bullet) { width: 12px !important; height: 12px !important; background: transparent !important; border: 1.5px solid white !important; opacity: 1 !important; margin: 0 10px !important; transition: 0.4s; }
-    :global(.luxury-pagination .swiper-pagination-bullet-active) { background: var(--gold) !important; border-color: var(--gold) !important; transform: scale(1.3); }
+    .nav-v29 { color: #bf953f !important; border: 1px solid #bf953f; width: 60px !important; height: 60px !important; border-radius: 50%; background: rgba(0,0,0,0.1); transition: 0.4s; z-index: 50; }
+    .nav-v29:hover { background: #bf953f; color: white !important; }
+    
+    :global(.dots-v29 .swiper-pagination-bullet) { width: 12px !important; height: 12px !important; background: transparent !important; border: 1.5px solid white !important; opacity: 1 !important; transition: 0.4s; }
+    :global(.dots-v29 .swiper-pagination-bullet-active) { background: #bf953f !important; border-color: #bf953f !important; }
 </style>

@@ -6,30 +6,21 @@ const { title } = Astro.props;
 <html lang="th">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>{title}</title>
-</head>
-<body class="luxury-body">
-    <div id="master-cursor"></div>
-    <main><slot /></main>
-    <script is:inline>
-        const dot = document.getElementById('master-cursor');
-        document.addEventListener('mousemove', (e) => {
-            dot.style.left = e.clientX + 'px';
-            dot.style.top = e.clientY + 'px';
-        });
-    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <title>{title} - V29</title> </head>
+<body class="sovereign-body-v29">
+    <div id="cursor-v29"></div>
+    <main class="root-v29"><slot /></main>
 </body>
 </html>
 <style is:global>
     @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300;1,600&display=swap');
-    :root { --gold: #bf953f; }
-    /* 🛡️ ล็อคขอบเขตขั้นเด็ดขาด */
+    :root { --gold-sovereign: #bf953f; }
     html, body { 
         margin: 0 !important; padding: 0 !important; 
         width: 100vw; overflow-x: hidden !important; 
         background: #FDFCFB; cursor: none !important;
         font-family: 'Cormorant Garamond', serif;
     }
-    #master-cursor { width: 10px; height: 10px; background: var(--gold); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); transition: transform 0.05s linear; box-shadow: 0 0 10px var(--gold); }
+    #cursor-v29 { width: 10px; height: 10px; background: var(--gold-sovereign); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); transition: transform 0.05s linear; box-shadow: 0 0 10px var(--gold-sovereign); }
 </style>
