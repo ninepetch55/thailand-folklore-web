@@ -1,28 +1,28 @@
-<section class="stats-master-v24">
-    <div class="stats-grid-v24">
+<section class="stats-master-v25">
+    <div class="stats-grid">
         {[ {t:26, l:'SERIES'}, {t:26, l:'ARCHIVE'}, {t:28, l:'NODES'}, {t:124, l:'ARTIFACTS'} ].map(s => (
-            <div class="stat-item-v24">
-                <div class="circle-silk-wrap">
+            <div class="stat-box">
+                <div class="silk-wrap">
                     <svg viewBox="0 0 100 100">
-                        <circle class="c-track" cx="50" cy="50" r="45"></circle>
-                        <circle class="c-silk" cx="50" cy="50" r="45"></circle>
+                        <circle class="c-bg" cx="50" cy="50" r="45"></circle>
+                        <circle class="silk-line" cx="50" cy="50" r="45"></circle>
                     </svg>
-                    <h3 class="n-display" data-target={s.t}>0</h3>
+                    <h3 class="n-val" data-target={s.t}>0</h3>
                 </div>
-                <p class="l-display">{s.l}</p>
+                <p class="l-val">{s.l}</p>
             </div>
         ))}
     </div>
 </section>
 
 <script is:inline>
-    const runStatsVictory = () => {
+    const runStatsSovereign = () => {
         const obs = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    const h3 = entry.target.querySelector('.n-display');
-                    const silk = entry.target.querySelector('.c-silk');
-                    const target = parseInt(h3.dataset.target);
+                    const h3 = entry.target.querySelector('.n-val');
+                    const silk = entry.target.querySelector('.silk-line');
+                    const targetNum = parseInt(h3.dataset.target);
                     
                     const len = silk.getTotalLength();
                     silk.style.strokeDasharray = len;
@@ -33,30 +33,30 @@
                     const animate = (time) => {
                         if (!start) start = time;
                         const progress = Math.min((time - start) / duration, 1);
-                        h3.innerText = Math.floor(progress * target);
+                        h3.innerText = Math.floor(progress * targetNum);
                         silk.style.strokeDashoffset = len - (progress * (len * 0.8));
                         if (progress < 1) requestAnimationFrame(animate);
-                        else h3.innerText = target;
+                        else h3.innerText = targetNum;
                     };
                     requestAnimationFrame(animate);
                     obs.unobserve(entry.target);
                 }
             });
         }, { threshold: 0.6 });
-        document.querySelectorAll('.stat-item-v24').forEach(b => obs.observe(b));
+        document.querySelectorAll('.stat-box').forEach(b => obs.observe(b));
     };
-    window.addEventListener('load', runStatsVictory);
+    window.addEventListener('load', runStatsSovereign);
 </script>
 
 <style>
-    .stats-master-v24 { padding: 120px 0; background: #FDFCFB; }
-    .stats-grid-v24 { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
-    .stat-item-v24 { text-align: center; }
-    .circle-silk-wrap { position: relative; width: 140px; height: 140px; margin: 0 auto 20px; }
+    .stats-master-v25 { padding: 120px 0; background: #FDFCFB; }
+    .stats-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+    .stat-box { text-align: center; }
+    .silk-wrap { position: relative; width: 140px; height: 140px; margin: 0 auto 20px; }
     svg { transform: rotate(-90deg); width: 100%; height: 100%; }
     circle { fill: none; stroke-width: 2.5; stroke-linecap: round; }
-    .c-track { stroke: rgba(191,149,63,0.1); }
-    .c-silk { stroke: var(--gold); transition: none; }
-    .n-display { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 38px; color: var(--gold); margin: 0; }
-    .l-display { font-size: 10px; letter-spacing: 0.6em; color: #999; font-weight: bold; }
+    .c-bg { stroke: rgba(191,149,63,0.1); }
+    .silk-line { stroke: #bf953f; transition: none; }
+    .n-val { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 38px; color: #bf953f; margin: 0; }
+    .l-val { font-size: 10px; letter-spacing: 0.6em; color: #999; font-weight: bold; }
 </style>
